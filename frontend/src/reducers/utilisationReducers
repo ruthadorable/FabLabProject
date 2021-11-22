@@ -1,0 +1,45 @@
+import {
+    UTILISATION_ADD_ITEM,
+    UTILISATION_REMOVE_ITEM,
+    UTILISATION_CLEAR_ITEMS,
+  } from '../constants/utilisationConstants';
+  
+const utilisationReducer = (
+    state = { utilisationItems: [], shippingAddress: {} },
+    action
+  ) => {
+    switch (action.type){
+      case UTILISATION_ADD_ITEM:
+        const item = action.payload
+  
+        const existItem = state.utilisationItems.find((x) => x.machine === item.machine)
+  
+        if (existItem) {
+          return {
+            ...state,
+            utilisationItems: state.utilisationItems.map((x) =>
+              x.machine === existItem.machine ? item : x
+            ),
+          }
+        } else {
+          return {
+            ...state,
+            utilisationItems: [...state.utilisationItems, item],
+          }
+        }
+      case UTILISATION_REMOVE_ITEM:
+        return {
+          ...state,
+          utilisationItems: state.utilisationItems.filter((x) => x.machine !== action.payload),
+        }
+      
+      case UTILISATION_CLEAR_ITEMS:
+        return {
+          ...state,
+          utilisationItems: [],
+        }
+      default:
+        return state
+    }
+  }
+  export default module.utilisationReducer;
