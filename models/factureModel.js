@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
+const Machine = require('./machineModel');
 const Utilisateur = require('./utilisateurModel');
+const Utilisation = require('./utilisationModel');
 
 const factureSchema= mongoose.Schema({
 utilisateur:{
     type: mongoose.Schema.Types.ObjectId,
     required:true,
-    ref:Utilisateur
+    ref: 'Utilisateur'
 },
 numero:{
     type: Number,
@@ -18,13 +20,13 @@ date_generation:{
 utilisation:[{
     type: mongoose.Schema.Types.ObjectId,
     required:true,
-    ref:Utilisation
+    ref:'Utilisation'
 }],
 machine:[
     {
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:Machine
+        ref: 'Machine'
     }],
 duree_total:
 {

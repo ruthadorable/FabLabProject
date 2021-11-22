@@ -1,10 +1,11 @@
 var mongoose =require ('mongoose')
+const Utilisation = require('./utilisationModel')
 const utilisateurSchema = mongoose.Schema({
     nom: {
         type: String,
         required : true,
     },
-    presnom: {
+    prenom: {
         type: String,
         required : true,
     },
@@ -20,12 +21,12 @@ const utilisateurSchema = mongoose.Schema({
     utilisations:[{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref: Utilisation
+        ref: 'Utilisation'
     }],
     roleId:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref: Role
+        ref: 'Role'
     },
     isAdmin: {
         type: Boolean,
