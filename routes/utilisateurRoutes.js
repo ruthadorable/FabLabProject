@@ -1,4 +1,4 @@
-const mongoose= require('mongoose');
+
 const express=require('express');
 const router=express();
 const Utilisateur=require('../models/utilisateurModel');

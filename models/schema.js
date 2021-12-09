@@ -4,11 +4,11 @@ const Use = require("./use");
 const User = require("./user");
 // const Role = require("./role");
 
-// Equipment.hasMany(Use);
-// Use.belongsTo(Equipment);
+ Equipment.hasMany(Use);
+ Use.belongsTo(Equipment);
 
-// User.hasMany(Use);
-// Use.belongsTo(User);
+ User.hasMany(Use);
+ Use.belongsTo(User);
 
 // Role.belongsToMany(User ,{
 //   through: "user_roles", 

@@ -13,7 +13,7 @@ Equipment.init(
         allowNull: false
     },
     price_minute: {
-        type: DataTypes.DOUBLE(50),
+        type: DataTypes.DOUBLE,
         allowNull: false
     },
     type_machine: {
@@ -22,7 +22,7 @@ Equipment.init(
         
     },
     reserved: {
-        type: DataTypes.BOOLEAN(),
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
   },

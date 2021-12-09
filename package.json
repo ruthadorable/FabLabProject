@@ -11,7 +11,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "dev": "DEBUG NODE_ENV=development nodemon ./bin/www",
     "create_database": "DEBUG node ./models/create_database.js",
-    "create_tables": "DEBUG node ./models/create_tables.js",
+    "create_tables": "node ./models/create_tables.js",
     "import_samples": "DEBUG node ./models/import_samples.js"
   },
   "author": "Boussaid Walid",
@@ -27,7 +27,6 @@
     "express-load": "^1.1.16",
     "is-promise": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mariadb": "^2.5.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "mysql2": "^2.3.3",
