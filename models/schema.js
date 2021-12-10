@@ -13,11 +13,11 @@ const Role = require("./role");
 Role.belongsToMany(User ,{
   through: "user_roles", 
   foreignKey: "roleId",
-otherKey: "userId"});
+  otherKey: "userId"});
 User.belongsToMany(Role,{
   through: "user_roles", 
-foreignKey: "userId",
-otherKey: "roleId"})
+  foreignKey: "userId",
+  otherKey: "roleId"})
 
 
 
