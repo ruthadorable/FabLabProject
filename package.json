@@ -9,10 +9,10 @@
     "data:import": "node seeder",
     "data:destroy": "node seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
-    "dev": "DEBUG NODE_ENV=development nodemon ./bin/www",
-    "create_database": "DEBUG node ./models/create_database.js",
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "create_database": "node ./models/create_database.js",
     "create_tables": "node ./models/create_tables.js",
-    "import_samples": "DEBUG node ./models/import_samples.js"
+    "import_samples": "node ./models/import_samples.js"
   },
   "author": "Boussaid Walid",
   "license": "ISC",

@@ -1,5 +1,5 @@
 require('dotenv').config();
-const debug = require("debug")("monprojetdemo:schema");
+
 const mysql = require("mysql2");
 
 // create the connection to database

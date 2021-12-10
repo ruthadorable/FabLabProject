@@ -1,6 +1,4 @@
 require('dotenv').config();
-
-// Load all defined models
 require("./schema");
 
 const sequelize = require("./connection");

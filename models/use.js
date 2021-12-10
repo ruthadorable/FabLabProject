@@ -13,15 +13,8 @@ Use.init(
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    durating_H: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        
-    },
-    price: {
-        type: DataTypes.DOUBLE,
-        allowNull: false
-    },
+    
+    
     amount_to_be_paid: {
         type: DataTypes.DOUBLE,
         allowNull: false
@@ -30,14 +23,7 @@ Use.init(
         type: DataTypes.DATE,
         allowNull: false
     },
-    paid: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    status: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    },
+    
   },
   { sequelize: connection, modelName: "use" }
 );

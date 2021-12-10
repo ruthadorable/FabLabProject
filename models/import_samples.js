@@ -38,13 +38,13 @@ const User = require("./user");
 
     const in1 = await Invoice.create({
         num: "1",
-        date: 2021-04-13,
+        date: "2021-04-13",
         amount_total: 23.90,
     });
 
     const in2 = await Invoice.create({
         num: "2",
-        date: 2021-04-24,
+        date: "2021-04-24",
         amount_total: 14.26,
     });
 
@@ -75,16 +75,21 @@ const User = require("./user");
     const use1 = await Use.create({
         durating_M: 125,
         amount_to_be_paid: 14.26,
-        date: 2021-04-24,
+        date: "2021-04-24",
     });
     
     const use2 = await Use.create({
         durating_M: 137,
         amount_to_be_paid: 19.23,
-        date: 2021-04-12,
+        date: "2021-04-12",
     });
 
-    // await use1.setEquipement(grFraisNum);
+    await grFraisNum.setUses(use1);
+    await hatim.setUses(use1);
+
+    await grDecoupLaser.setUses(use2);
+    await soufian.setUses(use2);
+    
 
     await sequelize.close();
 })();
