@@ -22,23 +22,24 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Admin Dashboard',
-    to: '/dashboard',
+    to: '/admin/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
     name: 'Mon Compte',
+    to: '/admin/dashboard/moncompte',
   },
   {
     component: CNavItem,
     name: 'Mes données',
-    to: '/theme/colors',
+    to: '/admin/dashboard/mesdonnees',
     icon: <CIcon icon={cilSpreadsheet} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Modifier mes données',
-    to: '/theme/typography',
+    to: '/admin/dashboard/modifierdonnees',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
@@ -48,46 +49,46 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Machines',
-    to: '/base',
+    to: '/admin/machine',
     icon: <CIcon icon={cilControl} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Liste des machines',
-        to: '/base/listemachines',
+        to: '/admin/machine/listemachines',
       },
       {
         component: CNavItem,
         name: 'Créer une machine',
-        to: '/forms/input-group',
+        to: '/admin/machine/creermachine',
       },
       {
         component: CNavItem,
         name: 'Modifier une machine',
-        to: '/base/updatemachine',
+        to: '/admin/machine/updatemachine',
       },
       {
         component: CNavItem,
         name: 'Supprimer une machine',
-        to: '/base/deletemachine',
+        to: '/admin/machine/deletemachine',
       },
     ],
   },
   {
     component: CNavGroup,
     name: 'Utilisations',
-    to: '/buttons',
+    to: '/admin/use',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Liste des utilisations',
-        to: '/buttons/buttons',
+        to: '/admin/use/listeuse',
       },
       {
         component: CNavItem,
         name: 'Créer une utilisation',
-        to: '/buttons/buttons',
+        to: '/admin/use/creerutilisation',
       },
     ],
   },
@@ -99,30 +100,30 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Liste des factures',
-        to: '/forms/form-control',
+        to: '/admin/invoice/invoicelist',
       },
       {
         component: CNavItem,
         name: 'Créer une facture',
-        to: '/forms/select',
+        to: '/admin/invoice/createinvoice',
       },
     ],
   },
   {
     component: CNavGroup,
     name: 'Roles',
-    to: '/charts',
+    to: '/admin/roles',
     icon: <CIcon icon={cilUserPlus} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Liste des roles',
-        to: '/icons/coreui-icons',
+        to: '/admin/roles/roleslist',
       },
       {
         component: CNavItem,
         name: 'Créer un role',
-        to: '/icons/flags',
+        to: '/admin/roles/createrole',
         badge: {
           color: 'success',
           text: 'NEW',
@@ -138,12 +139,22 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Liste des utilisateurs',
-        to: '/icons/coreui-icons',
+        to: '/admin/users/userslist',
       },
       {
         component: CNavItem,
         name: 'Créer un utilisateur',
-        to: '/icons/flags',
+        to: '/admin/users/createuser',
+      },
+      {
+        component: CNavItem,
+        name: 'Modifier un utilisateur',
+        to: '/admin/users/updateuser',
+      },
+      {
+        component: CNavItem,
+        name: 'Supprimer un utilisateur',
+        to: '/admin/users/deleteuser',
       },
     ],
   },
@@ -164,7 +175,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Register',
-        to: '/register',
+        to: '/admin/register',
       },
       {
         component: CNavItem,

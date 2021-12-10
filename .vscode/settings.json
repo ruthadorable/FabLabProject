@@ -1,0 +1,23 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "database_fablab",
+            "username": "root",
+            "name": "mysql",
+            "group": "mysql",
+            "password": ""
+        }
+    ],
+    "eslint.enable": false,
+    "eslint.workingDirectories": [
+        { "mode": "auto" }
+    ],
+    
+}
