@@ -25,7 +25,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "create_database": "node ./backend2/create_database.js",
     "create_tables": "node ./backend2/create_tables.js",
-    "import_samples": "node ./backend2/import_samples.js"
+    "import_data": "node ./backend2/import_data.js"
   },
   "config": {
     "coreui_library_short_version": "4.1"
@@ -63,6 +63,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nvm": "0.0.4",
+    "passport-jwt": "^4.0.0",
     "prettier": "^2.5.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -80,12 +81,12 @@
     "auto-changelog": "~2.3.0",
     "concurrently": "^5.3.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.4",
+    "prettier": "2.5.0",
     "react-scripts": "^4.0.3",
-    "sass": "^1.43.5",
-    "eslint-config-prettier": "^8.3.0",
-    "prettier": "2.5.0"
+    "sass": "^1.43.5"
   },
   "engines": {
     "node": ">=10",

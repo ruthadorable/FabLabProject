@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyparser=require("body-parser");
 const app=express()
-var dbconnection=require('./connection.js');
+var dbconnection=require('./connection');
 /*var machinesRoutes=require('../routes/machinesRoutes');*/
 var utilisateurRoutes=require('./routes/utilisateurRoutes')
 
+app.use(app.router);
+routes.initialize(app);
 app.use(bodyparser.json());
 /*app.use('/api/machines',machinesRoutes);*/
 app.use('/api/users',utilisateurRoutes);

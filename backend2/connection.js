@@ -16,10 +16,17 @@ debug("Connecting to database...");
 
 const sequelize = new Sequelize(db_dbname, db_username, db_password, {
   host: db_hostname,
-  dialect: "mysql",
+  dialect: 'mysql',
   logging: (msg) => debug(msg),
+  logging: (...msg)=>console.log(msg)
 });
 
 debug("Database connection established.");
 
+try {
+   sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
 module.exports = sequelize;

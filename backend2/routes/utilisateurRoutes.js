@@ -1,6 +1,6 @@
 const express=require('express');
-const router=express();
-const Utilisateur=require('../models/utilisateurModel');
+const router=express.Router();
+const Utilisateur=require('../models/user');
 
 router.post("/register",(req,res)=>{
     const newuser= new Utilisateur(req.body)

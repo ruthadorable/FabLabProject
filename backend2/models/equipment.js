@@ -16,7 +16,7 @@ Equipment.init(
         type: DataTypes.DOUBLE,
         allowNull: false
     },
-    type_machine: {
+    model_machine: {
         type: DataTypes.STRING(50),
         allowNull: false,
         
@@ -25,6 +25,11 @@ Equipment.init(
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
+    out_of_order: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+  },
+    
   },
   { sequelize: connection, modelName: "equipment" }
 );
