@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -56,7 +57,9 @@ const Register = () => {
                     />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
+                    <Link to="/register">
+                      <CButton color="success">Create Account</CButton>
+                    </Link>
                   </div>
                 </CForm>
               </CCardBody>

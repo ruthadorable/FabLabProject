@@ -1,5 +1,5 @@
 const debug = require("debug")("fablab:schema");
-const connection = require("./connection");
+const connection = require("../../backend2/connection");
 const { DataTypes, Model } = require("sequelize");
 
 debug("Defining equipment model...");
