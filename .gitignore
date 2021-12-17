@@ -1,0 +1,4 @@
+log/
+node_modules/
+node-v16*
+out/

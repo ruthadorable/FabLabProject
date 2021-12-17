@@ -1,0 +1,27 @@
+image: gitpod/workspace-mysql
+
+# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - init: |
+      npm install
+      gp await-port 3306
+      npm run create_database
+      npm run import_samples
+    command: |
+      gp await-port 3306
+      npm run dev
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 3000
+    onOpen: ignore
+  - port: 3306
+    onOpen: ignore
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - editorconfig.editorconfig
+    - esbenp.prettier-vscode
+    - humao.rest-client
+    - jebbs.plantuml
