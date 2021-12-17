@@ -1,4 +1,36 @@
 <%- include('header') -%>
 
+<main class="container">
+    <h1>Inscription</h1>
+    <form method="post" action="/register">
+      <div class="mb-3">
+        <label for="usernameInput" class="form-label">Nom :</label>
+        <input type="text" name="last_name" id="usernameInput" class="form-control" required>
+        <div class="invalid-feedback">Ce champs est requis</div>
+      </div><div class="mb-3">
+        <label for="usernameInput" class="form-label">Prenom :</label>
+        <input type="text" name="first_name" id="usernameInput" class="form-control" required>
+        <div class="invalid-feedback">Ce champs est requis</div>
+      </div><div class="mb-3">
+        <label for="usernameInput" class="form-label">Email :</label>
+        <input type="text" name="email" id="usernameInput" class="form-control" required>
+        <div class="invalid-feedback">Ce champs est requis</div>
+      </div>
+      <div class="mb-3">
+        <label for="passwordInput" class="form-label">Mot de passe</label>
+        <input type="password" name="password" id="passwordInput" class="form-control" required>
+        <div class="invalid-feedback">Ce champs est requis</div>
+      </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+      </div>
+      <div id="invalidCredsMsg" class="alert alert-danger invisible mb-3">
+        Votre nom d'utilisateur ou votre mot de passe sont invalides.
+      </div>
+    </form>
+
+   
+  </main>
+
+
 <%- include('footer') -%>
 
