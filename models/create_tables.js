@@ -4,7 +4,7 @@ require('dotenv').config();
 require("./schema");
 
 const sequelize = require("./connection");
-const debug = require("debug")("monprojetdemo:schema");
+const debug = require("debug")("fablab:schema");
 
 (async () => {
   debug("Synchronizing database...");

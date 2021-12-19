@@ -51,25 +51,19 @@ const User = require("./user");
     const grDecoupLaser = await Equipment.create({
         name: "LA GRANDE DÉCOUPEUSE LASER",
         price_minute: 0.33,
-        model_machine: "ML-W1290",
         reserved: false,
-        out_of_order: false,
     });
 
     const imp3Dgrand = await Equipment.create({
         name: "IMPRIMANTES 3D GRAND FORMAT",
         price_minute: 0.40,
-        model_machine: "Big Builder",
         reserved: false,
-        out_of_order: false,
     });
 
     const grFraisNum = await Equipment.create({
         name: "LA GRANDE FRAISEUSE NUMÉRIQUE",
         price_minute: 0.36,
-        model_machine: "ML6090",
         reserved: false,
-        out_of_order: false,
     });
 
     const use1 = await Use.create({

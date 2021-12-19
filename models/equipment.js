@@ -16,20 +16,11 @@ Equipment.init(
         type: DataTypes.DOUBLE,
         allowNull: false
     },
-    model_machine: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-        
-    },
     reserved: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    out_of_order: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
-  },
-    
+        
   },
   { sequelize: connection, modelName: "equipment" }
 );

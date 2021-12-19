@@ -1,9 +1,11 @@
+<%- include('header') -%>
+
 <main class="container">
     <h1>Authentification</h1>
-    <form novalidate>
+    <form method="post" action="/login">
       <div class="mb-3">
-        <label for="usernameInput" class="form-label">Nom d'utilisateur</label>
-        <input type="text" name="username" id="usernameInput" class="form-control" required>
+        <label for="usernameInput" class="form-label">Email :</label>
+        <input type="text" name="email" id="usernameInput" class="form-control" required>
         <div class="invalid-feedback">Ce champs est requis</div>
       </div>
       <div class="mb-3">
@@ -14,12 +16,15 @@
       <div class="mb-3">
         <button type="submit" class="btn btn-primary">S'authentifier</button>
       </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary" onclick="window.location.href = '/register';">S'inscrire</button>
+      </div>
       <div id="invalidCredsMsg" class="alert alert-danger invisible mb-3">
         Votre nom d'utilisateur ou votre mot de passe sont invalides.
       </div>
     </form>
+</main>
 
-    </p>
-  </main>
+<!-- <script src="/login.js"></script> -->
 
-<script src="/login.js"></script>
+<%- include('footer') -%>
