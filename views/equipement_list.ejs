@@ -1,0 +1,23 @@
+<%- include('header') -%>
+
+<h1>Liste des equipements</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Dispo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < equipement.length; i++ ) { %>
+            <tr>
+                <td><%= equipement[i].name %></td>
+                <td><%= equipement[i].price_minute %></td>
+                <td><%= equipement[i].reserved %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <%- include('footer') -%>
