@@ -31,6 +31,11 @@ const User = require("./user");
         permission: "all",
     });
 
+    const comptable = await Role.create({
+        name: "Comptable",
+        permission: "all",
+    });
+
     const member = await Role.create({
         name: "Member",
         permission: "read",

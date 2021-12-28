@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {User,Equipment} = require("../models/schema")
+const debug = require("debug");
+const {User,Equipment} = require("../models/schema");
+const { generate } = require("../jwt_generator");
+
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -13,11 +16,13 @@ router.post("/login", async function (req, res){
   if (!user || ((user) && user.password != req.body.password)){
       res.status(401)
       .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect"})
-  }else{
-    res.status(200)
-    .send({message : user})
   }
-})
+    const token = generate(user.id, user.email);
+    console.log(token)
+    res.cookie("jwt_token", token)
+    res.redirect("/equipement_list") 
+}
+)
 
 router.get("/register", function (req, res, next) {
   res.render("register");
@@ -37,8 +42,6 @@ router.get("/equipement_list", async function (req, res) {
   console.log(equipement)
   res.render("equipement_list", {equipement : equipement})  
 })
-
-
 
 
 module.exports = router;

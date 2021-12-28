@@ -3,15 +3,15 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
 const options = {
-  issuer: "MonProjetDemo token generator",
-  audience: "MonProjetDemo API",
+  issuer: "Fablab token generator",
+  audience: "Fablab API",
   expiresIn: "24h",
 };
 
-function generate(userId, username) {
+function generate(userId, email) {
   const payload = {
-    sub: userId,
-    preferred_username: username,
+    id: userId,
+    email: email,
   };
   return jwt.sign(payload, secret, options);
 }
