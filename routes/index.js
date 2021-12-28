@@ -35,6 +35,7 @@ router.post("/register", async function (req,res,next){
     password : req.body.password,
   })
   newUser.setRoles(2)
+  res.redirect("/login")
   console.log(newUser)
 })
 router.get("/equipement_list", async function (req, res) {
