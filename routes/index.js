@@ -3,6 +3,8 @@ const router = express.Router();
 const debug = require("debug");
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
+const  jwt_decode  = require("jwt-decode");
+
 
 
 /* GET home page. */
@@ -21,8 +23,11 @@ router.post("/login", async function (req, res){
     console.log(token)
     res.cookie("jwt_token", token)
     res.redirect("/equipement_list") 
-}
-)
+
+    const tok = token;
+    const decoded = jwt_decode(tok);
+    console.log(decoded);
+})
 
 router.get("/register", function (req, res, next) {
   res.render("register");
