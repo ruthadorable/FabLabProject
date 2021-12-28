@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const debug = require("debug")("PrajetFabLab:api:student");
+const debug = require("debug")("ProjetFabLab:api:FABLAB");
 const { User } = require("../models/schema");
 const { verify } = require("../password_hash");
 const { generate } = require("../jwt_generator");
