@@ -1,6 +1,22 @@
 const classList = document.getElementById("classList");
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
+
+
+let date1 =new Date();
+    let localDate=date1.toLocaleString('fr-FR',{
+      weekday: 'long',
+      year: 'numeric',
+      month:'long',
+      day: 'numeric',
+      hour:'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+    document.getElementById("date").innerHTML="Date : "+localDate;
 
 function populateTable(c) {
+  
   
     const row = document.createElement("tr");
 
@@ -15,25 +31,46 @@ function populateTable(c) {
 
 
     const euCol = document.createElement("td");
-    const euTxt = document.createTextNode(c.price_minute+" €");
+    var tarif= parseFloat(c.price_minute).toFixed(2);
+    const euTxt = document.createTextNode(tarif+" €");
     euCol.appendChild(euTxt);
     row.appendChild(euCol);
 
-    const inputCol = document.createElement("input");
-     inputCol.type="number";
-     row.appendChild(inputCol);
+    const inputDuree = document.createElement("input");
+    inputDuree.name="minutes"
+    inputDuree.type="number";
+    inputDuree.value=0;
+    row.appendChild(inputDuree);
     
     
-    const button=document.createElement("button");
-    const btnTxt=document.createTextNode("Encoder");
-    button.appendChild(btnTxt);
-    button.onclick="encoder()";
+    const button = document.createElement("button");
+    const innertxt = document.createTextNode("Valider");
+    button.type="button";
+    button.appendChild(innertxt);
+    button.onclick=rendertotal;
     row.appendChild(button);
+
+    function rendertotal(){
+    const calculCol = document.createElement("td");
+    calculCol.id="total";
+    const txt=document.createElement("input");
+    txt.type="text";
+    txt.name="total";
+    txt.value=0;
+    var total=parseFloat(c.price_minute*inputDuree.value).toFixed(2);
+    txt.value=total;
+    calculCol.appendChild(txt);
+    row.appendChild(calculCol);
+  }
+
   
   const tableBody = classList.querySelector("tbody");
   tableBody.replaceChildren(row);
 }
 
-fetch("/equipement/1")
+
+fetch(`/equipement/${paramId}`)
   .then((response) => response.json())
-  .then((machines) => populateTable(machines));
+  .then((machine) =>
+    populateTable(machine)
+  );

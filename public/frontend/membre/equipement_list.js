@@ -26,17 +26,35 @@ function populateTable(classes) {
     
     teacherCol.appendChild(teacherTxt);
     row.appendChild(teacherCol);
+    
     const button=document.createElement("a");
     const btnTxt=document.createTextNode("Encoder");
     button.appendChild(btnTxt);
-    button.href="encoder_utilisation.html";
+    button.class="btn btn-primary"
+    button.href=`/frontend/membre/encoder_utilisation.html?id=${c.id}`;
     row.appendChild(button);
+
+    let date1 =new Date();
+    let localDate=date1.toLocaleString('fr-FR',{
+      weekday: 'long',
+      year: 'numeric',
+      month:'long',
+      day: 'numeric',
+      hour:'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+    document.getElementById("date").innerHTML="Date : "+localDate;
+    
     return row;
   });
   const tableBody = classList.querySelector("tbody");
   tableBody.replaceChildren(...classRows);
 }
 
+
+
 fetch("/equipement")
   .then((response) => response.json())
   .then((machines) => populateTable(machines));
+
