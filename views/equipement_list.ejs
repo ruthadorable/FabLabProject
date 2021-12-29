@@ -1,25 +1,32 @@
 <%- include('header') -%>
-
+<main class="container">
+    <br><br>
 <h1>Liste des equipements</h1>
-    <table>
-        <thead>
-            <tr>
+    <table >
+        <thead style="border-width:2px">
+            <tr style="border-width:2px">
                 <th>Nom</th>
+                <th>Image</th>
                 <th>Prix</th>
-                <th>Dispo   </th>
+                <th>Réservé</th>
+                <th>Utilisation</th>
+
             </tr>
         </thead>
-        <tbody>
+        <tbody style="border-width:2px">
             <% for (let i = 0; i < equipement.length; i++ ) { %>
-            <tr>
-                <td><%= equipement[i].name %></td>
+            <tr style="border-width:2px">
+                <td ><%= equipement[i].name %></td>
+                <td><%=equiment[i].image</td>
                 <td><%= equipement[i].price_minute %></td>
                 <td><%= equipement[i].reserved %></td>
+                <td> <button onclick="window.location.href = '/equipement`${equipement[i].id}`';" type="button" class="btn btn-outline-danger">S'inscrire</button></td>
             </tr>
             <% } %>
         </tbody>
     </table>
 
-    
-
-    <%- include('footer') -%>
+</main>  
+<br>
+<br>
+<%- include('footer') -%>

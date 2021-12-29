@@ -16,13 +16,17 @@ Use.init(
     
     
     amount_to_be_paid: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
     date: {
         type: DataTypes.DATE,
         allowNull: false
     },
+    user_id:{
+      type: DataTypes.INTEGER,
+      allowNull: true
+    }
     
   },
   { sequelize: connection, modelName: "use" }

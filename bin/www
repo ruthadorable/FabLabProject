@@ -5,8 +5,12 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('monprojetdemo:server');
+const debug = require('debug')('fablab:server');
 const http = require('http');
+const url = require("url")
+const fs = require("fs")
+require("remedial")
+const querystring=require("querystring")
 
 /**
  * Get port from environment and store in Express.
@@ -88,3 +92,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/**** */

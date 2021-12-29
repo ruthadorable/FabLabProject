@@ -1,0 +1,172 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  }
+  
+  @media (min-width: 768px) {
+    .gradient-form {
+      height: 100vh !important;
+    }
+  }
+  @media (min-width: 769px) {
+    .gradient-custom-2 {
+      border-top-right-radius: .3rem;
+      border-bottom-right-radius: .3rem;
+    }
+  }
+
+  /*kaponda css*/
+
+  #bloc_page
+  {text-align:left;
+  margin:auto;
+  width:100%;
+  }
+   @media all and (max-width: 768px)
+ {    header
+   {font-size: 0.7em;
+     margin: 20px;; 
+     }
+   #titre-principale
+    {width: 20px;;
+     font-size: 0.7em;}
+   #definition
+    {width: 20px;;
+     font-size: 0.6em;}
+   nav
+   {margin:20px;
+    font-size: 0.5em;
+    overflow:auto;}
+     section
+   {width:20px;
+     font-size: 0.7em;}
+   #article
+   {width:auto;}
+   #affichage_page
+   {width:auto;}
+   #aside
+   {width:auto;}
+   table
+   {font-size:0.7em;}
+     footer
+    {font-size: 0.5em;
+     }
+ }  
+  header
+  {
+       
+    border: 1px blue groove;
+    border-radius: 5px;
+    height: 10%;
+    width:100%;
+    }
+  #titre-principale,#definition
+  { display:inline-block;
+  }
+  #titre-principale
+  {
+  margin-left:5%;	 
+  text-shadow:0px 0px 5px red;
+  }
+  #definition 
+  {	 
+   margin-left:35%;
+  }
+  
+  nav
+  {
+  border-radius: 5px;
+  height:5%;
+  width:100%;
+  }
+  #menu-deroulant
+  {
+  list-style-type: none;
+  text-align:center;
+  }
+  #menu-deroulant li
+  {display:inline-block;
+  width:15%;
+  }
+  #menu-deroulant  a:link
+  {text-decoration:none;
+  background-color:yellow;
+  }
+  #menu-deroulant  a:hover
+  {text-decoration:none;
+  background-color:red;
+  }
+  
+  section
+  {border: 1px blue groove;
+  border-radius: 5px;
+  height: 70%;
+  width:100%;
+  overflow:auto;
+  }
+  #article,#affichage_page,#aside
+  {display: inline-block;
+  vertical-align: top;
+  }
+  #article
+  
+  {
+  
+  border-radius: 5px;
+  margin-left:1%;
+  padding-left:1%;
+  width: 20%;
+  height: 100%;
+  overflow:auto;
+  }
+  #affichage_page
+  {position:relative;
+  border: 1px blue groove;
+  border-radius: 5px;
+  margin-left: 1%;
+  padding-left:1%;
+  width: 50%;
+  height: 100%;
+  overflow:auto;
+  }
+   #aside 
+   {
+   
+   border-radius: 5px;
+   margin-left: 1%;
+   padding-left:1%;
+   width: 20%;
+   height:100%;
+   overflow:auto;
+   }
+    input 
+  {background-color:yellow;}
+  input:active
+  {cursor:pointer;
+  background-color:red;}
+   table{border-collapse:collapse;}
+   th,td{border: 1px solid black;}
+   .long{padding-left:25%;}
+   footer
+   {
+   border: 1px blue groove;
+   border-radius: 5px;
+   height: 10%;
+   width:100%;
+   overflow:auto;
+   }
+   #edition_lbi,#condition_de_vente,#frais_de_livraison
+   {display: inline-block;
+   }
+   #edition_lbi
+   {padding-left:10%;}
+   #condition_de_vente
+   {padding-left:10%;}
+   #frais_de_livraison
+   {padding-left:10%;}

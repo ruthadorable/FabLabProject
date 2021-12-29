@@ -20,6 +20,11 @@ const sequelize = new Sequelize(db_dbname, db_username, db_password, {
   logging: (msg) => debug(msg),
 });
 
+
 debug("Database connection established.");
+
+
+
+
 
 module.exports = sequelize;
