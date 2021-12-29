@@ -39,6 +39,7 @@ router.post("/login", async function (req, res){
 
 })
 
+
 router.get("/register", function (req, res, next) {
   res.render("register");
 });
@@ -56,7 +57,6 @@ router.post("/register", async function (req,res,next){
     role_id:2 //membre par defaut
   })
   newUser.setRoles(2)
-  res.redirect("/login")
   console.log(newUser)
   res.render("login")
   }else{
@@ -66,4 +66,54 @@ router.post("/register", async function (req,res,next){
 })
 
 
+//membre routers
+router.get("/equipement_list",function (req, res, next) {
+  res.redirect("frontend/membre/equipement_list.html");
+});
+router.get("/equipement", async function (req, res) {
+  try{
+    const equipements = await Equipment.findAll()
+    return res.json(equipements);
+  }catch(err){
+    console.log(err);
+    return res.status(500).json({error: 'Something went wrong'})
+  }
+})
+router.get("/equipement/:id", async (req,res)=>{
+  const id=req.params.id;
+  try{
+    const equipementParId = await Equipment.findOne({
+      where: {id },
+    })   
+    return res.json(equipementParId); 
+  }catch(err){}
+})
+router.get("/utilisations/:id",async (req,res)=>{
+
+})
+router.post("/utilisations",async(req,res)=>{
+
+})
+
+router.get("/membre/:id",getMembreById);
+router.post("/membre/modification", async function (req, res){
+
+  const user = await User.findOne({ where : {email :req.body.email}})
+
+  if (!user || ((user) && user.password != req.body.password)){
+      res.status(401)
+      .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect"})
+  }  
+  
+});
+router.get("/facture",listefactures);
+
+router.post("/membre/utilisation",newUtilisation);
+router.get("/membre/facture/:id", function (req, res, next) {
+  res.render("membre/membre_facture")
+});
+
+router.get("/membre/utilisation/:id", function (req, res, next) {
+  res.render("membre/membre_utilisation")
+});
 module.exports = router;
