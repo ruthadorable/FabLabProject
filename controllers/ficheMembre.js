@@ -12,7 +12,7 @@ exports.listefactures= async(req,res,next)=>{
     const iduser=req.body.id;
     const all=Invoice.findAll({
         where: iduser
-    })
+    });
     
 }
 
