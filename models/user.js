@@ -35,6 +35,7 @@ User.init(
       type : DataTypes.INTEGER,
       allowNull:true
     }
+    
 
   },
   { sequelize: connection, modelName: "user" }
