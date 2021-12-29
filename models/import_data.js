@@ -8,15 +8,17 @@ const {
   Use,
   } = require("./schema");
 const User = require("./user");
-
 (async () => {
     await sequelize.sync({ force: true });
-
+   
+    
     const hatim = await User.create({
         first_name: "Hatim",
         last_name: "Naimi",
         email: "hatimnaimi@gmail.be",
         password: "12345",
+        role_id: 2,
+        uses_id: null
     });
 
     const soufian = await User.create({
@@ -24,8 +26,26 @@ const User = require("./user");
         last_name: "Haidour",
         email: "soufhaidour@gmail.be",
         password: "54321",
+        role_id: 2,
+        uses_id: null
     });
 
+    const ruth = await User.create({
+        first_name: "Ruth Ann",
+        last_name: "ADORABLE",
+        email: "adorableruthann@gmail.com",
+        password: "5698",
+        role_id: 1,
+        
+    })
+
+    const alfred = await User.create({
+        first_name: "Alfred",
+        last_name: "Lemonnier",
+        email: "alfredlemonnier@gmail.com",
+        password: "1234",
+        role_id: 3
+    }) 
     const admin = await Role.create({
         name: "Admin",
         permission: "all",
@@ -55,18 +75,21 @@ const User = require("./user");
 
     const grDecoupLaser = await Equipment.create({
         name: "LA GRANDE DÉCOUPEUSE LASER",
+        image: "../../images/découpeuselaser1.png",
         price_minute: 0.33,
         reserved: false,
     });
 
     const imp3Dgrand = await Equipment.create({
         name: "IMPRIMANTES 3D GRAND FORMAT",
+        image: "../../images/imprimante3D1.JPG",
         price_minute: 0.40,
         reserved: false,
     });
 
     const grFraisNum = await Equipment.create({
         name: "LA GRANDE FRAISEUSE NUMÉRIQUE",
+        image: "../../images/grandefraiseusenum1.JPG",
         price_minute: 0.36,
         reserved: false,
     });
@@ -92,3 +115,4 @@ const User = require("./user");
 
     await sequelize.close();
 })();
+

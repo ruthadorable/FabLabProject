@@ -27,6 +27,15 @@ User.init(
         type: DataTypes.STRING,
         allowNull: false
     },
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull:false
+    },
+    uses_id: {
+      type : DataTypes.INTEGER,
+      allowNull:true
+    }
+
   },
   { sequelize: connection, modelName: "user" }
 );

@@ -1,11 +1,10 @@
 const express = require("express");
+const bcrypt= require("bcrypt")
+const { getMembreById, newUtilisation, listefactures } = require("../controllers/ficheMembre");
 const router = express.Router();
-const debug = require("debug");
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-
-
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -15,38 +14,55 @@ router.post("/login", async function (req, res){
 
   const user = await User.findOne({ where : {email :req.body.email}})
 
-  if (!user || ((user) && user.password != req.body.password)){
+  if (!user || ((user) && user.email != req.body.email)){
       res.status(401)
-      .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect"})
+      .send({ message: "L'utilisateur n'a pas été trouvé "})
+  }else{
+    const token = generate(user.id,user.first_name);
+    res.cookie("jwt_token", token);
+    const decoded = jwt_decode(token);
+    console.log(decoded.preferred_username);
+    
+    if(user.role_id==2)
+  {
+    res.redirect("frontend/membre/equipement_list.html");
   }
-    const token = generate(user.id, user.email);
-    console.log(token)
-    res.cookie("jwt_token", token)
-    res.redirect("/equipement_list") 
+  else if( user.role_id==1)
+  {
+    res.render("manager/manager_accueil")
+  }
+  else{
+    res.render("comptable/comptable_accueil")
+  }
+  }
+  
 
-    const tok = token;
-    const decoded = jwt_decode(tok);
-    console.log(decoded);
 })
 
 router.get("/register", function (req, res, next) {
   res.render("register");
 });
 router.post("/register", async function (req,res,next){
+  const user = await User.findOne({ where : {email :req.body.email}})
+
+  if (!user || ((user) && user.email != req.body.email)){
+   
+  const salt= await bcrypt.genSalt(10);
   const newUser = await User.create({
     first_name : req.body.first_name,
     last_name : req.body.last_name,
     email : req.body.email,
-    password : req.body.password,
+    password : await bcrypt.hash(req.body.password,salt),
+    role_id:2 //membre par defaut
   })
   newUser.setRoles(2)
   res.redirect("/login")
   console.log(newUser)
-})
-router.get("/equipement_list", async function (req, res) {
-  const equipement = await Equipment.findAll()
-  console.log(equipement)
-  res.render("equipement_list", {equipement : equipement})  
+  res.render("login")
+  }else{
+    res.status(401)
+    .send({ message: "L'email est déjà dans la base de donnée!"})
+  }
 })
 
 
