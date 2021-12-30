@@ -14,9 +14,9 @@ function get_cookie_name(name)
    }
 
 
-function populateTable(classes) {
+function populateTable(c) {
 
-  const classRows = classes.map((c) => {
+  
     const row = document.createElement("tr");
 
     const numCol = document.createElement("td");
@@ -35,20 +35,9 @@ function populateTable(classes) {
     const amountTxt = document.createTextNode(total+"€");
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
-
-    const detailsCol= document.createElement("td");
-    const detailsBtn=document.createElement("a");
-    detailsBtn.href=`/frontend/membre/facturedetails.html?id=${c.id}`;
-    const detailsTxt = document.createTextNode("Voir");
-    detailsBtn.appendChild(detailsTxt);
-    detailsCol.appendChild(detailsBtn);
-    row.appendChild(detailsCol);
-
-
-    return row;
-  });
-  const tableBody = classList.querySelector("tbody");
-  tableBody.replaceChildren(...classRows);
+    
+    const tableBody = classList.querySelector("tbody");
+    tableBody.replaceChildren(row);
 }
 
 let date1 =new Date();
@@ -91,7 +80,6 @@ document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
 /*const modifylink=document.getElementById("modifydata");
 modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
-fetch("/facture")
+fetch("/getfacture")
   .then((response) => response.json())
-  .then((x) => populateTable(x));
-
+  .then((facture) => populateTable(facture));

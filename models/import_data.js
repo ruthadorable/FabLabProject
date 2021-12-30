@@ -60,12 +60,14 @@ const User = require("./user");
         num: "1",
         date: "2021-04-13",
         amount_total: 23.90,
+        userId:1
     });
 
     const in2 = await Invoice.create({
         num: "2",
         date: "2021-04-24",
         amount_total: 14.26,
+        userId:1
     });
 
     const grDecoupLaser = await Equipment.create({
