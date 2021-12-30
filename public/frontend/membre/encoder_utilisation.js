@@ -90,7 +90,6 @@ function parseJwt (token) {
 };
 const decoded=parseJwt(token);
 const iduser=decoded.sub;
-alert(iduser);
 const username=decoded.preferred_username;
 document.getElementById("username").innerHTML=("Bonjour "+username);
 fetch(`/equipement/${paramId}`)
@@ -111,6 +110,7 @@ fetch("/membre/utilisation",{
   headers:{
     "Content-type":"application/json; charset=UTF-8"
   }
-})
+});
+window.location.href="/frontend/membre/utilisation_reception.html";
 alert("Votre utilisation a bien été encodé!");
 }

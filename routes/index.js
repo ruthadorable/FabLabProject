@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { getMembreById, newUtilisation, listefactures, getEquipementById, updateMembre } = require("../controllers/ficheMembre");
+const { getMembreById, newUtilisation,getEquipements,getEquipementById, updateMembre, getFactureById,factureDetails ,getFactureDetailsById, equipementPage} = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
@@ -9,6 +9,8 @@ const  jwt_decode  = require("jwt-decode");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("login")
+  res.clearCookie('id');
+  res.clearCookie('jwt_token');
 });
 router.post("/login", async function (req, res){
 
@@ -66,25 +68,13 @@ router.post("/register", async function (req,res,next){
 
 
 //membre routers
-router.get("/equipement_list",function (req, res, next) {
-  res.redirect("frontend/membre/equipement_list.html");
-});
-router.get("/equipement", async function (req, res) {
-  try{
-    const equipements = await Equipment.findAll()
-    return res.json(equipements);
-  }catch(err){
-    console.log(err);
-    return res.status(500).json({error: 'Something went wrong'})
-  }
-})
+router.get("/equipement_list",equipementPage);
+router.get("/equipement", getEquipements)
 router.get("/equipement/:id", getEquipementById);
-
-router.get("/facture",listefactures);
-
+router.get("/facture",getFactureById);
 router.post("/membre/utilisation",newUtilisation);
-
 router.get("/modification/user/:id",getMembreById);
-
 router.post("/membre/update",updateMembre);
+router.get("/facturedetails/:id",factureDetails);
+router.get("/getfacture",getFactureDetailsById);
 module.exports = router;

@@ -23,7 +23,6 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerHTML=("Bonjour "+username);
-alert(iduser);
 function populateTable(c){
 
     const firstname=document.createTextNode(c.first_name);

@@ -3,6 +3,8 @@ const Invoice = require("./invoice");
 const Use = require("./use");
 const User = require("./user");
 const Role = require("./role");
+/*const { hasMany } = require("./equipment");
+const { BelongsTo } = require("sequelize/dist");*/
 
  Equipment.hasMany(Use);
  Use.belongsTo(Equipment);
@@ -10,8 +12,10 @@ const Role = require("./role");
  User.hasMany(Use);
  Use.belongsTo(User);
 
- Invoice.hasMany(Use);
- Use.belongsTo(Invoice);
+
+ User.hasMany(Invoice);
+ Invoice.belongsTo(User);
+
 
 Role.belongsToMany(User ,{
   through: "user_roles", 

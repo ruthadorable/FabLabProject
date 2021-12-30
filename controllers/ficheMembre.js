@@ -5,26 +5,7 @@ const Invoice=require("../models/invoice");
 const  jwt_decode  = require("jwt-decode");
 
 
-
-
-exports.getUser=(req,res,next)=>{
-
-    
-
-}
-
-exports.listefactures= async(req,res,next)=>{
-
-    const iduser=req.body.id;
-    const all=Invoice.findAll({
-        where: iduser
-    });
-    
-}
-
-
 exports.newUtilisation= async(req,res,next)=>{
-
     const iduser=req.body.iduser;
     const idmachine=req.body.idmachine;
     const user=Use.findOne({where:{id:iduser}});
@@ -42,14 +23,13 @@ exports.newUtilisation= async(req,res,next)=>{
    })
   await newUsage.setEquipment(equipement);
   await newUsage.setUser(iduser);
-  await newUsage.setInvoice(newFacture);
-  /*res.redirect("/frontend/membre/utilisation_reception.html")*/
-  res.render("membre/utilisation_reception");
-    
+  await newFacture.setUser(iduser);
+  
 }
 
 exports.getMembreById=async(req,res,next)=>{
     const id=req.params.id;
+    res.cookie('id',id,{expire:new Date()+10*60*1000});
     try{
      const userById =await User.findOne({
         where: {id},
@@ -59,9 +39,21 @@ exports.getMembreById=async(req,res,next)=>{
     
     console.log(user);
 }
-exports.getEquipementById=async (req,res)=>{
+exports.equipementPage=function (req, res, next) {
+    res.redirect("frontend/membre/equipement_list.html");
+  }
+exports.getEquipements=async(req, res)=> {
+    try{
+      const equipements = await Equipment.findAll()
+      return res.json(equipements);
+    }catch(err){
+      console.log(err);
+      return res.status(500).json({error: 'Something went wrong'})
+    }
+  }
+exports.getEquipementById = async (req,res)=>{
     const id=req.params.id;
-    res.cookie('id',id,{expire:new Date()+10*60*1000});
+    
     try{
       const equipementParId = await Equipment.findOne({
         where: {id },
@@ -92,3 +84,35 @@ exports.updateMembre=async(req,res)=>{
        }
     }catch(err){}
 }
+
+exports.getFactureById= async (req,res)=>{
+    const id=req.cookies.id;
+    
+    try{
+      const factureParId = await Invoice.findAll({
+        where: {userId:id },
+      })   
+      res.send(factureParId);
+      return res.json(factureParId); 
+    }catch(err){}
+  }
+
+exports.factureDetails=function(req,res){
+    const id=req.params.id;
+    res.cookie('idfacture',id,{expire:new Date()+10*60*1000});
+    res.redirect("/frontend/membre/facturedetails.html");
+
+      
+  }
+
+  exports.getFactureDetailsById=async(req,res)=>{
+      const id=req.cookies.idfacture;
+      try{
+        const factureParId = await Invoice.findOne({where:{id:id}})
+        res.clearCookie('idfacture');   
+        res.send(factureParId); 
+        return res.json(factureParId);
+        
+      }catch(err){}
+
+  }
