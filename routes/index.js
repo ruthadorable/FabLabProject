@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { getMembreById, newUtilisation, listefactures } = require("../controllers/ficheMembre");
+const { getMembreById, newUtilisation, listefactures, getEquipementById, updateMembre } = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
@@ -16,7 +16,7 @@ router.post("/login", async function (req, res){
 
   if (!user || ((user) && user.email != req.body.email)){
       res.status(401)
-      .send({ message: "L'utilisateur n'a pas été trouvé "})
+      .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect !"})
   }else{
     const token = generate(user.id,user.first_name);
     res.cookie("jwt_token", token);
@@ -78,41 +78,13 @@ router.get("/equipement", async function (req, res) {
     return res.status(500).json({error: 'Something went wrong'})
   }
 })
-router.get("/equipement/:id", async (req,res)=>{
-  const id=req.params.id;
-  try{
-    const equipementParId = await Equipment.findOne({
-      where: {id },
-    })   
-    return res.json(equipementParId); 
-  }catch(err){}
-})
-router.get("/utilisations/:id",async (req,res)=>{
+router.get("/equipement/:id", getEquipementById);
 
-})
-router.post("/utilisations",async(req,res)=>{
-
-})
-
-router.get("/membre/:id",getMembreById);
-router.post("/membre/modification", async function (req, res){
-
-  const user = await User.findOne({ where : {email :req.body.email}})
-
-  if (!user || ((user) && user.password != req.body.password)){
-      res.status(401)
-      .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect"})
-  }  
-  
-});
 router.get("/facture",listefactures);
 
 router.post("/membre/utilisation",newUtilisation);
-router.get("/membre/facture/:id", function (req, res, next) {
-  res.render("membre/membre_facture")
-});
 
-router.get("/membre/utilisation/:id", function (req, res, next) {
-  res.render("membre/membre_utilisation")
-});
+router.get("/modification/user/:id",getMembreById);
+
+router.post("/membre/update",updateMembre);
 module.exports = router;

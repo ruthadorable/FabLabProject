@@ -10,6 +10,9 @@ const Role = require("./role");
  User.hasMany(Use);
  Use.belongsTo(User);
 
+ Invoice.hasMany(Use);
+ Use.belongsTo(Invoice);
+
 Role.belongsToMany(User ,{
   through: "user_roles", 
   foreignKey: "roleId",

@@ -1,7 +1,7 @@
 const classList = document.getElementById("classList");
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
-
+let inputDuree,txt;
 
 let date1 =new Date();
     let localDate=date1.toLocaleString('fr-FR',{
@@ -36,7 +36,7 @@ function populateTable(c) {
     euCol.appendChild(euTxt);
     row.appendChild(euCol);
 
-    const inputDuree = document.createElement("input");
+    inputDuree = document.createElement("input");
     inputDuree.name="minutes"
     inputDuree.type="number";
     inputDuree.value=0;
@@ -53,7 +53,7 @@ function populateTable(c) {
     function rendertotal(){
     const calculCol = document.createElement("td");
     calculCol.id="total";
-    const txt=document.createElement("input");
+    txt=document.createElement("input");
     txt.type="text";
     txt.name="total";
     txt.value=0;
@@ -67,10 +67,50 @@ function populateTable(c) {
   const tableBody = classList.querySelector("tbody");
   tableBody.replaceChildren(row);
 }
+function get_cookie_name(name) 
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+const token = get_cookie_name("jwt_token");
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
 
-
+  return JSON.parse(jsonPayload);
+};
+const decoded=parseJwt(token);
+const iduser=decoded.sub;
+alert(iduser);
+const username=decoded.preferred_username;
+document.getElementById("username").innerHTML=("Bonjour "+username);
 fetch(`/equipement/${paramId}`)
   .then((response) => response.json())
   .then((machine) =>
     populateTable(machine)
   );
+
+function sendData(){
+fetch("/membre/utilisation",{
+  method: 'POST',
+  body: JSON.stringify({
+    iduser: iduser,
+    idmachine: paramId,
+    minutes: inputDuree.value,
+    total: txt.value
+  }),
+  headers:{
+    "Content-type":"application/json; charset=UTF-8"
+  }
+})
+alert("Votre utilisation a bien été encodé!");
+}

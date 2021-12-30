@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Accueil</a>
+                <a class="nav-link" href="#">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./modification_mesdonnées.html">Modifier mes données</a>
@@ -29,14 +29,34 @@
             <li class="nav-item">
                 <a class="nav-link" href="./facture_list.html">Afficher mes factures</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item ">
+                <a class="nav-link e" href="/">
                 Se déconnecter
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">TO DO</a>
-                </div>
             </li>
         </ul>
     </div>
 </nav>
+<main class="container">
+    <h1>Liste des factures</h1>
+    <p id="date"></p>
+    <table id="classList" class="table">
+      <thead>
+        <tr>
+          <th role="col">Numéro de facture</th>
+          <th role="col">Date</th>
+          <th role="col">Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="equipement_list.js"></script>
+</body>
+
+</html>

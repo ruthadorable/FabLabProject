@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Accueil</a>
+                <a class="nav-link" id="username" href="/">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./modification_mesdonnées.html">Modifier mes données</a>
@@ -29,42 +29,40 @@
             <li class="nav-item">
                 <a class="nav-link" href="./facture_list.html">Afficher mes factures</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item ">
+                <a class="nav-link " href="/">
                 Se déconnecter
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">TO DO</a>
-                </div>
+                
             </li>
         </ul>
     </div>
 </nav>
 <div class="container">
     <h1 class="bg-primary text-white border border-dark mt-2 p-3 rounded-lg">Modifier mes données</h1>
-    <form method="POST" action="/membre/modification">
-        <input type="hidden" name="idQuestion" value="{id}" />
+    <form method="POST" id="post" action="/membre/update">
         <div class="form-group">
             <label for="description">Nom :</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Votre nom" value="">
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre nom" value="">
         </div>
         <div class="form-group">
             <label for="reponseA">Prenom :</label>
-            <input type="text" class="form-control" id="reponseA" name="reponseA" placeholder="Votre prenom" value="">
+            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Votre prenom" value="">
         </div>
         <div class="form-group">
             <label for="reponseB">Email :</label>
-            <input type="email" class="form-control" id="reponseB" name="reponseB" placeholder="email" value="">
+            <input type="email" class="form-control" id="email" name="email" placeholder="email" value="">
         </div>
         <div class="form-group">
             <label for="reponseC">Mot de passe :</label>
-            <input type="password" class="form-control" id="reponseC" name="reponseC" placeholder="mot de passe" value="">
+            <input type="password" class="form-control" id="motdepasse" name="motdepasse" placeholder="mot de passe"  autocomplete="section-blue new-password">
         </div>
         <div class="form-group">
             <label for="reponseD">Confirmer mot de passe :</label>
-            <input type="password" class="form-control" id="reponseD" name="reponseD" placeholder="Confirmer mot de passe" value="">
+            <input type="password" class="form-control" id="confmotdepasse" name="confmotdepasse" placeholder="Confirmer mot de passe"  autocomplete="section-blue new-password">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Valider</button>
     </form>
 </div>
+<script src="modification_mesdonnées.js"></script>
