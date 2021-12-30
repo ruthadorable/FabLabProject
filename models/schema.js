@@ -12,7 +12,7 @@ const { BelongsTo } = require("sequelize/dist");*/
  User.hasMany(Use);
  Use.belongsTo(User);
 
-
+/*Ajouter une relation equipement à Invoice ici */
  User.hasMany(Invoice);
  Invoice.belongsTo(User);
 

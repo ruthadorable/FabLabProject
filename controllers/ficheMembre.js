@@ -108,6 +108,7 @@ exports.factureDetails=function(req,res){
   exports.getFactureDetailsById=async(req,res)=>{
       const id=req.cookies.idfacture;
       try{
+        //faire le include Invoice et Equipement ici
         const factureParId = await Invoice.findOne({where:{id:id}})
         res.clearCookie('idfacture');   
         res.send(factureParId); 

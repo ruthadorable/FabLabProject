@@ -82,4 +82,4 @@ modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
 fetch("/getfacture")
   .then((response) => response.json())
-  .then((x) => populateTable(x));
+  .then((facture) => populateTable(facture));
