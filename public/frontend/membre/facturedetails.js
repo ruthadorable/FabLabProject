@@ -1,28 +1,10 @@
 
 const classList = document.getElementById("classList");
 
-function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
+function populateTable(classes) {
 
-
-function populateTable(c) {
-
-  
+  const classRows = classes.map((c) => {
     const row = document.createElement("tr");
-
-    const numCol = document.createElement("td");
-    const numTxt = document.createTextNode(c.num);
-    numCol.appendChild(numTxt);
-    row.appendChild(numCol);
 
     const dateCol= document.createElement("td");
     const dateformat=c.date.toString().slice(0,10);
@@ -30,16 +12,36 @@ function populateTable(c) {
     dateCol.appendChild(dateTxt);
     row.appendChild(dateCol);
 
+    const col2 = document.createElement("td");
+    const txt2 = document.createTextNode(c.equipment_name);
+    col2.appendChild(txt2);
+    row.appendChild(col2);
+
+    const col3 = document.createElement("td");
+    const txt3 = document.createTextNode(c.equipment_tarif);
+    col3.appendChild(txt3);
+    row.appendChild(col3);
+
+    const col4 = document.createElement("td");
+    const txt4 = document.createTextNode(c.duration_M);
+    col4.appendChild(txt4);
+    row.appendChild(col4);
+
     const amountCol= document.createElement("td");
     const total=parseFloat(c.amount_total).toFixed(2);
     const amountTxt = document.createTextNode(total+"€");
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
-    
+    return row;
+  });
     const tableBody = classList.querySelector("tbody");
-    tableBody.replaceChildren(row);
-}
+    tableBody.replaceChildren(...classRows);
+};
+fetch("/getfacture")
+  .then((response) => {response.json();console.log(response);})
+  .then((facture) => populateTable(facture));
 
+  
 let date1 =new Date();
     let localDate=date1.toLocaleString('fr-FR',{
       weekday: 'long',
@@ -77,9 +79,5 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
-/*const modifylink=document.getElementById("modifydata");
-modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
-fetch("/getfacture")
-  .then((response) => response.json())
-  .then((facture) => populateTable(facture));
+

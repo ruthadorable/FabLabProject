@@ -71,10 +71,14 @@ router.post("/register", async function (req,res,next){
 router.get("/equipement_list",equipementPage);
 router.get("/equipement", getEquipements)
 router.get("/equipement/:id", getEquipementById);
-router.get("/facture",getFactureById);
+router.get("/facture/:id",getFactureById);
 router.post("/membre/utilisation",newUtilisation);
 router.get("/modification/user/:id",getMembreById);
 router.post("/membre/update",updateMembre);
 router.get("/facturedetails/:id",factureDetails);
 router.get("/getfacture",getFactureDetailsById);
+
+//administrator routers
+
+
 module.exports = router;
