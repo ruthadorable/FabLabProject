@@ -10,18 +10,6 @@ function get_cookie_name(name)
       }
    }
 
-
-function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
 const token = get_cookie_name("jwt_token");
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -34,4 +22,7 @@ function parseJwt (token) {
 };
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
-document.getElementById("username").innerHTML=("Bonjour "+username);
+const iduser=decoded.sub;
+
+
+document.getElementById("username").innerHTML=("   Bonjour "+username+" " );

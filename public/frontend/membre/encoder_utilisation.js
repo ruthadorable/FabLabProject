@@ -92,6 +92,7 @@ const decoded=parseJwt(token);
 const iduser=decoded.sub;
 const username=decoded.preferred_username;
 document.getElementById("username").innerHTML=("Bonjour "+username);
+
 fetch(`/equipement/${paramId}`)
   .then((response) => response.json())
   .then((machine) =>

@@ -1,17 +1,6 @@
 
 const classList = document.getElementById("classList");
 
-function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
 
 
 function populateTable(classes) {
@@ -62,7 +51,7 @@ let date1 =new Date();
       second: 'numeric'
     });
     document.getElementById("date").innerHTML="Date : "+localDate;
-    
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -91,7 +80,7 @@ document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
 /*const modifylink=document.getElementById("modifydata");
 modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
-fetch("/facture")
+fetch(`/facture/${iduser}`)
   .then((response) => response.json())
   .then((x) => populateTable(x));
 
