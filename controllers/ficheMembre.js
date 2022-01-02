@@ -9,7 +9,7 @@ const InvoiceDetail = require("../models/invoicedetail");
 exports.newUtilisation= async(req,res,next)=>{
     const iduser=req.cookies.id;
     const idmachine=req.body.idmachine;
-    const user=Use.findOne({where:{id:iduser}});
+    const use=Use.findOne({where:{id:iduser}});
     const equipement= await Equipment.findOne({where : {id:idmachine}})
    const newUsage = await Use.create({
       durating_M: req.body.minutes,
@@ -75,7 +75,7 @@ exports.getEquipementById = async (req,res)=>{
     }catch(err){}
   }
 
-exports.updateMembre=async(req,res)=>{
+exports.updateUser=async(req,res)=>{
     
     const id=req.cookies.id;
     const {nom,prenom,email,motdepasse,confmotdepasse}=req.body;
