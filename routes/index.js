@@ -5,7 +5,7 @@ const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-const { getUserById } = require("../controllers/ficheAdmin");
+const { getUserById, updateAdmin } = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -81,5 +81,6 @@ router.get("/getfacture",getFactureDetailsById);
 
 //administrator routers
 router.get("/admin/profile",getUserById);
+router.post("/admin/update",updateAdmin);
 
 module.exports = router;

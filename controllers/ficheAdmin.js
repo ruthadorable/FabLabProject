@@ -19,4 +19,30 @@ exports.getUserById=async(req,res,next)=>{
     }catch(err){}
     
 }
-exports.updateAdmin
+exports.updateAdmin=async(req,res)=>{
+    
+    const id=req.cookies.id;
+    const {nom,prenom,email,motdepasse,confmotdepasse}=req.body;
+    
+    try{
+        const userById =await User.findOne({
+            where: {id }})
+       if(nom!==""&&email!==""&&prenom!=""&&motdepasse!=="")
+       {
+        if(confmotdepasse!=motdepasse){
+
+          res.send("Les mots de passe ne sont pas identiques!")
+        }else{
+           userById.update({
+               first_name:prenom,
+               last_name:nom,
+               email:email,
+               password: motdepasse
+           },{
+               where : {id:id}
+           });
+           res.clearCookie('id');
+           res.redirect("/frontend/admin/pages/profile_update_reception.html");
+       }}
+    }catch(err){}
+}

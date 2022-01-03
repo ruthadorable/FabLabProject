@@ -88,14 +88,15 @@ exports.updateUser=async(req,res)=>{
         if(confmotdepasse!=motdepasse){
 
           res.send("Les mots de passe ne sont pas identiques!")
-        }else{
-           User.update({
+        }
+        //gestion duplicate 
+        
+        else{
+           userById.update({
                first_name:prenom,
                last_name:nom,
                email:email,
                password: motdepasse
-           },{
-               where : {id:id}
            });
            res.clearCookie('id');
            res.redirect("/frontend/membre/modification_reception.html");
