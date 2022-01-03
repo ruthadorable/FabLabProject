@@ -1,10 +1,11 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { getMembreById, newUtilisation,getEquipements,getEquipementById, updateMembre, getFactureById,factureDetails ,getFactureDetailsById, equipementPage} = require("../controllers/ficheMembre");
+const { getMembreById, newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage} = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
+const { getUserById, updateAdmin } = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -31,10 +32,10 @@ router.post("/login", async function (req, res){
   }
   else if( user.role_id==1)
   {
-    res.render("manager/manager_accueil")
+    res.redirect("frontend/admin/index.html");
   }
   else{
-    res.render("comptable/comptable_accueil")
+    res.redirect("frontend/comptable/index.html");
   }
   }
   
@@ -75,11 +76,12 @@ router.get("/equipement/:id", getEquipementById);
 router.get("/facture/:id",getFactureById);
 router.post("/membre/utilisation",newUtilisation);
 router.get("/modification/user/:id",getMembreById);
-router.post("/membre/update",updateMembre);
+router.post("/user/update",updateUser);
 router.get("/facturedetails/:id",factureDetails);
 router.get("/getfacture",getFactureDetailsById);
 
 //administrator routers
-
+router.get("/admin/profile",getUserById);
+router.post("/admin/update",updateAdmin);
 
 module.exports = router;
