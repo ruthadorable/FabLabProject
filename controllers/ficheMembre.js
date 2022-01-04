@@ -7,20 +7,23 @@ const InvoiceDetail = require("../models/invoicedetail");
 
 
 exports.newUtilisation= async(req,res,next)=>{
-    const iduser=req.cookies.id;
-    const idmachine=req.body.idmachine;
-    const use=Use.findOne({where:{id:iduser}});
+    const token=req.cookies.jwt_token;
+    const decoded=jwt_decode(token);
+    const iduser=decoded.sub;
+    const idmachine=req.params.id;
+    const {minutes,total}=req.body;
     const equipement= await Equipment.findOne({where : {id:idmachine}})
    const newUsage = await Use.create({
-      durating_M: req.body.minutes,
-      amount_to_be_paid: req.body.total,
+      durating_M: minutes,
+      amount_to_be_paid: total,
       date: Date(),
       user_id: iduser
   })
    const newFacture = await Invoice.create({
         num: Math.floor(Math.random()*(9999999-1111111+1)+1111111),
         date: Date(),
-        amount_total: req.body.total,
+        durating_M: minutes,
+        amount_total: total,
         userId: iduser
    })
    const newInvoiceDetail = await InvoiceDetail.create({
@@ -37,7 +40,7 @@ exports.newUtilisation= async(req,res,next)=>{
   await newUsage.setEquipment(equipement);
   await newUsage.setUser(iduser);
   await newFacture.setUser(iduser);
-  
+  res.redirect("/frontend/membre/utilisation_reception.html");
 }
 
 exports.getMembreById=async(req,res,next)=>{
@@ -66,7 +69,6 @@ exports.getEquipements=async(req, res)=> {
   }
 exports.getEquipementById = async (req,res)=>{
     const id=req.params.id;
-    
     try{
       const equipementParId = await Equipment.findOne({
         where: {id },

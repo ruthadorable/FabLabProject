@@ -77,14 +77,13 @@
                   <span class="nav-link-text">Logout</span>
                 </a>
               </li>
-          </ul>
+        </ul>
          
         </div>
       </div>
     </div>
   </nav>
-  
-    <!-- Main content -->
+  <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
@@ -94,54 +93,84 @@
         </div>
       </div>
     </nav>
-    <!-- Header container -->
-    <div class="container-fluid d-flex align-items-center">
-      <div class="row">
-        <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white" id="username"></h1>
-          
-          <a href="ajouter_equipement.html" class="btn btn-neutral">Ajouter equipement</a>
-        </div>
-      </div>
-    </div>
-    <br/>
     <!-- Page content -->
     <div class="container-fluid ">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Liste des équipements</h3>
-            </div>
-                  <!-- Light table -->
-                  <div class="table-responsive">
-                    <table id="list" class="table align-items-center table-flush">
-                      <thead class="thead-light">
-                        <tr>
-                          <th scope="col" class="sort" data-sort="name">Nom</th>
-                          <th scope="col" class="sort" data-sort="budget">Image</th>
-                          <th scope="col" class="sort" data-sort="status">Tarif</th>
-                          <th scope="col">Modifer</th>
-                          <th scope="col" class="sort" data-sort="completion">Supprimer</th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody >
-                        
-                      </tbody>
-                    </table>
+        <div class="row">
+          <div class="col-xl-8 order-xl-1">
+            <div class="card">
+              <div class="card-header">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 class="mb-0">Modifier l'équipement </h3>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="card-body">
+                <form method="POST"  id="post" action="/equipement/update">
+                  <h6 class="heading-small text-muted mb-4"> Equipement Update</h6>
+                  <div class="pl-lg-4">
+                    
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-nom">Nom</label>
+                          <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-image">Image</label>
+                          <input type="text" name="image"  id="image" class="form-control"  >
+                        </div>
+                      </div>
                     </div>
-           </div>         
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-tarif">Prix par minute </label>
+                          <input type="number" name="tarif" id="tarif" class="form-control" required step=".01">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-description">Description</label>
+                          <input type="text" name="description" id="description" class="form-control" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-reserved">Reserver</label>
+                          <select type="text" name="reserved" id="reserved" class="form-control" >
+                              <option value="true">true</option>
+                              <option value="false" selected>false</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+                  <hr class="my-4" />
+                  <div class=" text-right">
+                    <button type="submit" class="btn btn-sm btn-primary">Modifer</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-      </div> 
+    
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        
+      </footer>
     </div>
   </div>
 
-    
-  
-
-  <script src="equipementstable.js"></script>
+  <script src="modifier_equipement.js"></script>
 </body>
 
 </html>

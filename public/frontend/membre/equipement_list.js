@@ -26,6 +26,8 @@ function populateTable(classes) {
 
     const imageCol= document.createElement("img");
     imageCol.src=c.image;
+    imageCol.height=150;  
+    imageCol.width=250;
     row.appendChild(imageCol);
 
 

@@ -46,3 +46,58 @@ exports.updateAdmin=async(req,res)=>{
        }}
     }catch(err){}
 }
+exports.getAdminEquipementById=async (req,res)=>{
+    const id=req.params.id;
+    res.cookie('idmachine',id,{expire:new Date()+10*60*1000});
+    try{
+      const equipementParId = await Equipment.findOne({
+        where: {id },
+      })   
+      return res.json(equipementParId); 
+    }catch(err){}
+  }
+
+exports.createEquipement=async(req,res)=>{
+    const {nom,tarif,image,reserved,description}=req.body;
+    const imagedefault="../../images/ajoutimage.JPG".toString();
+    try{
+        const newEquipement=Equipment.create({
+        name:nom,
+        price_minute:tarif,
+        image: imagedefault,
+        reserved:reserved,
+        description: description
+        });
+        res.redirect("/frontend/admin/pages/equipmentstable.html");
+    }catch(err)
+    {}
+}
+exports.updateEquipement=async(req,res)=>{
+    const idmachine = req.cookies.idmachine;
+    const {nom,tarif,image,reserved,description}=req.body;
+    const imagedefault="../../images/ajoutimage.JPG".toString();
+    try{
+        const equipmentById =await Equipment.findOne({
+            where: {id:idmachine }});
+       if(nom!==""&&tarif!==""&&image!=""&&reserved!==""&&description!=="")
+       {
+           equipmentById.update({
+               name:nom,
+               price_minute:tarif,
+               image: image,
+               reserved: reserved,
+               description:description
+           });
+        }   
+           res.redirect("/frontend/admin/pages/equipmentstable.html");
+    }catch(err){}
+}
+exports.deleteEquipement=async(req,res)=>{
+    const idmachine= req.params.id;
+    try{
+    Equipment.destroy({
+        where:{id:idmachine}
+    })
+    res.redirect("/frontend/admin/pages/equipmentstable.html");
+    }catch(err){}
+}

@@ -5,7 +5,7 @@ const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-const { getUserById, updateAdmin } = require("../controllers/ficheAdmin");
+const { getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById } = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -74,7 +74,7 @@ router.get("/equipement_list",equipementPage);
 router.get("/equipement", getEquipements)
 router.get("/equipement/:id", getEquipementById);
 router.get("/facture/:id",getFactureById);
-router.post("/membre/utilisation",newUtilisation);
+router.post("/membre/utilisation/:id",newUtilisation);
 router.get("/modification/user/:id",getMembreById);
 router.post("/user/update",updateUser);
 router.get("/facturedetails/:id",factureDetails);
@@ -83,5 +83,9 @@ router.get("/getfacture",getFactureDetailsById);
 //administrator routers
 router.get("/admin/profile",getUserById);
 router.post("/admin/update",updateAdmin);
+router.get("/admin/equipement/:id",getAdminEquipementById);
+router.post("/equipement/create",createEquipement);
+router.post("/equipement/update",updateEquipement); 
+router.get("/equipement/delete/:id",deleteEquipement);
 
 module.exports = router;
