@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="utilisateurid" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Administrator Dashboard</title>
   <!-- Favicon -->
-  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/img/brand/favicon.png" type="date/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -102,56 +102,66 @@
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Ajouter un nouvel équipement </h3>
+                    <h3 class="mb-0">Ajouter une nouvelle facture </h3>
                   </div>
                   
                 </div>
               </div>
               <div class="card-body">
                 <form method="POST"  id="post" action="/equipement/create">
-                  <h6 class="heading-small text-muted mb-4">Nouvel Equipement</h6>
+                  <h6 class="heading-small text-muted mb-4">Nouvelle facture</h6>
                   <div class="pl-lg-4">
                     
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-nom">Nom</label>
-                          <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" >
+                          <label class="form-control-label" for="input-numéro">Numéro de facture</label>
+                          <input type="text" name="numéro" id="numéro" class="form-control" placeholder="numéro" >
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-last-image">Image path </label>
-                          <input type="text" name="image"  id="image" class="form-control"  >
+                          <label class="form-control-label" for="input-last-date">Date</label>
+                          <input type="date" name="date"  id="date" class="form-control"  >
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-tarif">Prix par minute </label>
+                          <label class="form-control-label" for="input-equipementid">Equipement</label>
+                          <select type="text" name="equipementid" id="equipementid" class="form-control" placeholder="equipementid" >
+                            <option value="1">La GRANDE fraiseuse numérique</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-minutes">Durée en minutes</label>
+                          <input type="number" name="minutes" id="minutes" class="form-control" placeholder="minutes" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-utilisateurid">Membre</label>
+                          <select type="text" name="utilisateurid" id="utilisateurid" class="form-control" >
+                            <option value="1">Hatim</option>
+                            <option value="2">Soufian</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-tarif">Prix total </label>
                           <input type="number" name="tarif" id="tarif" class="form-control" required step=".01">
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-description">Description</label>
-                          <input type="text" name="description" id="description" class="form-control" >
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-reserved">Reserver</label>
-                          <select type="text" name="reserved" id="reserved" class="form-control" >
-                              <option value="true">true</option>
-                              <option value="false" selected>false</option>
-                          </select>
-                        </div>
-                      </div>
-                      
-                    </div>
+                    
                   </div>
                   
                   <hr class="my-4" />
@@ -191,7 +201,7 @@
         </footer>
       </div>
 
-  <script src="ajouter_equipement.js"></script>
+  <script src="ajouter_facture.js"></script>
 </body>
 
 </html>

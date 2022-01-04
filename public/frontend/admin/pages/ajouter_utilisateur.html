@@ -102,14 +102,14 @@
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Ajouter un nouvel équipement </h3>
+                    <h3 class="mb-0">Ajouter un nouvel utilisateur </h3>
                   </div>
                   
                 </div>
               </div>
               <div class="card-body">
-                <form method="POST"  id="post" action="/equipement/create">
-                  <h6 class="heading-small text-muted mb-4">Nouvel Equipement</h6>
+                <form method="POST"  id="post" action="/utilisateur/create">
+                  <h6 class="heading-small text-muted mb-4">ADD USER</h6>
                   <div class="pl-lg-4">
                     
                     <div class="row">
@@ -121,33 +121,35 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-last-image">Image path </label>
-                          <input type="text" name="image"  id="image" class="form-control"  >
+                          <label class="form-control-label" for="input-prenom">Prenom</label>
+                          <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom" >
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-tarif">Prix par minute </label>
-                          <input type="number" name="tarif" id="tarif" class="form-control" required step=".01">
+                          <label class="form-control-label" for="input-email">Email </label>
+                          <input type="email" name="email" id="email" class="form-control" required >
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-description">Description</label>
-                          <input type="text" name="description" id="description" class="form-control" >
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-reserved">Reserver</label>
-                          <select type="text" name="reserved" id="reserved" class="form-control" >
-                              <option value="true">true</option>
-                              <option value="false" selected>false</option>
+                          <label class="form-control-label" for="input-role">Role</label>
+                          <select type="text" name="role" id="role" class="form-control" >
+                            <option value="2" selected>Membre</option>
+                            <option value="1">Administrateur</option>
+                            <option value="3" >Comptable</option>
                           </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-usesid">ID Utilisations</label>
+                          <input type="number" name="usesid" id="usesid" class="form-control" >
+                              
                         </div>
                       </div>
                       
@@ -156,7 +158,7 @@
                   
                   <hr class="my-4" />
                   <div class=" text-right">
-                    <button type="submit" class="btn btn-sm btn-primary">Ajouter</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Ajouter utilisateur</button>
                   </div>
                 </form>
               </div>
@@ -191,7 +193,7 @@
         </footer>
       </div>
 
-  <script src="ajouter_equipement.js"></script>
+  <script src="ajouter_utilisateur.js"></script>
 </body>
 
 </html>
