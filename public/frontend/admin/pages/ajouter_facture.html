@@ -108,15 +108,15 @@
                 </div>
               </div>
               <div class="card-body">
-                <form method="POST"  id="post" action="/equipement/create">
+                <form method="POST"  id="post" action="/facture/create">
                   <h6 class="heading-small text-muted mb-4">Nouvelle facture</h6>
                   <div class="pl-lg-4">
                     
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-numéro">Numéro de facture</label>
-                          <input type="text" name="numéro" id="numéro" class="form-control" placeholder="numéro" >
+                          <label class="form-control-label" for="input-numero">Numéro de facture</label>
+                          <input type="text" name="numero" id="numero" class="form-control" placeholder="numero" >
                         </div>
                       </div>
                       <div class="col-lg-6">
@@ -131,14 +131,8 @@
                         <div class="form-group">
                           <label class="form-control-label" for="input-equipementid">Equipement</label>
                           <select type="text" name="equipementid" id="equipementid" class="form-control" placeholder="equipementid" >
-                            <option value="1">La GRANDE fraiseuse numérique</option>
+                            
                             </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-minutes">Durée en minutes</label>
-                          <input type="number" name="minutes" id="minutes" class="form-control" placeholder="minutes" >
                         </div>
                       </div>
                     </div>
@@ -147,17 +141,17 @@
                         <div class="form-group">
                           <label class="form-control-label" for="input-utilisateurid">Membre</label>
                           <select type="text" name="utilisateurid" id="utilisateurid" class="form-control" >
-                            <option value="1">Hatim</option>
-                            <option value="2">Soufian</option>
+                            
                           </select>
                         </div>
                       </div>
+                      
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-tarif">Prix total </label>
-                          <input type="number" name="tarif" id="tarif" class="form-control" required step=".01">
+                          <label class="form-control-label" for="input-total">Prix total </label>
+                          <input type="number" name="total" id="total" class="form-control" min=0 step=.01 required >
                         </div>
                       </div>
                     </div>

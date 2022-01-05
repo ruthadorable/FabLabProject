@@ -14,13 +14,16 @@ const { BelongsTo } = require("sequelize/dist");*/
  Use.belongsTo(User);
 
 /*Ajouter une relation equipement à Invoice ici */
+Use.hasMany(Invoice);
+Invoice.belongsTo(Use);//=> useId in invoice
+
 
 Use.hasOne(InvoiceDetail);
 InvoiceDetail.belongsTo(Use);
 
 
-Invoice.hasOne(InvoiceDetail);
-InvoiceDetail.belongsTo(Invoice);
+InvoiceDetail.hasOne(Invoice);
+Invoice.belongsTo(InvoiceDetail); //=>invoicedetailId in invoice
 
 User.hasMany(InvoiceDetail)
 InvoiceDetail.belongsTo(User)

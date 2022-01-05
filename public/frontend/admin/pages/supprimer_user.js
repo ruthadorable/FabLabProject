@@ -1,3 +1,7 @@
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
+
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -23,5 +27,4 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
-
-
+fetch(`/user/delete/${paramId}`)

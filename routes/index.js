@@ -1,11 +1,11 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { getMembreById, newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage} = require("../controllers/ficheMembre");
+const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage} = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-const { getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById } = require("../controllers/ficheAdmin");
+const {newFacture, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture } = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -75,7 +75,7 @@ router.get("/equipement", getEquipements)
 router.get("/equipement/:id", getEquipementById);
 router.get("/facture/:id",getFactureById);
 router.post("/membre/utilisation/:id",newUtilisation);
-router.get("/modification/user/:id",getMembreById);
+router.get("/modification/user/:id",getUserById);
 router.post("/user/update",updateUser);
 router.get("/facturedetails/:id",factureDetails);
 router.get("/getfacture",getFactureDetailsById);
@@ -85,7 +85,17 @@ router.get("/admin/profile",getUserById);
 router.post("/admin/update",updateAdmin);
 router.get("/admin/equipement/:id",getAdminEquipementById);
 router.post("/equipement/create",createEquipement);
-router.post("/equipement/update",updateEquipement); 
+router.post("/equipement/update/:id",updateEquipement); 
 router.get("/equipement/delete/:id",deleteEquipement);
-
+router.get("/users",getUsers);
+router.post("/user/create",newUser);
+router.get("/user/:id",getUserfromAdmin);
+router.post("/user/update/:id",updateUserfromAdmin);
+router.get("/user/delete/:id",deleteUser);
+router.get("/factures",getFactures);
+router.get("/members",getMembers);
+router.post("/facture/create",newFacture);
+router.post("/facture/update/:id",updateFacture);
+router.get("/admin/facture/:id",getFactureByIdfromAdmin);
+router.get("/facture/delete/:id",deleteFacture);
 module.exports = router;

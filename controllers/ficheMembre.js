@@ -43,7 +43,7 @@ exports.newUtilisation= async(req,res,next)=>{
   res.redirect("/frontend/membre/utilisation_reception.html");
 }
 
-exports.getMembreById=async(req,res,next)=>{
+exports.getUserById=async(req,res,next)=>{
     const id=req.params.id;
     res.cookie('id',id,{expire:new Date()+10*60*1000});
     try{
@@ -110,7 +110,7 @@ exports.getFactureById= async (req,res)=>{
     const id=req.params.id;
     
     try{
-      const factureParId = await Invoice.findAll({
+      const factureParId = await Invoice.findOne({
         where: {userId:id },
       })   
       

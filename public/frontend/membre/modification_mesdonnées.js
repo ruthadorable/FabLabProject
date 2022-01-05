@@ -25,10 +25,6 @@ const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerHTML=("Bonjour "+username);
 function populateTable(c){
-
-    const firstname=document.createTextNode(c.first_name);
-    const lastname=document.createTextNode(c.last_name);
-    const email=document.createTextNode(c.email);
     document.getElementById("nom").value=c.first_name;
     document.getElementById("prenom").value=c.last_name;
     document.getElementById("email").value=c.email;

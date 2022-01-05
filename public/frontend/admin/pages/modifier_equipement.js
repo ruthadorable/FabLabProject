@@ -28,9 +28,6 @@ const iduser=decoded.sub;
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 function populateTable(c){
 
-    const firstname=document.createTextNode(c.first_name);
-    const lastname=document.createTextNode(c.last_name);
-    const email=document.createTextNode(c.email);
     document.getElementById("nom").value=c.name;
     document.getElementById("image").value=c.image;
     document.getElementById("tarif").value=c.price_minute;
@@ -41,3 +38,4 @@ fetch(`/admin/equipement/${paramId}`)
   .then((response) => response.json())
   .then((equipement) => populateTable(equipement));
 
+document.getElementById("form").action=`/equipement/update/${paramId}`;

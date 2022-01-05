@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <form method="POST"  id="post" action="/utilisateur/create">
+                <form method="POST"  id="post" action="/user/create">
                   <h6 class="heading-small text-muted mb-4">ADD USER</h6>
                   <div class="pl-lg-4">
                     
@@ -133,6 +133,12 @@
                           <input type="email" name="email" id="email" class="form-control" required >
                         </div>
                       </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-password">Password </label>
+                          <input type="text" name="password" id="password" class="form-control" required >
+                        </div>
+                      </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
@@ -144,15 +150,7 @@
                             <option value="3" >Comptable</option>
                           </select>
                         </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-usesid">ID Utilisations</label>
-                          <input type="number" name="usesid" id="usesid" class="form-control" >
-                              
-                        </div>
-                      </div>
-                      
+                      </div>    
                     </div>
                   </div>
                   

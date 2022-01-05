@@ -1,7 +1,9 @@
 const list = document.getElementById("list");
-function populateTable(invoices) {
 
-  const invoiceRows = invoices.map((c) => {
+
+function populateTable(classes) {
+
+  const invoiceRows = classes.map((c) => {
     const row = document.createElement("tr");
 
     const numCol = document.createElement("td");
@@ -21,9 +23,17 @@ function populateTable(invoices) {
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
 
+    const detailsCol= document.createElement("td");
+    const detailsBtn=document.createElement("a");
+    detailsBtn.href=`/frontend/admin/pages/details_facture.html?id=${c.id}`;
+    const detailsTxt = document.createTextNode("Voir détails");
+    detailsBtn.appendChild(detailsTxt);
+    detailsCol.appendChild(detailsBtn);
+    row.appendChild(detailsCol);
+
     const modifCol= document.createElement("td");
     const modifBtn=document.createElement("a");
-    modifBtn.href=`/frontend/membre/modif_facture.html?id=${c.id}`;
+    modifBtn.href=`/frontend/admin/pages/modif_facture.html?id=${c.id}`;
     const modifTxt = document.createTextNode("Modifier");
     modifBtn.appendChild(modifTxt);
     modifCol.appendChild(modifBtn);
@@ -31,11 +41,13 @@ function populateTable(invoices) {
 
     const deleteCol= document.createElement("td");
     const deleteBtn=document.createElement("a");
-    deleteBtn.href=`/frontend/membre/delete_facture.html?id=${c.id}`;
+    deleteBtn.href=`/frontend/admin/pages/supprimer_facture.html?id=${c.id}`;
     const deleteTxt = document.createTextNode("Supprimer");
     deleteBtn.appendChild(deleteTxt);
     deleteCol.appendChild(deleteBtn);
     row.appendChild(deleteCol);
+
+
     return row;
   });
   const tableBody = list.querySelector("tbody");
@@ -66,7 +78,8 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
-fetch(`/facture/${iduser}`)
+
+fetch(`/factures`)
   .then((response) => response.json())
   .then((x) => populateTable(x));
 

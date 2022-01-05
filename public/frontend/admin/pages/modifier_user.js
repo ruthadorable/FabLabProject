@@ -1,3 +1,6 @@
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -24,4 +27,15 @@ const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 
+function populateTable(c){
+    document.getElementById("nom").value=c.first_name;
+    document.getElementById("prenom").value=c.last_name;
+    document.getElementById("email").value=c.email;
+    document.getElementById("password").value=c.password;
+    document.getElementById("role").value=c.role_id;
+}
+fetch(`/user/${paramId}`)
+.then((response)=>response.json())
+.then((user)=>populateTable(user));
 
+document.getElementById("form").action=`/user/update/${paramId}`;

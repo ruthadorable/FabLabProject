@@ -1,3 +1,6 @@
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -23,5 +26,20 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
+function populateTable(c){
+ 
+    document.getElementById("numero").value=c.num;
+    const dateformat=c.date.toString().slice(0,10); 
+    document.getElementById("date").value=dateformat;
+    document.getElementById("total").value=c.amount_total;
+    fetch(`/user/${c.userId}`)
+    .then((res)=>res.json())
+    .then(x=>{document.getElementById("utilisateur").value= x.first_name});
 
+  }
+fetch(`/admin/facture/${paramId}`)
+  .then((response) => response.json())
+  .then((facture) => {populateTable(facture); console.log(facture)});
 
+  
+document.getElementById('form').action=`/facture/update/${paramId}`;

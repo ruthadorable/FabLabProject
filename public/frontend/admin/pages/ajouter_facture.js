@@ -1,6 +1,34 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
+
+function populateList1(machines)
+{
+  
+  const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
+  const selectequipement=document.getElementById("equipementid")
+  selectequipement.innerHTML=options;
+ 
+}
+function populateList2(users)
+{
+  const options= users.map(x=>`<option value=${x.id}>${x.first_name}</option>`).join('\n');
+  const selectmembre=document.getElementById("utilisateurid")
+  selectmembre.innerHTML=options;
+}
+
+
+
+fetch("/members")
+.then((response)=>response.json())
+.then((users)=>{populateList2(users); console.log(users);});
+
+fetch("/equipement")
+.then((response)=>response.json())
+.then((machines)=>{populateList1(machines); console.log(machines);});
+
+
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -28,16 +56,11 @@ const iduser=decoded.sub;
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 function populateTable(c){
 
-    const firstname=document.createTextNode(c.first_name);
-    const lastname=document.createTextNode(c.last_name);
-    const email=document.createTextNode(c.email);
-    document.getElementById("nom").value=c.name;
-    document.getElementById("image").value=c.image;
-    document.getElementById("tarif").value=c.price_minute;
-    document.getElementById("description").value=c.description;
-    document.getElementById("reserved").value=c.reserved;
+    
+    document.getElementById("numéro").value=c.name;
+    document.getElementById("date").value=c.image;
+ //document.getElementById("equipementid").value=c.price_minute;
+    document.getElementById("minutes").value=c.description;
+  //  document.getElementById("utilisateurid").value=c.reserved;
+  document.getElementById("tarif").value=c.description;
 }
-fetch(`/admin/equipement/${paramId}`)
-  .then((response) => response.json())
-  .then((equipement) => populateTable(equipement));
-

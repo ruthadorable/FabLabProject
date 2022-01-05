@@ -28,8 +28,8 @@ function parseJwt (token) {
       const firstname=document.createTextNode(c.first_name);
       const lastname=document.createTextNode(c.last_name);
       const email=document.createTextNode(c.email);
-      document.getElementById("nom").value=c.first_name;
-      document.getElementById("prenom").value=c.last_name;
+      document.getElementById("prenom").value=c.first_name;
+      document.getElementById("nom").value=c.last_name;
       document.getElementById("email").value=c.email;
       document.getElementById("motdepasse").value=c.password;
       document.getElementById("confmotdepasse").value=c.password;
