@@ -1,3 +1,11 @@
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 export function parseJwt (token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
