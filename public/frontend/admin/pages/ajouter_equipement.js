@@ -1,4 +1,11 @@
-function get_cookie_name(name) 
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
       if (match) {
@@ -9,7 +16,6 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
-const token = get_cookie_name("jwt_token");
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
