@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage} = require("../controllers/ficheMembre");
+const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage, getUsesById} = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
@@ -21,8 +21,8 @@ router.post("/login", async function (req, res){
       res.status(401)
       .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect !"})
   }else{
-    const token = generate(user.id,user.first_name);
-    res.cookie("jwt_token", token);
+    const token = generate(user.id,user.first_name,user.role_id);
+    res.cookie("jwt_token", token,{httpOnly:false});
     const decoded = jwt_decode(token);
     console.log(decoded.preferred_username);
     
@@ -77,8 +77,7 @@ router.get("/facture/:id",getFactureById);
 router.post("/membre/utilisation/:id",newUtilisation);
 router.get("/modification/user/:id",getUserById);
 router.post("/user/update",updateUser);
-router.get("/facturedetails/:id",factureDetails);
-router.get("/getfacture",getFactureDetailsById);
+router.get("/uses",getUsesById);
 
 //administrator routers
 router.get("/admin/profile",getUserById);

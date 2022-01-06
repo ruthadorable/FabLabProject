@@ -71,6 +71,21 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
+const role=decoded.role_user;
+console.log("some token over here"+token);
+if(document.cookie.match('jwt_token')){}
+else{
+  const body=document.querySelector("body");
+    body.remove();
+    alert("Vous n'êtes pas connecté !");
+}
+if(role!=1)
+{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Vous n'avez pas accès à cette page");
+}
+
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 fetch("/equipement")
   .then((response) => response.json())

@@ -23,6 +23,13 @@ function parseJwt (token) {
   const decoded=parseJwt(token);
   const username=decoded.preferred_username;
   const iduser=decoded.sub;
+  const role=decoded.role_user;
+  if(role!=1)
+  {
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Vous n'avez pas accès à cette page");
+  }
   document.getElementById("username").innerHTML=("Bonjour "+username);
   function populateTable(c){
       const firstname=document.createTextNode(c.first_name);

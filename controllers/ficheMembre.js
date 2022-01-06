@@ -13,34 +13,26 @@ exports.newUtilisation= async(req,res,next)=>{
     const idmachine=req.params.id;
     const {minutes,total}=req.body;
     const equipement= await Equipment.findOne({where : {id:idmachine}})
-   const newUsage = await Use.create({
+    const newUsage = await Use.create({
       durating_M: minutes,
       amount_to_be_paid: total,
       date: Date(),
       user_id: iduser
-  })
-   const newFacture = await Invoice.create({
-        num: Math.floor(Math.random()*(9999999-1111111+1)+1111111),
-        date: Date(),
-        durating_M: minutes,
-        amount_total: total,
-        userId: iduser
-   })
-   const newInvoiceDetail = await InvoiceDetail.create({
-    equipmentId:equipement.id,
-    equipment_name: equipement.name,
-    equipment_tarif: equipement.price_minute,
-    duration_M: newUsage.durating_M,
-    amount_total: newUsage.amount_to_be_paid,
-    facturation: true,
-    useId:newUsage.id,
-    invoiceId:newFacture.id,
-    date: Date()
-   })
+  });
   await newUsage.setEquipment(equipement);
   await newUsage.setUser(iduser);
-  await newFacture.setUser(iduser);
   res.redirect("/frontend/membre/utilisation_reception.html");
+}
+exports.getUsesById=async(req,res)=>{
+  const token=req.cookies.jwt_token;
+  const decoded=jwt_decode(token);
+  const iduser=decoded.sub;
+  try{
+    const usesById=await Use.findAll({where:{userId:iduser}})
+     return res.json(usesById);
+  }catch(err){
+
+  }
 }
 
 exports.getUserById=async(req,res,next)=>{
