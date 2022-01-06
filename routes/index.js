@@ -1,14 +1,17 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { getMembreById, newUtilisation, listefactures } = require("../controllers/ficheMembre");
+const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage, getUsesById} = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
+const {newFacture, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture } = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("login")
+  res.clearCookie('id');
+  res.clearCookie('jwt_token');
 });
 router.post("/login", async function (req, res){
 
@@ -16,10 +19,10 @@ router.post("/login", async function (req, res){
 
   if (!user || ((user) && user.email != req.body.email)){
       res.status(401)
-      .send({ message: "L'utilisateur n'a pas été trouvé "})
+      .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect !"})
   }else{
-    const token = generate(user.id,user.first_name);
-    res.cookie("jwt_token", token);
+    const token = generate(user.id,user.first_name,user.role_id);
+    res.cookie("jwt_token", token,{httpOnly:false});
     const decoded = jwt_decode(token);
     console.log(decoded.preferred_username);
     
@@ -29,10 +32,10 @@ router.post("/login", async function (req, res){
   }
   else if( user.role_id==1)
   {
-    res.render("manager/manager_accueil")
+    res.redirect("frontend/admin/pages/equipmentstable.html");
   }
   else{
-    res.render("comptable/comptable_accueil")
+    res.redirect("frontend/comptable/pages/invoicestable.html");
   }
   }
   
@@ -67,53 +70,31 @@ router.post("/register", async function (req,res,next){
 
 
 //membre routers
-router.get("/equipement_list",function (req, res, next) {
-  res.redirect("frontend/membre/equipement_list.html");
-});
-router.get("/equipement", async function (req, res) {
-  try{
-    const equipements = await Equipment.findAll()
-    return res.json(equipements);
-  }catch(err){
-    console.log(err);
-    return res.status(500).json({error: 'Something went wrong'})
-  }
-})
-router.get("/equipement/:id", async (req,res)=>{
-  const id=req.params.id;
-  try{
-    const equipementParId = await Equipment.findOne({
-      where: {id },
-    })   
-    return res.json(equipementParId); 
-  }catch(err){}
-})
-router.get("/utilisations/:id",async (req,res)=>{
+router.get("/equipement_list",equipementPage);
+router.get("/equipement", getEquipements)
+router.get("/equipement/:id", getEquipementById);
+router.get("/facture/:id",getFactureById);
+router.post("/membre/utilisation/:id",newUtilisation);
+router.get("/modification/user/:id",getUserById);
+router.post("/user/update",updateUser);
+router.get("/uses",getUsesById);
 
-})
-router.post("/utilisations",async(req,res)=>{
-
-})
-
-router.get("/membre/:id",getMembreById);
-router.post("/membre/modification", async function (req, res){
-
-  const user = await User.findOne({ where : {email :req.body.email}})
-
-  if (!user || ((user) && user.password != req.body.password)){
-      res.status(401)
-      .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect"})
-  }  
-  
-});
-router.get("/facture",listefactures);
-
-router.post("/membre/utilisation",newUtilisation);
-router.get("/membre/facture/:id", function (req, res, next) {
-  res.render("membre/membre_facture")
-});
-
-router.get("/membre/utilisation/:id", function (req, res, next) {
-  res.render("membre/membre_utilisation")
-});
+//administrator routers
+router.get("/admin/profile",getUserById);
+router.post("/admin/update",updateAdmin);
+router.get("/admin/equipement/:id",getAdminEquipementById);
+router.post("/equipement/create",createEquipement);
+router.post("/equipement/update/:id",updateEquipement); 
+router.get("/equipement/delete/:id",deleteEquipement);
+router.get("/users",getUsers);
+router.post("/user/create",newUser);
+router.get("/user/:id",getUserfromAdmin);
+router.post("/user/update/:id",updateUserfromAdmin);
+router.get("/user/delete/:id",deleteUser);
+router.get("/factures",getFactures);
+router.get("/members",getMembers);
+router.post("/facture/update/:id",updateFacture);
+router.get("/admin/facture/:id",getFactureByIdfromAdmin);
+router.get("/facture/delete/:id",deleteFacture);
+router.post("/facture/generate",createFacture);
 module.exports = router;

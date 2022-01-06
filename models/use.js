@@ -23,11 +23,11 @@ Use.init(
         type: DataTypes.DATE,
         allowNull: false
     },
-    user_id:{
-      type: DataTypes.INTEGER,
-      allowNull: true
+    facturé:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
-    
   },
   { sequelize: connection, modelName: "use" }
 );

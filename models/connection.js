@@ -20,7 +20,7 @@ const sequelize = new Sequelize(db_dbname, db_username, db_password, {
   logging: (msg) => debug(msg),
 });
 
-
+const Op = sequelize.Op;
 debug("Database connection established.");
 
 

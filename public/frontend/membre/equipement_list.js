@@ -1,6 +1,21 @@
+
 const classList = document.getElementById("classList");
 
+function get_cookie_name(name) 
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+
+
 function populateTable(classes) {
+
   const classRows = classes.map((c) => {
     const row = document.createElement("tr");
 
@@ -11,6 +26,8 @@ function populateTable(classes) {
 
     const imageCol= document.createElement("img");
     imageCol.src=c.image;
+    imageCol.height=150;  
+    imageCol.width=250;
     row.appendChild(imageCol);
 
 
@@ -51,8 +68,33 @@ function populateTable(classes) {
   const tableBody = classList.querySelector("tbody");
   tableBody.replaceChildren(...classRows);
 }
+function get_cookie_name(name) 
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+const token = get_cookie_name("jwt_token");
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
 
-
+  return JSON.parse(jsonPayload);
+};
+const decoded=parseJwt(token);
+const username=decoded.preferred_username;
+const iduser=decoded.sub;
+document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
+/*const modifylink=document.getElementById("modifydata");
+modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
 fetch("/equipement")
   .then((response) => response.json())

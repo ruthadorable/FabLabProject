@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Administrator Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+      <!-- Brand -->
+      <div class="sidenav-header  align-items-center">
+        <a class="navbar-brand" href="#">
+          Fablab Application
+        </a>
+      </div>
+      <div class="navbar-inner">
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <!-- Nav items -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="dashboard.html">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Tableau de Bord</span>
+              </a>
+            </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">
+                <i class="ni ni-single-02 text-yellow"></i>
+                <span class="nav-link-text">Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="userstable.html">
+                <i class="ni ni-bullet-list-67 text-default"></i>
+                <span class="nav-link-text">Gérer Utilisateurs</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="usestable.html">
+                  <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">Gérer Utilisations</span>
+                </a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="invoicestable.html">
+                  <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">Gérer Factures</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="equipmentstable.html">
+                  <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">Gérer Equipement</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <i class="ni ni-user-run"></i>
+                  <span class="nav-link-text">Logout</span>
+                </a>
+              </li>
+          </ul>
+         
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+    <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <p style="color:white; font-family:georgia,garamond,serif;font-size:20px;font-style:bold;"id="username"></p>
+        </div>
+      </div>
+    </nav>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white" id="username"></h1>
+          
+          <a href="generate_facture.html" class="btn btn-neutral">Générer facture</a>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <!-- Page content -->
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Liste des factures</h3>
+            </div>
+                  <!-- Light table -->
+                  <div class="table-responsive">
+                    <table id="list" class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col" class="sort" data-sort="name">Numéro de facture</th>
+                          <th scope="col" class="sort" data-sort="budget">Date</th>
+                          <th scope="col" class="sort" data-sort="status">Total</th>
+                          <th scope="col" class="sort" data-sort="status">Utilisateur</th>
+                          <th scope="col" class="sort" data-sort="status">Détails</th>
+                          <th scope="col" class="sort" data-sort="completion">Supprimer</th>
+                        </tr>
+                      </thead>
+                      <tbody >
+                        
+                      </tbody>
+                    </table>
+                  </div>
+           </div>         
+        </div>
+      </div> 
+    </div>
+  </div>
+
+    
+  
+
+  <script src="invoicestable.js"></script>
+</body>
+
+</html>

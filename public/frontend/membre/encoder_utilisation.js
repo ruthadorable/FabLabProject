@@ -1,7 +1,7 @@
 const classList = document.getElementById("classList");
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
-
+let inputDuree,txt;
 
 let date1 =new Date();
     let localDate=date1.toLocaleString('fr-FR',{
@@ -18,59 +18,67 @@ let date1 =new Date();
 function populateTable(c) {
   
   
-    const row = document.createElement("tr");
+    
 
-    const nameCol = document.createElement("td");
+    const nameCol = document.getElementById("name");
     const nameTxt = document.createTextNode(c.name);
     nameCol.appendChild(nameTxt);
-    row.appendChild(nameCol);
-
-    const imageCol= document.createElement("img");
-    imageCol.src=c.image;
-    row.appendChild(imageCol);
 
 
-    const euCol = document.createElement("td");
+    const imageCol= document.getElementById("image");
+    const image = document.createElement("img");
+    image.src=c.image;
+    image.height=150;
+    image.width=250;
+    imageCol.appendChild(image);
+
+
+    const euCol = document.getElementById("tarif");
     var tarif= parseFloat(c.price_minute).toFixed(2);
     const euTxt = document.createTextNode(tarif+" €");
     euCol.appendChild(euTxt);
-    row.appendChild(euCol);
 
-    const inputDuree = document.createElement("input");
-    inputDuree.name="minutes"
-    inputDuree.type="number";
-    inputDuree.value=0;
-    row.appendChild(inputDuree);
+    const inputDuree=document.getElementById("minutes");
     
-    
-    const button = document.createElement("button");
-    const innertxt = document.createTextNode("Valider");
-    button.type="button";
-    button.appendChild(innertxt);
+    const button = document.getElementById("buttonduree");
     button.onclick=rendertotal;
-    row.appendChild(button);
 
     function rendertotal(){
-    const calculCol = document.createElement("td");
-    calculCol.id="total";
-    const txt=document.createElement("input");
-    txt.type="text";
-    txt.name="total";
-    txt.value=0;
+    const calculCol = document.getElementById("total");
     var total=parseFloat(c.price_minute*inputDuree.value).toFixed(2);
-    txt.value=total;
-    calculCol.appendChild(txt);
-    row.appendChild(calculCol);
+    calculCol.value=total;    
   }
 
-  
-  const tableBody = classList.querySelector("tbody");
-  tableBody.replaceChildren(row);
 }
+function get_cookie_name(name) 
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+const token = get_cookie_name("jwt_token");
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
 
+  return JSON.parse(jsonPayload);
+};
+const decoded=parseJwt(token);
+const iduser=decoded.sub;
+const username=decoded.preferred_username;
+document.getElementById("username").innerHTML=("Bonjour "+username);
 
 fetch(`/equipement/${paramId}`)
   .then((response) => response.json())
   .then((machine) =>
     populateTable(machine)
   );
+document.getElementById("form").action=`/membre/utilisation/${paramId}`;
