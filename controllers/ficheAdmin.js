@@ -319,3 +319,72 @@ exports.getMembers=async(req,res)=>{
 
     }
 }
+let cptfacture;
+const now=new Date();
+if(now.getDate()==1)
+{
+    cptfacture=0;
+}
+
+
+exports.createFacture=async(req,res)=>{
+    
+    const {mois,annee,userid}=req.body;
+    const yearformated=String(annee).slice(2,4); 
+    console.log(mois);
+    console.log(new Date(annee,mois-1,1)+" "+new Date(annee,mois-1,31));
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var seqfacture= String(++cptfacture).padStart(3,'0');
+    const numfacture=Number(yyyy+dd+mm+seqfacture);
+
+
+    try{
+        const usesByIdByMonth=await Use.findAll({where:{
+            userId:userid,
+            /*date:{
+                [Op.gte]: new Date(annee,mois-1,1),
+                [Op.lt]: new Date(annee,mois-1,31)
+            }*/
+        }});
+        
+        const uses=usesByIdByMonth.json()
+        console.log(uses);
+        const montant=()=>{let total;
+            uses.map((use)=>{
+            /*const equipement= Equipment.findOne({where:{id:use.equipementId}}) */
+            total+=use.amount_total;
+        })
+        return total;};
+        const newInvoice=await Invoice.create({
+            num: numfacture,
+            date: today,
+            amount_total: montant
+        });
+        const objectToUpdate = {
+            facturé: true
+            }
+            await Use.findAll({ where:{
+                userId:iduser,
+                date: {
+                    $gt: beginningOfMonth,
+                    $lt: endOfMonth
+                }
+            }}).then((result) => {
+               if(result){
+               // Result is array because we have used findAll. 
+                    result.map((x)=>{
+                        x.set(objectToUpdate);
+                        x.save();
+                    })
+                   // result[0].set(objectToUpdate); // seul le premier est modifié
+                   // result[0].save(); // This is a promise
+            }
+            })
+        newInvoice.setUses(uses.map(x=>x.id));
+        res.redirect('/frontend/admin/pages/invoicestable.html');
+    }catch(err){}
+}
+

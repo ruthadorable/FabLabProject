@@ -5,7 +5,7 @@ const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-const {newFacture, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture } = require("../controllers/ficheAdmin");
+const {newFacture, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture } = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -32,10 +32,10 @@ router.post("/login", async function (req, res){
   }
   else if( user.role_id==1)
   {
-    res.redirect("frontend/admin/index.html");
+    res.redirect("frontend/admin/pages/equipmentstable.html");
   }
   else{
-    res.redirect("frontend/comptable/index.html");
+    res.redirect("frontend/comptable/pages/invoicestable.html");
   }
   }
   
@@ -94,8 +94,8 @@ router.post("/user/update/:id",updateUserfromAdmin);
 router.get("/user/delete/:id",deleteUser);
 router.get("/factures",getFactures);
 router.get("/members",getMembers);
-router.post("/facture/create",newFacture);
 router.post("/facture/update/:id",updateFacture);
 router.get("/admin/facture/:id",getFactureByIdfromAdmin);
 router.get("/facture/delete/:id",deleteFacture);
+router.post("/facture/generate",createFacture);
 module.exports = router;

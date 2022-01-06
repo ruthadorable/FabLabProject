@@ -96,12 +96,14 @@ const User = require("./user");
         durating_M: 125,
         amount_to_be_paid: 14.26,
         date: "2021-04-24",
+        facturé: true
     });
     
     const use2 = await Use.create({
         durating_M: 137,
         amount_to_be_paid: 19.23,
         date: "2021-04-12",
+        facturé: false
     });
 
     const ind1=InvoiceDetail.create({
@@ -136,7 +138,8 @@ const User = require("./user");
     await grDecoupLaser.setUses(use2);
     await soufian.setUses(use2);
     
-
+    await use1.setInvoice(in1);
+    
     await sequelize.close();
 })();
 

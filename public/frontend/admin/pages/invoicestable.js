@@ -1,5 +1,5 @@
 const list = document.getElementById("list");
-
+var membre;
 
 function populateTable(classes) {
 
@@ -23,6 +23,14 @@ function populateTable(classes) {
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
 
+    const userCol = document.createElement("td");
+    fetch(`/user/${c.userId}`)
+    .then((response)=>response.json())
+    .then((user)=>{ membre=user.first_name+" "+user.last_name; console.log(membre);});
+    const userTxt=document.createTextNode(membre);
+    userCol.appendChild(userTxt);
+    row.appendChild(userCol);
+
     const detailsCol= document.createElement("td");
     const detailsBtn=document.createElement("a");
     detailsBtn.href=`/frontend/admin/pages/details_facture.html?id=${c.id}`;
@@ -30,23 +38,6 @@ function populateTable(classes) {
     detailsBtn.appendChild(detailsTxt);
     detailsCol.appendChild(detailsBtn);
     row.appendChild(detailsCol);
-
-    const modifCol= document.createElement("td");
-    const modifBtn=document.createElement("a");
-    modifBtn.href=`/frontend/admin/pages/modif_facture.html?id=${c.id}`;
-    const modifTxt = document.createTextNode("Modifier");
-    modifBtn.appendChild(modifTxt);
-    modifCol.appendChild(modifBtn);
-    row.appendChild(modifCol);
-
-    const deleteCol= document.createElement("td");
-    const deleteBtn=document.createElement("a");
-    deleteBtn.href=`/frontend/admin/pages/supprimer_facture.html?id=${c.id}`;
-    const deleteTxt = document.createTextNode("Supprimer");
-    deleteBtn.appendChild(deleteTxt);
-    deleteCol.appendChild(deleteBtn);
-    row.appendChild(deleteCol);
-
 
     return row;
   });
