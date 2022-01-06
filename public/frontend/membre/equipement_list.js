@@ -1,5 +1,13 @@
 
 const classList = document.getElementById("classList");
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 
 function get_cookie_name(name) 
     {
@@ -79,7 +87,7 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
-const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -92,6 +100,12 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
+if(role!=2)
+{
+const body=document.querySelector("body");
+body.remove();
+alert("Vous n'avez pas accès à cette page");
+}
 document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
 /*const modifylink=document.getElementById("modifydata");
 modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
