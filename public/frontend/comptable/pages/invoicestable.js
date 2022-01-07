@@ -41,9 +41,11 @@ function populateTable(classes) {
 
     return row;
   });
+
   const tableBody = list.querySelector("tbody");
   tableBody.replaceChildren(...invoiceRows);
 }
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -55,7 +57,9 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
+
 const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -65,23 +69,29 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
+
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-const role=decoded.role_id;
-if(role!=3)
-{
+const role=decoded.role_user;
+
+if(token){
+  console.log("ok"),
+  console.log(token),
+  console.log(decoded),
+  console.log(role)
+  if(role!=3)
+  {
     const body=document.querySelector("body");
     body.remove();
     alert("Vous n'avez pas accès à cette page");
+  }
+  document.getElementById("username").innerText=("   Bonjour "+username+" " );
+}else{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Veillez d'abord vous connecter");
 }
-if(!token)
-{
-    const body=document.querySelector("body");
-    body.remove();
-    alert("Vous n'êtes pas connecté !");
-}
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
 
 fetch(`/factures`)
   .then((response) => response.json())

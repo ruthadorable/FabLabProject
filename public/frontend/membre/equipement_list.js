@@ -1,18 +1,4 @@
-
 const classList = document.getElementById("classList");
-
-function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
-
 
 function populateTable(classes) {
 
@@ -68,6 +54,7 @@ function populateTable(classes) {
   const tableBody = classList.querySelector("tbody");
   tableBody.replaceChildren(...classRows);
 }
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -79,7 +66,9 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
+
 const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -89,10 +78,30 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
+
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
+const role=decoded.role_user;
+
+if(token){
+  console.log("ok"),
+  console.log(token),
+  console.log(decoded),
+  console.log(role)
+  if(role!=2)
+  {
+    const body=document.querySelector("body");
+    body.remove();
+    alert("Vous n'avez pas accès à cette page");
+  }
+  document.getElementById("username").innerText=("   Bonjour "+username+" " );
+}else{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Veillez d'abord vous connecter");
+}
+
 /*const modifylink=document.getElementById("modifydata");
 modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
