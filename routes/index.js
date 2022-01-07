@@ -70,14 +70,14 @@ router.post("/register", async function (req,res,next){
 
 
 //membre routers
-// router.get("/equipement_list",equipementPage);
-// router.get("/equipement", getEquipements)
-// router.get("/equipement/:id", getEquipementById);
-// router.get("/facture/:id",getFactureById);
-// router.post("/membre/utilisation/:id",newUtilisation);
-// router.get("/modification/user/:id",getUserById);
-// router.post("/user/update",updateUser);
-// router.get("/uses",getUsesById);
+router.get("/equipement_list",equipementPage);
+router.get("/equipement", getEquipements)
+router.get("/equipement/:id", getEquipementById);
+router.get("/facture/:id",getFactureById);
+router.post("/membre/utilisation/:id",newUtilisation);
+router.get("/modification/user/:id",getUserById);
+router.post("/user/update",updateUser);
+//router.get("/uses",getUsesById);
 
 //administrator routers
 router.get("/admin/profile",getUserById);

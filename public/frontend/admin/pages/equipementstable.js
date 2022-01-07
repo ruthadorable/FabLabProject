@@ -95,7 +95,6 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
 fetch("/equipement")
   .then((response) => response.json())
   .then((machines) => populateTable(machines));

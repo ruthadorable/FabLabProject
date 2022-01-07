@@ -17,9 +17,6 @@ document.getElementById("date").innerHTML="Date : "+localDate;
 
 function populateTable(c) {
   
-  
-  
-  
   const nameCol = document.getElementById("name");
   const nameTxt = document.createTextNode(c.name);
   nameCol.appendChild(nameTxt);
@@ -50,6 +47,7 @@ function populateTable(c) {
   }
   
 }
+
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
