@@ -48,6 +48,7 @@ function populateTable(classes) {
   const tableBody = list.querySelector("tbody");
   tableBody.replaceChildren(...classRows);
 }
+
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -66,9 +67,9 @@ function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-
+  
   return JSON.parse(jsonPayload);
 };
 

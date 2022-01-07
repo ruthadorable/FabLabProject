@@ -19,9 +19,9 @@ function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-
+  
   return JSON.parse(jsonPayload);
 };
 
@@ -49,11 +49,11 @@ if(token){
 }
 
 function populateTable(c){
-    document.getElementById("nom").value=c.first_name;
-    document.getElementById("prenom").value=c.last_name;
-    document.getElementById("email").value=c.email;
-    document.getElementById("password").value=c.password;
-    document.getElementById("role").value=c.role_id;
+  document.getElementById("nom").value=c.first_name;
+  document.getElementById("prenom").value=c.last_name;
+  document.getElementById("email").value=c.email;
+  document.getElementById("password").value=c.password;
+  document.getElementById("role").value=c.role_id;
 }
 fetch(`/user/${paramId}`)
 .then((response)=>response.json())

@@ -43,4 +43,3 @@ if(token){
   const body=document.querySelector("body");
   body.remove();
   alert("Veillez d'abord vous connecter");
-}
