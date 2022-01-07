@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-=======
-
-const token = get_cookie_name("jwt_token");
-if(token){
-  console.log("ok")
-}else{
-  const body=document.querySelector("body");
-body.remove();
-alert("Veillez d'abord vous connecter");
-}
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -21,10 +9,9 @@ function get_cookie_name(name)
        console.log('--something went wrong---');
   }
 }
-<<<<<<< HEAD
+
 const token = get_cookie_name("jwt_token");
-=======
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
+
 
 function parseJwt (token) {
 var base64Url = token.split('.')[1];
@@ -39,7 +26,7 @@ return JSON.parse(jsonPayload);
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-<<<<<<< HEAD
+
 const role=decoded.role_user;
 
 if(token){
@@ -60,15 +47,7 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-=======
-if(role!=2)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
+
 const list = document.getElementById("list");
 function populateTable(users) {
 

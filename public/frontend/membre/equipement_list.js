@@ -75,11 +75,10 @@ function get_cookie_name(name)
       }
    }
 
-<<<<<<< HEAD
+
 const token = get_cookie_name("jwt_token");
 
-=======
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -93,7 +92,7 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-<<<<<<< HEAD
+
 const role=decoded.role_user;
 
 if(token){
@@ -114,15 +113,6 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-=======
-if(role!=2)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
-document.getElementById("username").innerHTML=("   Bonjour "+username+" " );
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 /*const modifylink=document.getElementById("modifydata");
 modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
