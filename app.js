@@ -37,7 +37,7 @@ passport.use(
 );
 
 const indexRouter = require("./routes/index");
-const tokensRouter = require("./routes/tokens");
+
 
 debug("Configuring app server");
 
@@ -73,7 +73,7 @@ app.use(morgan('combined', { stream: accessLogStream }))
 
 
 app.use("/", indexRouter);
-app.use("/tokens", tokensRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

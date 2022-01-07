@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -11,6 +12,40 @@ function get_cookie_name(name)
    }
 
 const token = get_cookie_name("jwt_token");
+=======
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
+function get_cookie_name(name) 
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+
+
+function get_cookie_name(name) 
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+>>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -24,6 +59,7 @@ function parseJwt (token) {
 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
+<<<<<<< HEAD
 const iduser=decoded.sub;
 const role=decoded.role_user;
 
@@ -44,3 +80,12 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
+=======
+if(role!=2)
+{
+const body=document.querySelector("body");
+body.remove();
+alert("Vous n'avez pas accès à cette page");
+}
+document.getElementById("username").innerHTML=("Bonjour "+username);
+>>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443

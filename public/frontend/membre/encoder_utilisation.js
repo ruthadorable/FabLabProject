@@ -2,6 +2,14 @@ const classList = document.getElementById("classList");
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 let inputDuree,txt;
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 
 let date1 =new Date();
     let localDate=date1.toLocaleString('fr-FR',{
@@ -62,8 +70,11 @@ function get_cookie_name(name)
       }
    }
 
+<<<<<<< HEAD
 const token = get_cookie_name("jwt_token");
 
+=======
+>>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -76,6 +87,7 @@ function parseJwt (token) {
 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
+<<<<<<< HEAD
 const iduser=decoded.sub;
 const role=decoded.role_user;
 
@@ -96,6 +108,16 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
+=======
+const role=decoded.role_id;
+if(role!=2)
+{
+const body=document.querySelector("body");
+body.remove();
+alert("Vous n'avez pas accès à cette page");
+}
+document.getElementById("username").innerHTML=("Bonjour "+username);
+>>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 
 fetch(`/equipement/${paramId}`)
   .then((response) => response.json())
