@@ -69,15 +69,16 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_id;
-if(role!=1)
+if( role ==2 | role == 3)
 {
 const body=document.querySelector("body");
 body.remove();
 alert("Vous n'avez pas accès à cette page");
-}
+}else {
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 
 fetch(`/factures`)
   .then((response) => response.json())
   .then((x) => populateTable(x));
 
+}

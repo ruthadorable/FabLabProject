@@ -79,7 +79,7 @@ else{
     body.remove();
     alert("Vous n'êtes pas connecté !");
 }
-if(role!=1)
+if(role==2||role==3)
 {
   const body=document.querySelector("body");
   body.remove();

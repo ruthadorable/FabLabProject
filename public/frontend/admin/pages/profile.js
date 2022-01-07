@@ -24,7 +24,7 @@ function parseJwt (token) {
   const username=decoded.preferred_username;
   const iduser=decoded.sub;
   const role=decoded.role_user;
-  if(role!=1)
+  if(role==2||role==3)
   {
   const body=document.querySelector("body");
   body.remove();

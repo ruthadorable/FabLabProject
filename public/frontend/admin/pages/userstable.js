@@ -1,4 +1,3 @@
-
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -24,12 +23,12 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_id;
-if(role!=1)
+if( role ==2 | role == 3)
 {
 const body=document.querySelector("body");
 body.remove();
 alert("Vous n'avez pas accès à cette page");
-}
+}else{
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 const list = document.getElementById("list");
 function populateTable(users) {
@@ -93,3 +92,4 @@ function populateTable(users) {
 fetch("/users")
   .then((response) => response.json())
   .then((users) => populateTable(users));
+}
