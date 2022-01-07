@@ -1,15 +1,6 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
-const token = get_cookie_name("jwt_token");
-if(token){
-  console.log("ok")
-}else{
-  const body=document.querySelector("body");
-body.remove();
-alert("Veillez d'abord vous connecter");
-}
-
 var select = document.getElementById('annee');
 var date = new Date();
 var year = date.getFullYear();
@@ -20,17 +11,13 @@ for (var i = year - 4; i <= year + 3; i++) {
   select.appendChild(option);
 }
 
-
-
-
-
 function populateList1(machines)
 {
   
   const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
   const selectequipement=document.getElementById("equipementid")
   selectequipement.innerHTML=options;
- 
+  
 }
 function populateList2(users)
 {
@@ -52,16 +39,18 @@ fetch("/equipement")
 
 
 function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
+{
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) {
+    console.log(match[2]);
+    return match[2];
+  }
+  else{
+    console.log('--something went wrong---');
+  }
+}
+
+const token = get_cookie_name("jwt_token");
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -72,20 +61,32 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
+
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-const role=decoded.role_id;
-if(role!=1)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
-function populateTable(c){
+const role=decoded.role_user;
 
-    
+if(token){
+  console.log("ok"),
+  console.log(token),
+  console.log(decoded),
+  console.log(role)
+  if(role!=1)
+  {
+    const body=document.querySelector("body");
+    body.remove();
+    alert("Vous n'avez pas accès à cette page");
+  }
+  document.getElementById("username").innerText=("   Bonjour "+username+" " );
+}else{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Veillez d'abord vous connecter");
+}
+
+function populateTable(c){
+   
     document.getElementById("numéro").value=c.name;
     document.getElementById("date").value=c.image;
  //document.getElementById("equipementid").value=c.price_minute;
