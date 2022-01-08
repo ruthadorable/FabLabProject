@@ -95,5 +95,5 @@ if(token){
 
 fetch(`/factures`)
   .then((response) => response.json())
-  .then((x) => populateTable(x));
-
+  .then((x) => populateTable(x))
+}
