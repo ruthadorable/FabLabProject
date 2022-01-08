@@ -19,9 +19,9 @@ function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-
+  
   return JSON.parse(jsonPayload);
 };
 
@@ -47,9 +47,10 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
+
 function populateTable(c){
- 
-    document.getElementById("numero").value=c.num;
+  
+  document.getElementById("numero").value=c.num;
     const dateformat=c.date.toString().slice(0,10); 
     document.getElementById("date").value=dateformat;
     document.getElementById("total").value=c.amount_total;

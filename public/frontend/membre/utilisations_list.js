@@ -109,9 +109,11 @@ const userRows = users.map((c) => {
   
   return row;
 });
+
 const tableBody = list.querySelector("tbody");
 tableBody.replaceChildren(...userRows);
 }
+
 fetch("/uses")
 .then((response) => response.json())
 .then((uses) => populateTable(uses));

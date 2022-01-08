@@ -19,9 +19,9 @@ function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-
+  
   return JSON.parse(jsonPayload);
 };
 
@@ -79,12 +79,8 @@ function populateTable(c) {
     const amountTxt = document.createTextNode(total+"€");
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
-
-    
-
-
-   
   };
+  
 fetch(`/facture/${paramId}`)
 .then((response) => response.json())
   .then((x) => populateTable(x));

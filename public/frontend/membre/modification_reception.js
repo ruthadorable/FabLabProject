@@ -12,6 +12,9 @@ function get_cookie_name(name)
 
 const token = get_cookie_name("jwt_token");
 
+const token = get_cookie_name("jwt_token");
+
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -43,4 +46,4 @@ if(token){
   const body=document.querySelector("body");
   body.remove();
   alert("Veillez d'abord vous connecter");
-}
+

@@ -21,7 +21,7 @@ function parseJwt (token) {
   
   return JSON.parse(jsonPayload);
 };
-  
+ 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
@@ -45,7 +45,8 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-  function populateTable(c){
+
+ function populateTable(c){
       const firstname=document.createTextNode(c.first_name);
       const lastname=document.createTextNode(c.last_name);
       const email=document.createTextNode(c.email);

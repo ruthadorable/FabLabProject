@@ -41,9 +41,11 @@ function populateTable(classes) {
     
     return row;
   });
+
   const tableBody = list.querySelector("tbody");
   tableBody.replaceChildren(...invoiceRows);
 }
+
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -71,6 +73,7 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
+
 const role=decoded.role_user;
 
 if(token){
@@ -89,7 +92,6 @@ if(token){
   const body=document.querySelector("body");
   body.remove();
   alert("Veillez d'abord vous connecter");
-}
 
 fetch(`/factures`)
   .then((response) => response.json())

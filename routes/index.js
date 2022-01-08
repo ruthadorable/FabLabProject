@@ -21,7 +21,7 @@ router.post("/login", async function (req, res){
       .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect !"})
   }else{
     const token = generate(user.id,user.first_name,user.role_id);
-    res.cookie("jwt_token", token,{httpOnly:false});
+    res.cookie("jwt_token", token);
     const decoded = jwt_decode(token);
     console.log(decoded.preferred_username);
     
