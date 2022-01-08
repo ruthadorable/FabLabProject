@@ -48,18 +48,50 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-function populateTable(c){
+// function populateTable(c){
 
-    const firstname=document.createTextNode(c.first_name);
-    const lastname=document.createTextNode(c.last_name);
-    const email=document.createTextNode(c.email);
-    document.getElementById("nom").value=c.name;
-    document.getElementById("image").value=c.image;
-    document.getElementById("tarif").value=c.price_minute;
-    document.getElementById("description").value=c.description;
-    document.getElementById("reserved").value=c.reserved;
+//     const firstname=document.createTextNode(c.first_name);
+//     const lastname=document.createTextNode(c.last_name);
+//     const email=document.createTextNode(c.email);
+//     document.getElementById("nom").value=c.name;
+//     document.getElementById("image").value=c.image;
+//     document.getElementById("tarif").value=c.price_minute;
+//     document.getElementById("description").value=c.description;
+//     document.getElementById("reserved").value=c.reserved;
+// }
+// fetch(`/admin/equipement/${paramId}`)
+//   .then((response) => response.json())
+  // .then((equipement) => populateTable(equipement));
+  
+  const date = document.querySelector("#date")
+  var today = new Date();
+  var date1 =today.getDate()+'-'+(today.getMonth()+1)+'-'+ today.getFullYear();
+  date.value = date1
+  const idusername = document.querySelector("#idusername")
+  const equipement = document.querySelector("#equipement")
+  const tarif = document.querySelector("#tarif")
+  const fetchReq1 = fetch('/users').then((res) => res.json());
+  const fetchReq2 = fetch('/equipement').then((res) => res.json());
+  const data = Promise.all([fetchReq1,fetchReq2]);
+  let a ;
+  data.then((res) =>{ res[0].forEach(element => {
+    let option = document.createElement('option')
+    option.value = element.id 
+    option.textContent = element.first_name + " " + element.last_name
+    idusername.appendChild(option) });
+    a = res[1];
+    res[1].forEach(element => {
+      let option = document.createElement('option')
+      option.value = element.id 
+      option.textContent = element.name
+      equipement.appendChild(option) 
+    });
+    
+    
+})
+function newTarif() {
+  let valeur = a.filter(el=>el.id==equipement.value)
+  tarif.value = valeur[0].price_minute
 }
-fetch(`/admin/equipement/${paramId}`)
-  .then((response) => response.json())
-  .then((equipement) => populateTable(equipement));
+equipement.addEventListener("change", newTarif)
 
