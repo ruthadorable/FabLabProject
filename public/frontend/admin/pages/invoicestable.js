@@ -1,5 +1,13 @@
 const list = document.getElementById("list");
 var membre;
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 
 function populateTable(classes) {
 
@@ -23,14 +31,6 @@ function populateTable(classes) {
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
 
-    const userCol = document.createElement("td");
-    fetch(`/user/${c.userId}`)
-    .then((response)=>response.json())
-    .then((user)=>{ membre=user.first_name+" "+user.last_name; console.log(membre);});
-    const userTxt=document.createTextNode(membre);
-    userCol.appendChild(userTxt);
-    row.appendChild(userCol);
-
     const detailsCol= document.createElement("td");
     const detailsBtn=document.createElement("a");
     detailsBtn.href=`/frontend/admin/pages/details_facture.html?id=${c.id}`;
@@ -38,6 +38,19 @@ function populateTable(classes) {
     detailsBtn.appendChild(detailsTxt);
     detailsCol.appendChild(detailsBtn);
     row.appendChild(detailsCol);
+
+    fetch(`/user/${c.userId}`)
+    .then((response)=>response.json())
+    .then((user)=>{
+     const userCol = document.createElement("td"); 
+     const userTxt=document.createTextNode(user.first_name+" "+user.last_name);
+     userCol.appendChild(userTxt);
+     row.appendChild(userCol); 
+      
+      });
+    
+
+    
 
     return row;
   });
@@ -55,7 +68,7 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
-const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

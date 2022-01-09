@@ -1,4 +1,12 @@
 
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -10,7 +18,7 @@ function get_cookie_name(name)
        console.log('--something went wrong---');
   }
 }
-const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
 var base64Url = token.split('.')[1];
 var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -23,32 +31,38 @@ return JSON.parse(jsonPayload);
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
+
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 const list = document.getElementById("list");
-function populateTable(users) {
 
-const userRows = users.map((c) => {
+function populateTable(uses) {
+
+const useRows = uses.map((c) => {
+
+  
   const row = document.createElement("tr");
   const dateCol = document.createElement("td");
-  const dateTxt = document.createTextNode(c.date);
+  const dateTxt = document.createTextNode(c.date.toString().slice(0,10));
   dateCol.appendChild (dateTxt);
   row.appendChild( dateCol);
 
   fetch(`/equipement/${c.equipmentId}`)
   .then((response)=>response.json())
-  .then((x)=>{
-    equipementTxt = document.createTextNode(x.name);
-    tarifTxt = document.createTextNode(x.price_minute);
-  });
-  console.log(equipementTxt+" "+tarifTxt);
+  .then((x=>{
+    
   const equipementCol = document.createElement("td");
-  equipementCol.appendChild(equipementTxt);
+  const eCol=document.createTextNode(x.name);
+  equipementCol.appendChild(eCol);
   row.appendChild(equipementCol);
 
-  const tarifCol = document.createElement("td");
-  
-  tarifCol.appendChild(tarifTxt);
+  const tarifCol = document.createElement("td"); 
+  const tCol=document.createTextNode(x.price_minute+"€");
+  tarifCol.appendChild(tCol);
   row.appendChild(tarifCol);
+  
+  }));
+  
+  
 
   const dureeCol = document.createElement("td");
   const dureeTxt = document.createTextNode(c.durating_M);
@@ -56,7 +70,7 @@ const userRows = users.map((c) => {
   row.appendChild(dureeCol);
 
   const amountCol = document.createElement("td");
-  const amountTxt = document.createTextNode(c.amount_to_be_paid);
+  const amountTxt = document.createTextNode(c.amount_to_be_paid+"€");
   amountCol.appendChild (amountTxt);
   row.appendChild( amountCol);
 
@@ -65,32 +79,12 @@ const userRows = users.map((c) => {
   const facturéTxt = document.createTextNode(c.facturé);
   facturéCol.appendChild (facturéTxt);
   row.appendChild( facturéCol);;
-
-  const modifCol = document.createElement("td");
-  const modifBtn = document.createElement("a");
-  const modifTxt = document.createTextNode("Modifier");
-  modifBtn.user="btn btn-primary"
-  modifBtn.appendChild(modifTxt);
-  modifBtn.href=`modifier_user.html?id=${c.id}`;
-  modifCol.appendChild(modifBtn);
-  row.appendChild(modifCol);
-
-  
-  const deleteCol = document.createElement("td");
-  const button=document.createElement("a");
-  const btnTxt=document.createTextNode("Supprimer");
-  button.appendChild(btnTxt);
-  button.user="btn btn-primary"
-  button.href=`supprimer_user.html?id=${c.id}`;
-  deleteCol.appendChild(button);
-  row.appendChild(deleteCol);
-
   
   return row;
 });
 const tableBody = list.querySelector("tbody");
-tableBody.replaceChildren(...userRows);
-}
-fetch("/uses")
+tableBody.replaceChildren(...useRows);
+};
+fetch("/alluses")
 .then((response) => response.json())
 .then((uses) => populateTable(uses));

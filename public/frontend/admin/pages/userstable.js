@@ -1,3 +1,12 @@
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -9,7 +18,7 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
-const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -23,12 +32,6 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_id;
-if( role ==2 | role == 3)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}else{
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 const list = document.getElementById("list");
 function populateTable(users) {
@@ -57,12 +60,14 @@ function populateTable(users) {
       roleCol.appendChild (roleTxt);
       row.appendChild( roleCol);
 
-      const usesCol = document.createElement("td");
-      const usesTxt = document.createTextNode(c.uses_Id);
-      usesCol.appendChild (usesTxt);
-      row.appendChild( usesCol);;
-
-
+      const useCol = document.createElement("td");
+      const useBtn = document.createElement("a");
+      const useTxt = document.createTextNode("Encoder");
+      useBtn.user="btn btn-primary"
+      useBtn.appendChild(useTxt);
+      useBtn.href=`encoder_utilisation.html?id=${c.id}`;
+      useCol.appendChild(useBtn);
+      row.appendChild(useCol);
 
       const modifCol = document.createElement("td");
       const modifBtn = document.createElement("a");
@@ -73,7 +78,6 @@ function populateTable(users) {
       modifCol.appendChild(modifBtn);
       row.appendChild(modifCol);
 
-      
       const deleteCol = document.createElement("td");
       const button=document.createElement("a");
       const btnTxt=document.createTextNode("Supprimer");
@@ -92,4 +96,3 @@ function populateTable(users) {
 fetch("/users")
   .then((response) => response.json())
   .then((users) => populateTable(users));
-}

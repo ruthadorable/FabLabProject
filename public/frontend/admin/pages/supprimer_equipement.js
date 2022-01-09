@@ -1,5 +1,14 @@
+let bool;
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 
 
 function get_cookie_name(name) 
@@ -13,7 +22,7 @@ function get_cookie_name(name)
            console.log('--something went wrong---');
       }
    }
-const token = get_cookie_name("jwt_token");
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -34,4 +43,27 @@ body.remove();
 alert("Vous n'avez pas accès à cette page");
 }
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
-fetch(`/equipement/delete/${paramId}`)
+
+function deletemachine(){
+      fetch(`/equipement/delete/${paramId}`)
+      const content=document.getElementById("content");
+      content.remove();
+      const messagearea=document.getElementById("message");
+      const message=document.createTextNode("L'équipement a bien été supprimé !");
+      messagearea.appendChild(message); 
+}
+
+function redirectpage(){
+
+window.location.href="equipmentstable.html";
+
+}
+
+fetch(`/uses/machineid/${paramId}`)
+.then((response)=>response.json())
+.then((use)=>{
+  if(paramId==use.equipmentId)
+{ window.location.href="suppression_equipement_interdiction.html";}
+
+})
+

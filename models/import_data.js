@@ -52,20 +52,25 @@ const User = require("./user");
         permission: "all",
     });
 
+    const comptable = await Role.create({
+        name: "Comptable",
+        permission: "all",
+    });
+
     const member = await Role.create({
         name: "Member",
         permission: "read",
     });
 
     const in1 = await Invoice.create({
-        num: "1",
+        num: "20211304001",
         date: "2021-04-13",
         amount_total: 23.90,
         userId:1
     });
 
     const in2 = await Invoice.create({
-        num: "2",
+        num: "20222404002",
         date: "2021-04-24",
         amount_total: 14.26,
         userId:1
@@ -138,7 +143,10 @@ const User = require("./user");
     await grDecoupLaser.setUses(use2);
     await soufian.setUses(use2);
     
-    await use1.setInvoice(in1);
+    await in1.setUse(use1);
+    await in1.setEquipment(grDecoupLaser);
+
+    await in2.setEquipment(grFraisNum);
     
     await sequelize.close();
 })();

@@ -1,3 +1,4 @@
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -20,10 +21,14 @@ function get_cookie_name(name)
 }
 var old;
 const token = get_cookie_name("jwt_token");
+
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 document.getElementById("username").innerHTML=("Bonjour "+username);
+
+
+
 const newpassword = document.getElementById("newmotdepasse");
 const confpassword = document.getElementById("confmotdepasse"); 
 function check(elem){
@@ -60,6 +65,3 @@ fetch(`/modification/user/${iduser}`)
   .then((response) => response.json())
   .then((userdata) => populateTable(userdata));
 
-  //validate old password
-  
-    //validate new and confirm passsword

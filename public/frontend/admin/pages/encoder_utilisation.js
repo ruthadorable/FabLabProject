@@ -9,6 +9,33 @@ body.remove();
 alert("Veillez d'abord vous connecter");
 }
 
+
+function populateList1(machines)
+{
+  
+  const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
+  const selectequipement=document.getElementById("equipementid")
+  selectequipement.innerHTML=options;
+}
+function populateArea(user)
+{
+  const area=document.getElementById("membre");
+  const text=document.createTextNode(user.first_name);
+  area.appendChild(text);
+}
+
+
+
+fetch(`/user/${paramId}`)
+.then((response)=>response.json())
+.then((user)=>{populateArea(user);});
+
+fetch("/equipement")
+.then((response)=>response.json())
+.then((machines)=>{populateList1(machines); console.log(machines);});
+
+
+
 function get_cookie_name(name) 
     {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -34,15 +61,12 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_id;
-if( role ==2 | role == 3)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 function populateTable(c){
 
+    const firstname=document.createTextNode(c.first_name);
+    const lastname=document.createTextNode(c.last_name);
+    const email=document.createTextNode(c.email);
     document.getElementById("nom").value=c.name;
     document.getElementById("image").value=c.image;
     document.getElementById("tarif").value=c.price_minute;
@@ -53,4 +77,4 @@ fetch(`/admin/equipement/${paramId}`)
   .then((response) => response.json())
   .then((equipement) => populateTable(equipement));
 
-document.getElementById("form").action=`/equipement/update/${paramId}`;
+document.getElementById("post").action=`/use/create/${paramId}`;

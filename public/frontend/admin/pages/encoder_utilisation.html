@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="total" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Administrator Dashboard</title>
   <!-- Favicon -->
-  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/img/brand/favicon.png" type="date/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -68,7 +68,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="equipmentstable.html">
                   <i class="ni ni-bullet-list-67 text-default"></i>
-                  <span class="nav-link-text">Gérer Equipement</span>
+                  <span class="nav-link-text">Gérer utilisation</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -102,61 +102,46 @@
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Modifier un utilisateur </h3>
+                    <h3 class="mb-0">Encoder une nouvelle utilisation pour <h3 id="membre"></h3></h3>
                   </div>
                   
                 </div>
               </div>
               <div class="card-body">
-                <form method="POST"  id="form" action="/user/update">
-                  <h6 class="heading-small text-muted mb-4">Modify User</h6>
+                <form method="POST"  id="post" action="/utilisation/create">
+                  <h6 class="heading-small text-muted mb-4">Nouvelle utilisation</h6>
                   <div class="pl-lg-4">
                     
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label class="form-control-label" for="input-nom">Nom</label>
-                          <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" >
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-prenom">Prenom</label>
-                          <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom" >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-email">Email </label>
-                          <input type="email" name="email" id="email" class="form-control" required >
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-password">Password </label>
-                          <input type="text" name="password" id="password" class="form-control" required >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-role">Role</label>
-                          <select type="text" name="role" id="role" class="form-control" >
-                            <option value="2" selected>Membre</option>
-                            <option value="1">Administrateur</option>
-                            <option value="3" >Comptable</option>
+                          <label class="form-control-label" for="input-equipement">Equipement</label>
+                          <select type="text"  name="equipementid" id="equipementid" class="form-control" placeholder="equipement" >
+                              <option ></option>
+                              <option ></option>
                           </select>
                         </div>
-                      </div>    
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-date">Date</label>
+                          <input type="date" name="date"  id="date" class="form-control"  >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-duree">Durée en minute </label>
+                          <input type="number"  name="duree" id="duree" class="form-control"step=1 min=1 required >
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
                   <hr class="my-4" />
                   <div class=" text-right">
-                    <button type="submit" class="btn btn-sm btn-primary">Modifier utilisateur</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Ajouter utilisation</button>
                   </div>
                 </form>
               </div>
@@ -191,7 +176,7 @@
         </footer>
       </div>
 
-  <script src="modifier_user.js"></script>
+  <script src="encoder_utilisation.js"></script>
 </body>
 
 </html>

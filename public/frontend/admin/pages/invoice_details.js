@@ -78,6 +78,6 @@ function populateTable(c){
     amountCol.appendChild(amountTxt);
     
 }
-fetch(`/admin/facture/${paramId}`)
+fetch(`/facturedetails/useid/${paramId}`)
 .then((response)=>response.json())
 .then((x)=>{populateTable(x)})
