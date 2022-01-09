@@ -60,15 +60,6 @@ function populateTable(users) {
       roleCol.appendChild (roleTxt);
       row.appendChild( roleCol);
 
-      const useCol = document.createElement("td");
-      const useBtn = document.createElement("a");
-      const useTxt = document.createTextNode("Encoder");
-      useBtn.user="btn btn-primary"
-      useBtn.appendChild(useTxt);
-      useBtn.href=`encoder_utilisation.html?id=${c.id}`;
-      useCol.appendChild(useBtn);
-      row.appendChild(useCol);
-
       const modifCol = document.createElement("td");
       const modifBtn = document.createElement("a");
       const modifTxt = document.createTextNode("Modifier");

@@ -22,13 +22,6 @@ function populateTable(classes) {
     euCol.appendChild(euTxt);
     row.appendChild(euCol);
     
-    const teacherCol = document.createElement("td");
-    const teacherTxt = document.createTextNode(
-      c.reserved
-      );
-      
-      teacherCol.appendChild(teacherTxt);
-      row.appendChild(teacherCol);
       
       const button=document.createElement("a");
       const btnTxt=document.createTextNode("Encoder");
