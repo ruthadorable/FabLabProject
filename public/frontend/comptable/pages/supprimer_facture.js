@@ -41,4 +41,19 @@ body.remove();
 alert("Vous n'avez pas accès à cette page");
 }
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
-fetch(`/facture/delete/${paramId}`)
+
+
+function deletefacture(){
+  fetch(`/facture/delete/${paramId}`)
+  const content=document.getElementById("content");
+  content.remove();
+  const messagearea=document.getElementById("message");
+  const message=document.createTextNode("La facture a bien été supprimée !");
+  messagearea.appendChild(message); 
+}
+
+function redirectpage(){
+
+window.location.href="invoicestable.html";
+
+}

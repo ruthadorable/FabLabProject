@@ -63,14 +63,14 @@ const User = require("./user");
     });
 
     const in1 = await Invoice.create({
-        num: "20211304001",
+        num: 001,
         date: "2021-04-13",
         amount_total: 23.90,
         userId:1
     });
 
     const in2 = await Invoice.create({
-        num: "20222404002",
+        num: 002,
         date: "2021-04-24",
         amount_total: 14.26,
         userId:1

@@ -77,13 +77,14 @@
                   <span class="nav-link-text">Logout</span>
                 </a>
               </li>
-        </ul>
+          </ul>
          
         </div>
       </div>
     </div>
   </nav>
-  <!-- Main content -->
+  
+    <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
@@ -93,17 +94,56 @@
         </div>
       </div>
     </nav>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white" id="username"></h1>
+          
+          <a href="ajouter_utilisateur.html" class="btn btn-neutral">Ajouter utilisateur</a>
+        </div>
+      </div>
+    </div>
+    <br/>
     <!-- Page content -->
-    <p>La facture a bien été supprimée!</p>
-    
-      <!-- Footer -->
-      <footer class="footer pt-0">
-        <p><a href="invoicestable.html"> < retour à la liste des factures </a></p>
-      </footer>
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Liste des utilisateurs</h3>
+            </div>
+                  <!-- Light table -->
+                  <div class="table-responsive">
+                    <table id="list" class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col" class="sort" data-sort="name">Prénom</th>
+                          <th scope="col" class="sort" data-sort="name">Nom</th>
+                          <th scope="col" class="sort" data-sort="name">Email</th>
+                          <th scope="col" class="sort" data-sort="name">Role</th>
+                          <th scope="col" class="sort" data-sort="name">Utilisation </th>
+                          <th scope="col">Modifer</th>
+                          <th scope="col" class="sort" data-sort="completion">Supprimer</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody >
+                        
+                      </tbody>
+                    </table>
+                    </div>
+           </div>         
+        </div>
+      </div> 
     </div>
   </div>
 
-  <script src="supprimer_facture.js"></script>
+    
+  
+
+  <script src="userstable.js"></script>
 </body>
 
 </html>

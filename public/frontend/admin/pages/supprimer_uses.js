@@ -37,29 +37,35 @@ document.getElementById("username").innerText=("   Bonjour "+username+" " );
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
-function affichageEcran(x){
 
-
-
-if(!x.facturé){
-    if(confirm("Etes vous sûre de supprimer cet utilisation?"))
-    {
-            window.location.href=`supprimer_use_reception.html?id=${paramId}`;
-    }
-}else{
-    const content=document.getElementById("content");
-    content.innerText="Impossible de supprimer car il faut que sa facture soit supprimé avant !! \n Voir lien => ";
-    const lien=document.createElement("a");
-    const btnTxt=document.createTextNode("Details facture");
-    lien.href=`invoice_details.html?id=${paramId}`;
-    lien.appendChild(btnTxt);
-    content.appendChild(lien);
-}
-}
 
 
 
 fetch(`/utilisation/${paramId}`)
 .then((response)=>response.json())
-.then((x)=>affichageEcran(x))
+.then((x)=>{
+if(x.facturé){
+  const content=document.getElementById("content");
+  content.innerText="Impossible de supprimer car il faut que sa facture soit supprimé avant !! \n Voir lien => ";
+  const lien=document.createElement("a");
+  const btnTxt=document.createTextNode("Details facture");
+  lien.href=`invoice_details.html?id=${paramId}`;
+  lien.appendChild(btnTxt);
+  content.appendChild(lien);
+}
+})
 
+function deleteuse(){
+  fetch(`/use/delete/${paramId}`)
+  const content=document.getElementById("content");
+  content.remove();
+  const messagearea=document.getElementById("message");
+  const message=document.createTextNode("L'utilisation a bien été supprimé !");
+  messagearea.appendChild(message); 
+}
+
+function redirectpage(){
+
+window.location.href="usestable.html";
+
+}

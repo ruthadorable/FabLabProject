@@ -9,9 +9,9 @@ const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, crea
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("login")
   res.clearCookie('id');
   res.clearCookie('jwt_token');
+  res.render("login")
 });
 router.post("/login", async function (req, res){
 

@@ -44,11 +44,20 @@ function populateTable(classes) {
 
     const detailsCol= document.createElement("td");
     const detailsBtn=document.createElement("a");
-    detailsBtn.href=`/frontend/admin/pages/details_facture.html?id=${c.id}`;
+    detailsBtn.href=`/frontend/comptable/pages/details_facture.html?id=${c.id}`;
     const detailsTxt = document.createTextNode("Voir détails");
     detailsBtn.appendChild(detailsTxt);
     detailsCol.appendChild(detailsBtn);
     row.appendChild(detailsCol);
+
+    const deleteCol= document.createElement("td");
+    const deleteBtn=document.createElement("a");
+    deleteBtn.href=`/frontend/comptable/pages/supprimer_facture.html?id=${c.id}`;
+    const deleteTxt = document.createTextNode("Supprimer");
+    deleteBtn.appendChild(deleteTxt);
+    deleteCol.appendChild(deleteBtn);
+    row.appendChild(deleteCol);
+
 
     return row;
   });
@@ -79,12 +88,7 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-if(role!=3)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
+
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 
 fetch(`/factures`)
