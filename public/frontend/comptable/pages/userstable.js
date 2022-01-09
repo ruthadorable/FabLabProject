@@ -60,23 +60,6 @@ function populateTable(users) {
       roleCol.appendChild (roleTxt);
       row.appendChild( roleCol);
 
-      const modifCol = document.createElement("td");
-      const modifBtn = document.createElement("a");
-      const modifTxt = document.createTextNode("Modifier");
-      modifBtn.user="btn btn-primary"
-      modifBtn.appendChild(modifTxt);
-      modifBtn.href=`modifier_user.html?id=${c.id}`;
-      modifCol.appendChild(modifBtn);
-      row.appendChild(modifCol);
-
-      const deleteCol = document.createElement("td");
-      const button=document.createElement("a");
-      const btnTxt=document.createTextNode("Supprimer");
-      button.appendChild(btnTxt);
-      button.user="btn btn-primary"
-      button.href=`supprimer_user.html?id=${c.id}`;
-      deleteCol.appendChild(button);
-      row.appendChild(deleteCol);
 
       
       return row;
