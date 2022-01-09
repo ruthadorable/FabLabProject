@@ -1,44 +1,28 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
-var select = document.getElementById('annee');
-var date = new Date();
-var year = date.getFullYear();
-for (var i = year - 4; i <= year + 3; i++) {
-  var option = document.createElement('option');
-  option.value = option.innerHTML = i;
-  if (i === year) option.selected = true;
-  select.appendChild(option);
-}
-
-
-
-
-
 function populateList1(machines)
 {
   
   const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
   const selectequipement=document.getElementById("equipementid")
   selectequipement.innerHTML=options;
- 
 }
-function populateList2(users)
+function populateArea(user)
 {
-  const options= users.map(x=>`<option value=${x.id}>${x.first_name}</option>`).join('\n');
-  const selectmembre=document.getElementById("userid")
-  selectmembre.innerHTML=options;
+  const area=document.getElementById("membre");
+  const text=document.createTextNode(user.first_name);
+  area.appendChild(text);
 }
 
 
 
-fetch("/members")
+fetch(`/user/${paramId}`)
 .then((response)=>response.json())
-.then((users)=>{populateList2(users); console.log(users);});
+.then((user)=>{populateArea(user);});
 
 fetch("/equipement")
 .then((response)=>response.json())
-.then((machines)=>{populateList1(machines); console.log(machines);})
 .then((machines)=>{populateList1(machines); console.log(machines);});
 
 
@@ -61,9 +45,9 @@ function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-  
+
   return JSON.parse(jsonPayload);
 };
 
@@ -92,10 +76,17 @@ if(token){
 
 function populateTable(c){
 
-  document.getElementById("numéro").value=c.name;
-  document.getElementById("date").value=c.image;
-//document.getElementById("equipementid").value=c.price_minute;
-  document.getElementById("minutes").value=c.description;
-//  document.getElementById("utilisateurid").value=c.reserved;
-document.getElementById("tarif").value=c.description;
+    const firstname=document.createTextNode(c.first_name);
+    const lastname=document.createTextNode(c.last_name);
+    const email=document.createTextNode(c.email);
+    document.getElementById("nom").value=c.name;
+    document.getElementById("image").value=c.image;
+    document.getElementById("tarif").value=c.price_minute;
+    document.getElementById("description").value=c.description;
+    document.getElementById("reserved").value=c.reserved;
 }
+fetch(`/admin/equipement/${paramId}`)
+  .then((response) => response.json())
+  .then((equipement) => populateTable(equipement));
+
+document.getElementById("post").action=`/use/create/${paramId}`;

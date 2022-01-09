@@ -52,35 +52,49 @@ if(token){
 const list = document.getElementById("list");
 
 
-function populateTable(c) {
-
- 
-    const row = document.createElement("tr");
-
-    const numCol = document.createElement("td");
-    const numTxt = document.createTextNode(c.id);
-    numCol.appendChild(numTxt);
-    row.appendChild(numCol);
-
-
-    const userCol = document.createElement("td");
-    const userTxt = document.createTextNode(c.userId);
-    userCol.appendChild(userTxt);
-    row.appendChild(userCol);
-
-    const dateCol= document.createElement("td");
-    const dateformat=c.date.toString().slice(0,10);
-    const dateTxt = document.createTextNode(dateformat);
-    dateCol.appendChild(dateTxt);
-    row.appendChild(dateCol);
-
-    const amountCol= document.createElement("td");
-    const total=parseFloat(c.amount_total).toFixed(2);
-    const amountTxt = document.createTextNode(total+"€");
-    amountCol.appendChild(amountTxt);
-    row.appendChild(amountCol);
-  };
+function populateTable(c){
+    
+  const idCol = document.getElementById("id");
+  const idTxt = document.createTextNode(c.id);
+  idCol.appendChild(idTxt);
+  const usernameCol = document.getElementById("membre");
+  fetch(`/user/${c.userId}`)
+  .then((response)=>response.json())
+  .then((user)=>{
   
-fetch(`/facture/${paramId}`)
-.then((response) => response.json())
-  .then((x) => populateTable(x));
+  const usernameTxt = document.createTextNode(user.first_name+" "+user.last_name);
+  usernameCol.appendChild(usernameTxt);
+  });
+  
+  const dateCol= document.getElementById("date");
+  const dateTxt = document.createTextNode(c.date.toString().slice(0,10));
+  dateCol.appendChild(dateTxt);
+
+  fetch(`/admin/equipement/${c.equipmentId}`)
+  .then((response)=>response.json())
+  .then((machine)=>{
+  const machinenameCol = document.getElementById("equipmentname");
+  const machinenameTxt = document.createTextNode( machine.name);
+   machinenameCol.appendChild( machinenameTxt);
+
+   const machinetarifCol = document.getElementById("equipmenttarif");
+  const machinetarifTxt = document.createTextNode( machine.price_minute);
+   machinetarifCol.appendChild( machinetarifTxt);
+  })
+
+  fetch(`/utilisation/${paramId}`)
+  .then((response)=>response.json())
+  .then((use)=>{
+  const dureeCol = document.getElementById("duree");
+  const dureeTxt = document.createTextNode(use.durating_M);
+  dureeCol.appendChild(dureeTxt);
+  })
+
+  const amountCol = document.getElementById("amount");
+  const amountTxt = document.createTextNode(c.amount_total+"€");
+  amountCol.appendChild(amountTxt);
+  
+}
+fetch(`/admin/facture/${paramId}`)
+.then((response)=>response.json())
+.then((x)=>{populateTable(x)})

@@ -3,41 +3,46 @@ const Use = require("../models/use");
 const User= require("../models/user");
 const Invoice=require("../models/invoice");
 const  jwt_decode  = require("jwt-decode");
-const InvoiceDetail = require("../models/invoicedetail");
+exports.modification=(req,res,next)=>{
+
+}
+
+exports.listefactures= async(req,res,next)=>{
+
+    const iduser=req.body.id;
+    const all=Invoice.findAll({
+        where: iduser
+    });
+    
+}
 
 
 exports.newUtilisation= async(req,res,next)=>{
-    const iduser=req.cookies.id;
-    const idmachine=req.body.idmachine;
-    const use=Use.findOne({where:{id:iduser}});
-    const equipement= await Equipment.findOne({where : {id:idmachine}})
+    const token=req.cookies.jwt_token;
+    const decoded = jwt_decode(token);
+    const iduser=decoded.sub;
+    const idmachine=req.params.id;
+    
    const newUsage = await Use.create({
       durating_M: req.body.minutes,
       amount_to_be_paid: req.body.total,
       date: Date(),
-      user_id: iduser
+      userId: iduser,
+      equipmentId: idmachine
   })
-   const newFacture = await Invoice.create({
-        num: Math.floor(Math.random()*(9999999-1111111+1)+1111111),
-        date: Date(),
-        amount_total: req.body.total,
-        userId: iduser
-   })
-   const newInvoiceDetail = await InvoiceDetail.create({
-    equipmentId:equipement.id,
-    equipment_name: equipement.name,
-    equipment_tarif: equipement.price_minute,
-    duration_M: newUsage.durating_M,
-    amount_total: newUsage.amount_to_be_paid,
-    facturation: true,
-    useId:newUsage.id,
-    invoiceId:newFacture.id,
-    date: Date()
-   })
-  await newUsage.setEquipment(equipement);
-  await newUsage.setUser(iduser);
-  await newFacture.setUser(iduser);
   
+  
+  console.log(newUsage)
+  res.redirect("/frontend/membre/utilisation_reception.html")
+
+    
+}
+
+exports.getMembreById=(req,res,next)=>{
+    User.findAll({where: { id: req.params.id}})
+    .then((membre)=>res.status(200).json(membre))
+    .catch((error)=>res.status(400).json({error}));
+    res.render("membre/membre_accueil")
 }
 
 exports.getMembreById=async(req,res,next)=>{
@@ -77,12 +82,14 @@ exports.getEquipementById = async (req,res)=>{
 
 exports.updateUser=async(req,res)=>{
     
-    const id=req.cookies.id;
+    const token=req.cookies.jwt_token;
+    const decoded = jwt_decode(token);
+    const iduser=decoded.sub;
     const {nom,prenom,email,motdepasse,confmotdepasse}=req.body;
     
     try{
         const userById =await User.findOne({
-            where: {id }})
+            where: {id:iduser }})
        if(nom!==""&&email!==""&&prenom!=""&&motdepasse!=="")
        {
         if(confmotdepasse!=motdepasse){
@@ -130,4 +137,21 @@ exports.factureDetails=function(req,res){
         return res.json(factureDetailsParId);
       }catch(err){}
 
+  }
+  exports.getUsesById=async(req,res)=>{
+    const id=req.params.id;
+    try{
+    const uses= await Use.findAll({where:{userId:id}})
+    return res.json(uses);
+    }catch(err){
+
+    }
+  }
+  exports.getUses=async(req,res)=>{
+    try{  
+    const uses= await Use.findAll();
+    return res.json(uses);
+    }catch(err){
+
+    }
   }

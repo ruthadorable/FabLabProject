@@ -44,15 +44,39 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
+var old;
+
+const newpassword = document.getElementById("newmotdepasse");
+const confpassword = document.getElementById("confmotdepasse"); 
+function check(elem){
+  if(elem.value.length>0){
+       if(elem.value!=newpassword.value){
+    
+        document.getElementById("alert").innerText="Les 2 mots de passe ne sont pas identiques!"
+       }else{
+        document.getElementById("alert").innerText="";    
+       }
+}
+}
+function checkold(){
+
+  const oldpassword = document.getElementById("oldmotdepasse");
+  
+    if (oldpassword.value != old)
+    {
+      document.getElementById("alertold").innerText="L'ancien mot de passe n'est pas correcte!";
+    }else{
+      document.getElementById("alertold").innerText="";
+    }
+}
+
 
 function populateTable(c){
     document.getElementById("nom").value=c.first_name;
     document.getElementById("prenom").value=c.last_name;
     document.getElementById("email").value=c.email;
-    document.getElementById("motdepasse").value=c.password;
-    document.getElementById("confmotdepasse").value=c.password;
+     old=c.password;
 }
-
 
 fetch(`/modification/user/${iduser}`)
   .then((response) => response.json())

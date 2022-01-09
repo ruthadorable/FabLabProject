@@ -100,7 +100,7 @@
         <div class="col-lg-7 col-md-10">
           <h1 class="display-2 text-white" id="username"></h1>
           
-          <a href="ajouter_utilisation.html" class="btn btn-neutral">Ajouter utilisation</a>
+          <a href="invoicestable.html" class="btn btn-neutral"> Retour à la liste des factures</a>
         </div>
       </div>
     </div>
@@ -112,34 +112,43 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header border-0">
-              <h3 class="mb-0">Liste des utilisations</h3>
+              <h3 class="mb-0">Détails de la facture</h3>
             </div>
                   <!-- Light table -->
                   <div class="table-responsive">
                     <table id="list" class="table align-items-center table-flush">
                       <thead class="thead-light">
                         <tr>
-                          <th role="col">ID Membre</th>
-                          <th role="col">Date</th>
-                          <th role="col">Durée en minutes</th>
-                          <th role="col">Montant</th>
-                          <th role="col">Facturé</th>
-                          <th scope="col" class="sort" data-sort="completion">Supprimer</th>
-                          <th role="col">Equipement</th>
-                          <th role="col">Tarif</th>
+                        <th scope="col" class="sort" data-sort="status">ID Facture</th>
+                          <th scope="col" class="sort" data-sort="status">Utilisateur</th>
+                          <th scope="col" class="sort" data-sort="status">Date</th>
+                          <th scope="col" class="sort" data-sort="budget">Equipement Name</th>
+                          <th scope="col" class="sort" data-sort="status">Equipement Tarif</th>
+                          <th scope="col" class="sort" data-sort="status">Durée d'utilisation</th>
+                          <th scope="col" class="sort" data-sort="status">Prix total</th>
                         </tr>
                       </thead>
                       <tbody >
+                        <tr>
+                            <td id="id" scope="col" class="sort" data-sort="status"></td>
+                            <td id="membre" scope="col" class="sort" data-sort="status"></td>
+                            <td id="date" scope="col" class="sort" data-sort="status"></td>
+                            <td id="equipmentname" scope="col" class="sort" data-sort="budget"></td>
+                            <td id="equipmenttarif" scope="col" class="sort" data-sort="status"></td>
+                            <td id="duree" scope="col" class="sort" data-sort="status"></td>
+                            <td id="amount" scope="col" class="sort" data-sort="status"></td>
+                          </tr>
                         
                       </tbody>
                     </table>
-                    </div>
-           </div>         
+                  </div>
+                  
+           </div>  
+           <footer class="container">
+            <p>Veuillez contacter votre comptable pour supprimer la facture</p>    
+          </footer>       
         </div>
       </div> 
     </div>
   </div>
-  <script src="usestable.js"></script>
-</body>
-
-</html>
+<script src="invoice_details.js"></script>

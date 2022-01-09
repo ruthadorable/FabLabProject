@@ -1,3 +1,4 @@
+let bool;
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
@@ -48,4 +49,25 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-fetch(`/equipement/delete/${paramId}`)
+function deletemachine(){
+  fetch(`/equipement/delete/${paramId}`)
+  const content=document.getElementById("content");
+  content.remove();
+  const messagearea=document.getElementById("message");
+  const message=document.createTextNode("L'équipement a bien été supprimé !");
+  messagearea.appendChild(message); 
+}
+
+function redirectpage(){
+
+window.location.href="equipmentstable.html";
+
+}
+
+fetch(`/uses/machineid/${paramId}`)
+.then((response)=>response.json())
+.then((use)=>{
+if(paramId==use.equipmentId)
+{ window.location.href="suppression_equipement_interdiction.html";}
+
+})

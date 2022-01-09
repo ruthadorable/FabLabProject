@@ -77,14 +77,13 @@
                   <span class="nav-link-text">Logout</span>
                 </a>
               </li>
-          </ul>
+        </ul>
          
         </div>
       </div>
     </div>
   </nav>
-  
-    <!-- Main content -->
+  <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
@@ -94,52 +93,20 @@
         </div>
       </div>
     </nav>
-    <!-- Header container -->
-    <div class="container-fluid d-flex align-items-center">
-      <div class="row">
-        <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white" id="username"></h1>
-          
-          <a href="ajouter_utilisation.html" class="btn btn-neutral">Ajouter utilisation</a>
-        </div>
-      </div>
-    </div>
-    <br/>
     <!-- Page content -->
-    <div class="container-fluid ">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Liste des utilisations</h3>
-            </div>
-                  <!-- Light table -->
-                  <div class="table-responsive">
-                    <table id="list" class="table align-items-center table-flush">
-                      <thead class="thead-light">
-                        <tr>
-                          <th role="col">ID Membre</th>
-                          <th role="col">Date</th>
-                          <th role="col">Durée en minutes</th>
-                          <th role="col">Montant</th>
-                          <th role="col">Facturé</th>
-                          <th scope="col" class="sort" data-sort="completion">Supprimer</th>
-                          <th role="col">Equipement</th>
-                          <th role="col">Tarif</th>
-                        </tr>
-                      </thead>
-                      <tbody >
-                        
-                      </tbody>
-                    </table>
-                    </div>
-           </div>         
-        </div>
-      </div> 
+    <div class="container">
+    <br><br>
+    <h3 id="content">Interdit de supprimer un équipement qui a déjà servi !
+         <br> Seul les équipements sans utilisation peuvent être supprimés !</h3>
+    </div>
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <p><a href="equipmentstable.html"> < retour à la liste des équipements </a></p>
+      </footer>
     </div>
   </div>
-  <script src="usestable.js"></script>
+
+  <script src="supprimer_equipement.js"></script>
 </body>
 
 </html>

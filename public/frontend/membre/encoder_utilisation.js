@@ -4,48 +4,51 @@ let paramId=url.searchParams.get("id");
 let inputDuree,txt;
 
 let date1 =new Date();
-let localDate=date1.toLocaleString('fr-FR',{
-  weekday: 'long',
-  year: 'numeric',
-  month:'long',
-  day: 'numeric',
-  hour:'numeric',
-  minute: 'numeric',
-  second: 'numeric'
-});
-document.getElementById("date").innerHTML="Date : "+localDate;
+    let localDate=date1.toLocaleString('fr-FR',{
+      weekday: 'long',
+      year: 'numeric',
+      month:'long',
+      day: 'numeric',
+      hour:'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+    document.getElementById("date").innerHTML="Date : "+localDate;
 
 function populateTable(c) {
   
-  const nameCol = document.getElementById("name");
-  const nameTxt = document.createTextNode(c.name);
-  nameCol.appendChild(nameTxt);
   
-  
-  const imageCol= document.getElementById("image");
-  const image = document.createElement("img");
-  image.src=c.image;
-  image.height=150;
-  image.width=250;
-  imageCol.appendChild(image);
-  
-  
-  const euCol = document.getElementById("tarif");
-  var tarif= parseFloat(c.price_minute).toFixed(2);
-  const euTxt = document.createTextNode(tarif+" €");
-  euCol.appendChild(euTxt);
-  
-  const inputDuree=document.getElementById("minutes");
-  
-  const button = document.getElementById("buttonduree");
-  button.onclick=rendertotal;
-  
-  function rendertotal(){
+    
+
+    const nameCol = document.getElementById("name");
+    const nameTxt = document.createTextNode(c.name);
+    nameCol.appendChild(nameTxt);
+
+
+    const imageCol= document.getElementById("image");
+    const image = document.createElement("img");
+    image.src=c.image;
+    image.height=150;
+    image.width=250;
+    imageCol.appendChild(image);
+
+
+    const euCol = document.getElementById("tarif");
+    var tarif= parseFloat(c.price_minute).toFixed(2);
+    const euTxt = document.createTextNode(tarif+" €");
+    euCol.appendChild(euTxt);
+
+    const inputDuree=document.getElementById("minutes");
+    
+    const button = document.getElementById("buttonduree");
+    button.onclick=rendertotal;
+
+    function rendertotal(){
     const calculCol = document.getElementById("total");
     var total=parseFloat(c.price_minute*inputDuree.value).toFixed(2);
     calculCol.value=total;    
   }
-  
+
 }
 
 function get_cookie_name(name) 
