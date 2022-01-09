@@ -154,9 +154,6 @@ exports.factureDetails=function(req,res){
     }catch(err){
 
     }
-<<<<<<< HEAD
+
   }
-=======
-  }
-  
->>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399
+
