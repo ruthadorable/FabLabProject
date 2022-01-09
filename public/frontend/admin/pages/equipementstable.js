@@ -1,28 +1,28 @@
 const list = document.getElementById("list");
 
 function populateTable(classes) {
-  
+
   const classRows = classes.map((c) => {
     const row = document.createElement("tr");
-    
+
     const nameCol = document.createElement("td");
     const nameTxt = document.createTextNode(c.name);
     nameCol.appendChild(nameTxt);
     row.appendChild(nameCol);
-    
+
     const imageCol= document.createElement("img");
     imageCol.src="../../"+c.image;
     imageCol.height=150;
     imageCol.width=250;
     row.appendChild(imageCol);
-    
+
     const euCol = document.createElement("td");
     const euTxt = document.createTextNode(c.price_minute+" €");
     euCol.appendChild(euTxt);
     row.appendChild(euCol);
-    
-    
-    
+
+
+
     const modifCol = document.createElement("td");
     const modifBtn = document.createElement("a");
     const modifTxt = document.createTextNode("Modifier");
@@ -31,7 +31,7 @@ function populateTable(classes) {
     modifBtn.href=`modifier_equipement.html?id=${c.id}`;
     modifCol.appendChild(modifBtn);
     row.appendChild(modifCol);
-    
+
     
     const deleteCol = document.createElement("td");
     const button=document.createElement("a");
@@ -41,7 +41,7 @@ function populateTable(classes) {
     button.href=`supprimer_equipement.html?id=${c.id}`;
     deleteCol.appendChild(button);
     row.appendChild(deleteCol);
-    
+
     
     return row;
   });

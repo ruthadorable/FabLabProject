@@ -19,6 +19,7 @@ exports.getUserById=async(req,res,next)=>{
     }catch(err){}
     
 }
+
 exports.updateAdmin=async(req,res)=>{
     const token=req.cookies.jwt_token;
     const decoded = jwt_decode(token);

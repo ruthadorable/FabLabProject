@@ -50,17 +50,20 @@ function populateTable(c) {
   }
 
 }
+
 function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
+{
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) {
+    console.log(match[2]);
+    return match[2];
+  }
+  else{
+    console.log('--something went wrong---');
+  }
+}
+
+const token = get_cookie_name("jwt_token");
 
 
 const token = get_cookie_name("jwt_token");
@@ -98,7 +101,6 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
-
 
 fetch(`/equipement/${paramId}`)
   .then((response) => response.json())

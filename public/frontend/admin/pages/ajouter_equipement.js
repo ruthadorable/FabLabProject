@@ -21,10 +21,12 @@ function parseJwt (token) {
   
   return JSON.parse(jsonPayload);
 };
+
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_user;
+
 if(token){
   console.log("ok"),
   console.log(token),

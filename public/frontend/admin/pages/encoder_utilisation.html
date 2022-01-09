@@ -2,13 +2,13 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="total" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Administrator Dashboard</title>
   <!-- Favicon -->
-  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/img/brand/favicon.png" type="date/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -68,7 +68,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="equipmentstable.html">
                   <i class="ni ni-bullet-list-67 text-default"></i>
-                  <span class="nav-link-text">Gérer Equipement</span>
+                  <span class="nav-link-text">Gérer utilisation</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -77,14 +77,14 @@
                   <span class="nav-link-text">Logout</span>
                 </a>
               </li>
-          </ul>
+        </ul>
          
         </div>
       </div>
     </div>
   </nav>
   
-    <!-- Main content -->
+  <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
@@ -94,52 +94,89 @@
         </div>
       </div>
     </nav>
-    <!-- Header container -->
-    <div class="container-fluid d-flex align-items-center">
-      <div class="row">
-        <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white" id="username"></h1>
-          
-          <a href="ajouter_utilisation.html" class="btn btn-neutral">Ajouter utilisation</a>
-        </div>
-      </div>
-    </div>
-    <br/>
     <!-- Page content -->
     <div class="container-fluid ">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Liste des utilisations</h3>
-            </div>
-                  <!-- Light table -->
-                  <div class="table-responsive">
-                    <table id="list" class="table align-items-center table-flush">
-                      <thead class="thead-light">
-                        <tr>
-                          <th role="col">ID Membre</th>
-                          <th role="col">Date</th>
-                          <th role="col">Durée en minutes</th>
-                          <th role="col">Montant</th>
-                          <th role="col">Facturé</th>
-                          <th scope="col" class="sort" data-sort="completion">Supprimer</th>
-                          <th role="col">Equipement</th>
-                          <th role="col">Tarif</th>
-                        </tr>
-                      </thead>
-                      <tbody >
-                        
-                      </tbody>
-                    </table>
+        <div class="row">
+          <div class="col-xl-8 order-xl-1">
+            <div class="card">
+              <div class="card-header">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 class="mb-0">Encoder une nouvelle utilisation pour <h3 id="membre"></h3></h3>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="card-body">
+                <form method="POST"  id="post" action="/utilisation/create">
+                  <h6 class="heading-small text-muted mb-4">Nouvelle utilisation</h6>
+                  <div class="pl-lg-4">
+                    
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-equipement">Equipement</label>
+                          <select type="text"  name="equipementid" id="equipementid" class="form-control" placeholder="equipement" >
+                              <option ></option>
+                              <option ></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-date">Date</label>
+                          <input type="date" name="date"  id="date" class="form-control"  >
+                        </div>
+                      </div>
                     </div>
-           </div>         
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-duree">Durée en minute </label>
+                          <input type="number"  name="duree" id="duree" class="form-control"step=1 min=1 required >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <hr class="my-4" />
+                  <div class=" text-right">
+                    <button type="submit" class="btn btn-sm btn-primary">Ajouter utilisation</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-      </div> 
-    </div>
-  </div>
-  <script src="usestable.js"></script>
+        <!-- Footer -->
+        <footer class="footer pt-0">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6">
+              <div class="copyright text-center  text-lg-left  text-muted">
+               
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  
+                </li>
+                <li class="nav-item">
+                  
+                </li>
+                <li class="nav-item">
+                  
+                </li>
+                <li class="nav-item">
+                 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+  <script src="encoder_utilisation.js"></script>
 </body>
 
 </html>

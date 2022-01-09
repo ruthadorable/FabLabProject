@@ -1,6 +1,3 @@
-let url = new URL(window.location.href);
-let paramId=url.searchParams.get("id");
-
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -24,16 +21,18 @@ function parseJwt (token) {
   
   return JSON.parse(jsonPayload);
 };
+ 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_user;
+
 if(token){
   console.log("ok"),
   console.log(token),
   console.log(decoded),
   console.log(role)
-  if(role!=1)
+  if(role!=3)
   {
     const body=document.querySelector("body");
     body.remove();
@@ -46,4 +45,20 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-fetch(`/facture/delete/${paramId}`)
+
+ function populateTable(c){
+      const firstname=document.createTextNode(c.first_name);
+      const lastname=document.createTextNode(c.last_name);
+      const email=document.createTextNode(c.email);
+      document.getElementById("prenom").value=c.first_name;
+      document.getElementById("nom").value=c.last_name;
+      document.getElementById("email").value=c.email;
+      document.getElementById("motdepasse").value=c.password;
+      document.getElementById("confmotdepasse").value=c.password;
+  }
+  
+  
+  fetch("/admin/profile")
+    .then((response) => response.json())
+    .then((userdata) => populateTable(userdata));
+  

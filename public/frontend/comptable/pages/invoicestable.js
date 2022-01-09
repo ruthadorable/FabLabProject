@@ -1,36 +1,28 @@
 const list = document.getElementById("list");
 var membre;
-const token = get_cookie_name("jwt_token");
-if(token){
-  console.log("ok")
-}else{
-  const body=document.querySelector("body");
-body.remove();
-alert("Veillez d'abord vous connecter");
-}
 
 function populateTable(classes) {
-
+  
   const invoiceRows = classes.map((c) => {
     const row = document.createElement("tr");
-
+    
     const numCol = document.createElement("td");
     const numTxt = document.createTextNode(c.num);
     numCol.appendChild(numTxt);
     row.appendChild(numCol);
-
+    
     const dateCol= document.createElement("td");
     const dateformat=c.date.toString().slice(0,10);
     const dateTxt = document.createTextNode(dateformat);
     dateCol.appendChild(dateTxt);
     row.appendChild(dateCol);
-
+    
     const amountCol= document.createElement("td");
     const total=parseFloat(c.amount_total).toFixed(2);
     const amountTxt = document.createTextNode(total+"€");
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
-
+    
     const userCol = document.createElement("td");
     fetch(`/user/${c.userId}`)
     .then((response)=>response.json())
@@ -38,7 +30,7 @@ function populateTable(classes) {
     const userTxt=document.createTextNode(membre);
     userCol.appendChild(userTxt);
     row.appendChild(userCol);
-
+    
     const detailsCol= document.createElement("td");
     const detailsBtn=document.createElement("a");
     detailsBtn.href=`/frontend/admin/pages/details_facture.html?id=${c.id}`;
@@ -46,7 +38,7 @@ function populateTable(classes) {
     detailsBtn.appendChild(detailsTxt);
     detailsCol.appendChild(detailsBtn);
     row.appendChild(detailsCol);
-
+    
     return row;
   });
 
@@ -55,22 +47,19 @@ function populateTable(classes) {
 }
 
 function get_cookie_name(name) 
-    {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
+{
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) {
+    console.log(match[2]);
+    return match[2];
+  }
+  else{
+    console.log('--something went wrong---');
+  }
+}
 
-<<<<<<< HEAD
 const token = get_cookie_name("jwt_token");
 
-=======
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -84,7 +73,7 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-<<<<<<< HEAD
+
 const role=decoded.role_user;
 
 if(token){
@@ -103,18 +92,8 @@ if(token){
   const body=document.querySelector("body");
   body.remove();
   alert("Veillez d'abord vous connecter");
-}
-=======
-if(role!=3)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
->>>>>>> 9a919d08b32271ff4c246df75e030a5ad2397443
 
 fetch(`/factures`)
   .then((response) => response.json())
-  .then((x) => populateTable(x));
-
+  .then((x) => populateTable(x))
+}

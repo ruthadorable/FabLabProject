@@ -21,11 +21,12 @@ function parseJwt (token) {
   
   return JSON.parse(jsonPayload);
 };
-
+ 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_user;
+
 if(token){
   console.log("ok"),
   console.log(token),
@@ -44,18 +45,20 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-function populateTable(c){
-  const firstname=document.createTextNode(c.first_name);
-  const lastname=document.createTextNode(c.last_name);
-  const email=document.createTextNode(c.email);
-  document.getElementById("prenom").value=c.first_name;
-  document.getElementById("nom").value=c.last_name;
-  document.getElementById("email").value=c.email;
-  document.getElementById("motdepasse").value=c.password;
-  document.getElementById("confmotdepasse").value=c.password;
-}
 
-
-fetch("/admin/profile")
-.then((response) => response.json())
-.then((userdata) => populateTable(userdata));
+ function populateTable(c){
+      const firstname=document.createTextNode(c.first_name);
+      const lastname=document.createTextNode(c.last_name);
+      const email=document.createTextNode(c.email);
+      document.getElementById("prenom").value=c.first_name;
+      document.getElementById("nom").value=c.last_name;
+      document.getElementById("email").value=c.email;
+      document.getElementById("motdepasse").value=c.password;
+      document.getElementById("confmotdepasse").value=c.password;
+  }
+  
+  
+  fetch("/admin/profile")
+    .then((response) => response.json())
+    .then((userdata) => populateTable(userdata));
+  
