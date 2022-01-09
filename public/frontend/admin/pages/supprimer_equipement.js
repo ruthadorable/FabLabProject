@@ -69,7 +69,9 @@ document.getElementById("annule").onclick = redirectpage;
 fetch(`/uses/machineid/${paramId}`)
 .then((response)=>response.json())
 .then((use)=>{
+
 if(paramId==use.equipmentId)
 { window.location.href="suppression_equipement_interdiction.html";}
 
 })
+

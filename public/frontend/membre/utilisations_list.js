@@ -47,6 +47,7 @@ if(token){
 
 const list = document.getElementById("list");
 
+
 function populateTable(uses) {
 
 const useRows = uses.map((c) => {
@@ -71,8 +72,10 @@ const useRows = uses.map((c) => {
   const tCol=document.createTextNode(x.price_minute+"€");
   tarifCol.appendChild(tCol);
   row.appendChild(tarifCol);
+
   }));
   
+
   const dureeCol = document.createElement("td");
   const dureeTxt = document.createTextNode(c.durating_M);
   dureeCol.appendChild(dureeTxt);

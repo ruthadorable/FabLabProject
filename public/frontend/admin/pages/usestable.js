@@ -20,6 +20,7 @@ function parseJwt (token) {
   }).join(''));
   
   return JSON.parse(jsonPayload);
+
 };
 
 const decoded=parseJwt(token);
@@ -44,6 +45,7 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
+
 
 const list = document.getElementById("list");
 
@@ -118,3 +120,4 @@ tableBody.replaceChildren(...useRows);
 fetch("/alluses")
 .then((response) => response.json())
 .then((uses) => populateTable(uses));
+

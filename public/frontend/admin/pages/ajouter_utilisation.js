@@ -1,6 +1,40 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
+
+function populateList1(machines)
+{
+  
+  const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
+  const selectequipement=document.getElementById("equipementid")
+  selectequipement.innerHTML=options;
+}
+function populateList2(users)
+{
+  const options= users.map(x=>`<option value=${x.id}>${x.first_name}</option>`).join('\n');
+  const selectmembre=document.getElementById("userid")
+  selectmembre.innerHTML=options;
+}
+
+
+
+fetch("/members")
+.then((response)=>response.json())
+.then((users)=>{populateList2(users); console.log(users);});
+
+fetch("/equipement")
+.then((response)=>response.json())
+.then((machines)=>{populateList1(machines); console.log(machines);});
+
+
+function calculMontant(){
+
+
+}
+
+
+
+
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -28,6 +62,7 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
+
 const role=decoded.role_user;
 
 if(token){

@@ -12,6 +12,7 @@ function get_cookie_name(name)
 
 const token = get_cookie_name("jwt_token");
 
+
 function parseJwt (token) {
 var base64Url = token.split('.')[1];
 var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -45,9 +46,11 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
+
 //si facturé est vrai alors on ne  peut pas supprimer
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
+
 
 fetch(`/utilisation/${paramId}`)
 .then((response)=>response.json())
@@ -76,4 +79,6 @@ function redirectpage(){
 
 window.location.href="usestable.html";
 
+
 }
+

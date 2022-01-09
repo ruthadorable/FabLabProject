@@ -28,6 +28,7 @@ fetch("/equipement")
 
 
 function get_cookie_name(name) 
+<<<<<<< HEAD
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
   if (match) {
@@ -40,6 +41,18 @@ function get_cookie_name(name)
 }
 
 const token = get_cookie_name("jwt_token");
+=======
+    {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) {
+        console.log(match[2]);
+        return match[2];
+      }
+      else{
+           console.log('--something went wrong---');
+      }
+   }
+>>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -50,6 +63,7 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
+<<<<<<< HEAD
 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
@@ -74,6 +88,13 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
+=======
+const decoded=parseJwt(token);
+const username=decoded.preferred_username;
+const iduser=decoded.sub;
+const role=decoded.role_id;
+document.getElementById("username").innerText=("   Bonjour "+username+" " );
+>>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399
 function populateTable(c){
 
     const firstname=document.createTextNode(c.first_name);

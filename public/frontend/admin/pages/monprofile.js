@@ -10,15 +10,15 @@ function get_cookie_name(name)
   }
 }
 
-const token = get_cookie_name("jwt_token");
+const token = get_cookie_name("jwttoken");
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var base64 = base64Url.replace(/-/g, '+').replace(//g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-  
+
   return JSON.parse(jsonPayload);
 };
  
@@ -56,9 +56,8 @@ if(token){
       document.getElementById("motdepasse").value=c.password;
       document.getElementById("confmotdepasse").value=c.password;
   }
-  
-  
+
+
   fetch("/admin/profile")
     .then((response) => response.json())
     .then((userdata) => populateTable(userdata));
-  

@@ -48,7 +48,7 @@ function populateTable(classes) {
     const tableBody = classList.querySelector("tbody");
     tableBody.replaceChildren(...classRows);
   }
-  
+
   function get_cookie_name(name) 
   {
     var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -80,6 +80,7 @@ const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_user;
 
+
 if(token){
   console.log("ok"),
   console.log(token),
@@ -98,10 +99,10 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
+
 /*const modifylink=document.getElementById("modifydata");
 modifylink.href=`./modification_mesdonnées.html?id=${iduser}`;*/
 
 fetch("/equipement")
   .then((response) => response.json())
   .then((machines) => populateTable(machines));
-

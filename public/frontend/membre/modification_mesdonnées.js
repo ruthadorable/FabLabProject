@@ -12,6 +12,7 @@ function get_cookie_name(name)
 
 const token = get_cookie_name("jwt_token");
 
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -45,6 +46,7 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 var old;
+
 
 const newpassword = document.getElementById("newmotdepasse");
 const confpassword = document.getElementById("confmotdepasse"); 
@@ -81,3 +83,4 @@ function populateTable(c){
 fetch(`/modification/user/${iduser}`)
   .then((response) => response.json())
   .then((userdata) => populateTable(userdata));
+

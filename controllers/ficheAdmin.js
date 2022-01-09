@@ -244,9 +244,8 @@ exports.getFactureByIdfromAdmin= async (req,res)=>{
     
     try{
       const factureParId = await Invoice.findOne({
-        where: {id },
+        where: {id:id },
       })   
-      
       return res.json(factureParId); 
     }catch(err){}
   }
@@ -265,12 +264,30 @@ exports.deleteFacture=async(req,res)=>{
 }
 exports.getUtilisations=async(req,res)=>{
     try{
-        const alluses=await Use.findAll();
-        return res.json(alluses);
-
+        const uses=await Use.findAll();
+        console.log(uses.json())
+        return res.json(uses);
+    }catch(err){
+    }
+}
+exports.newUtilisationByAdmin=async(req,res)=>{
+    const {equipementid,date,duree,userid}=req.body;
+    try{
+        const equipment=await Equipment.findOne({where:{id:equipementid}})
+        await Use.create({
+            durating_M:duree,
+            amount_to_be_paid: duree*equipment.price_minute,
+            date: date,
+            userId:userid,
+            equipmentId:equipementid,
+            facturé:false
+        });
+        
+        res.redirect("/frontend/admin/pages/usestable.html");
     }catch(err){
 
     }
+
 }
 exports.getUtilisationsById=async(req,res)=>{
     try{
@@ -304,14 +321,7 @@ exports.updateUtilisation=async(req,res)=>{
                }
             }catch(err){}
 }
-exports.deleteUse=async(req,res)=>{
-    const id=req.params.id;
-    try{
-        Use.destroy({where:{id}});
-    }catch(err){
 
-    }
-}
 exports.getMembers=async(req,res)=>{
     try{
         const members=await User.findAll({where:{role_id:2}})
@@ -388,4 +398,58 @@ exports.createFacture=async(req,res)=>{
         res.redirect('/frontend/admin/pages/invoicestable.html');
     }catch(err){}
 }
+exports.getUtilisationById=async(req,res)=>{
+    const iduse=req.params.id;
+    try{
+        const use=await Use.findOne({where:{id:iduse}})
+        return res.json(use);
+    }catch(err){
+    }
+}
+exports.deleteUseById=async(req,res)=>{
+    const id=req.params.id;
+    try{
+        Use.destroy({where:{id:id}})
 
+    }catch(err){
+
+    }
+}
+exports.getFactureDetailsByIdfromAdmin=async(req,res)=>{
+    const id=req.params.id;
+    try{
+        const invoice=await Invoice.findOne({where:{useId:id}})
+        return res.json(invoice);
+    }catch(err){
+
+    }
+}
+exports.getUseByEquipmentId=async(req,res)=>{
+    const idmachine=req.params.id;
+    try{
+        const use=await Use.findOne({where:{equipmentId:idmachine}});
+        return res.json(use);
+    }catch(err){
+
+    }
+}
+exports.createUseByUserIdAsParams=async(req,res)=>{
+    const iduser=req.params.id;
+    const {date,duree,equipementid}=req.body;
+    try{
+        const equipement=await Equipment.findOne({where:{id:equipementid}});
+        const use=Use.create({
+            durating_M: duree,
+            amount_to_be_paid: duree*equipement.price_minute,
+            date: date,
+            userId: iduser,
+            facturé: false,
+            equipmentId:equipementid
+        })
+        res.redirect("/frontend/admin/pages/usestable.html");
+
+    }catch(err){
+
+    }
+
+}

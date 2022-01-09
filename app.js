@@ -4,7 +4,6 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-var fs = require('fs')
 const rfs = require("rotating-file-stream");
 const debug = require("debug")("monprojetdemo:config");
 const favicon = require("serve-favicon");
@@ -14,11 +13,6 @@ const passport = require("passport");
 const jwt_options = require("./jwt_generator").options;
 const jwt_secret = require("./jwt_generator").secret;
 const { User } = require("./models/schema");
-const helmet = require("helmet");
-var morgan = require('morgan');
-
-
-
 
 const jwt_passport_opts = {};
 jwt_passport_opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -37,14 +31,11 @@ passport.use(
 );
 
 const indexRouter = require("./routes/index");
-
+const tokensRouter = require("./routes/tokens");
 
 debug("Configuring app server");
 
 const app = express();
-
-app.use(helmet());
-
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -67,13 +58,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
-
-// setup the logger
-app.use(morgan('combined', { stream: accessLogStream }))
-
-
 app.use("/", indexRouter);
-
+app.use("/tokens", tokensRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
