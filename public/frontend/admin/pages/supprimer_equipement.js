@@ -49,6 +49,7 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
+
 function deletemachine(){
   fetch(`/equipement/delete/${paramId}`)
   const content=document.getElementById("content");
@@ -59,10 +60,11 @@ function deletemachine(){
 }
 
 function redirectpage(){
-
-window.location.href="equipmentstable.html";
-
+  window.location.href="equipmentstable.html";
 }
+
+document.getElementById("sup").onclick = deletemachine;
+document.getElementById("annule").onclick = redirectpage;
 
 fetch(`/uses/machineid/${paramId}`)
 .then((response)=>response.json())
