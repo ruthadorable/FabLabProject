@@ -102,9 +102,12 @@ if(token){
   var today = new Date();
   var date1 =today.getDate()+'-'+(today.getMonth()+1)+'-'+ today.getFullYear();
   date.value = date1
+
   const idusername = document.querySelector("#idusername")
   const equipement = document.querySelector("#equipement")
   const tarif = document.querySelector("#tarif")
+  const duree = document.querySelector("#duree")
+  const total = document.querySelector("#total")
   const fetchReq1 = fetch('/users').then((res) => res.json());
   const fetchReq2 = fetch('/equipement').then((res) => res.json());
   const data = Promise.all([fetchReq1,fetchReq2]);
@@ -123,10 +126,18 @@ if(token){
     });
     
     
-})
-function newTarif() {
-  let valeur = a.filter(el=>el.id==equipement.value)
-  tarif.value = valeur[0].price_minute
+  })
+  function newTarif() {
+    let valeur = a.filter(el=>el.id==equipement.value)
+    tarif.value = valeur[0].price_minute
+  }
+  
+  function newTotal() {
+    let val = a.filter(elem=> elem.id==duree.value)
+    total.value = val.amount_to_be_paid
+    total.value=parseFloat(tarif.value*duree.value).toFixed(2);
+    console.log(total.value)
 }
 equipement.addEventListener("change", newTarif)
+duree.addEventListener("click", newTotal)
 

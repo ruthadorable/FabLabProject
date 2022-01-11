@@ -46,16 +46,3 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
-
-const token = get_cookie_name("jwt_token");
-const decoded=parseJwt(token);
-const username=decoded.preferred_username;
-const iduser=decoded.sub;
-const role=decoded.role_id;
-if(role==2||role==3)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
-}
-document.getElementById("username").innerHTML=("   Bonjour "+username+" " );

@@ -80,21 +80,21 @@ const User = require("./user");
         name: "LA GRANDE DÉCOUPEUSE LASER",
         image: "../../images/découpeuselaser1.png",
         price_minute: 0.33,
-        reserved: false,
+        
     });
 
     const imp3Dgrand = await Equipment.create({
         name: "IMPRIMANTES 3D GRAND FORMAT",
         image: "../../images/imprimante3D1.JPG",
         price_minute: 0.40,
-        reserved: false,
+        
     });
 
     const grFraisNum = await Equipment.create({
         name: "LA GRANDE FRAISEUSE NUMÉRIQUE",
         image: "../../images/grandefraiseusenum1.JPG",
         price_minute: 0.36,
-        reserved: false,
+        
     });
 
     const use1 = await Use.create({

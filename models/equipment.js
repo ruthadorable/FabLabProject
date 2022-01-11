@@ -25,11 +25,7 @@ Equipment.init(
       allowNull: true
 
     },
-    reserved: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-        
+           
   },
   { sequelize: connection, modelName: "equipment" }
 );

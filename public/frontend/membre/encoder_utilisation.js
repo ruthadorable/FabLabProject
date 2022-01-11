@@ -17,9 +17,6 @@ let date1 =new Date();
 
 function populateTable(c) {
   
-  
-    
-
     const nameCol = document.getElementById("name");
     const nameTxt = document.createTextNode(c.name);
     nameCol.appendChild(nameTxt);
@@ -62,9 +59,6 @@ function get_cookie_name(name)
     console.log('--something went wrong---');
   }
 }
-
-const token = get_cookie_name("jwt_token");
-
 
 const token = get_cookie_name("jwt_token");
 

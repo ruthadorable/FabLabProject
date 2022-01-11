@@ -64,14 +64,13 @@ exports.getAdminEquipementById=async (req,res)=>{
   }
 
 exports.createEquipement=async(req,res)=>{
-    const {nom,tarif,image,reserved,description}=req.body;
+    const {nom,tarif,image,description}=req.body;
     const imagedefault="../../images/ajoutimage.JPG".toString();
     try{
         const newEquipement=Equipment.create({
         name:nom,
         price_minute:tarif,
         image: imagedefault,
-        reserved:reserved,
         description: description
         });
         res.redirect("/frontend/admin/pages/equipmentstable.html");
@@ -80,7 +79,7 @@ exports.createEquipement=async(req,res)=>{
 }
 exports.updateEquipement=async(req,res)=>{
     const idmachine = req.params.id;
-    const {nom,tarif,image,reserved,description}=req.body;
+    const {nom,tarif,image,description}=req.body;
     const imagedefault="../../images/ajoutimage.JPG".toString();
     try{
         const equipmentById =await Equipment.findOne({
@@ -435,16 +434,16 @@ exports.getUseByEquipmentId=async(req,res)=>{
 }
 exports.createUseByUserIdAsParams=async(req,res)=>{
     const iduser=req.params.id;
-    const {date,duree,equipementid}=req.body;
+    const {date,duree,equipement,idusername}=req.body;
     try{
-        const equipement=await Equipment.findOne({where:{id:equipementid}});
+        // const equipement=await Equipment.findOne({where:{id:equipementid}});
         const use=Use.create({
             durating_M: duree,
             amount_to_be_paid: duree*equipement.price_minute,
             date: date,
-            userId: iduser,
+            userId: idusername,
             facturé: false,
-            equipmentId:equipementid
+            equipmentId:equipement
         })
         res.redirect("/frontend/admin/pages/usestable.html");
 
