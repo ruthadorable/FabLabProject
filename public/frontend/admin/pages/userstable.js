@@ -78,14 +78,23 @@ function populateTable(users) {
       modifCol.appendChild(modifBtn);
       row.appendChild(modifCol);
 
-      const deleteCol = document.createElement("td");
+      const Col = document.createElement("td");
       const button=document.createElement("a");
-      const btnTxt=document.createTextNode("Supprimer");
+      const btnTxt=document.createTextNode("Voir utilisations");
       button.appendChild(btnTxt);
       button.user="btn btn-primary"
-      button.href=`supprimer_user.html?id=${c.id}`;
-      deleteCol.appendChild(button);
-      row.appendChild(deleteCol);
+      button.href=`uses_by_user.html?id=${c.id}`;
+      Col.appendChild(button);
+      row.appendChild(Col);
+
+      const invoiceCol = document.createElement("td");
+      const invoicebutton=document.createElement("a");
+      const invoicebtnTxt=document.createTextNode("Voir factures");
+      invoicebutton.appendChild(invoicebtnTxt);
+      invoicebutton.user="btn btn-primary"
+      invoicebutton.href=`invoices_by_user.html?id=${c.id}`;
+      invoiceCol.appendChild(invoicebutton);
+      row.appendChild(invoiceCol);
 
       
       return row;

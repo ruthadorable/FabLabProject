@@ -10,28 +10,6 @@ body.remove();
 alert("Veillez d'abord vous connecter");
 }
 
-var select = document.getElementById('annee');
-var date = new Date();
-var year = date.getFullYear();
-for (var i = year - 4; i <= year + 3; i++) {
-  var option = document.createElement('option');
-  option.value = option.innerHTML = i;
-  if (i === year) option.selected = true;
-  select.appendChild(option);
-}
-
-
-
-
-
-function populateList1(machines)
-{
-  
-  const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
-  const selectequipement=document.getElementById("equipementid")
-  selectequipement.innerHTML=options;
- 
-}
 function populateList2(users)
 {
   const options= users.map(x=>`<option value=${x.id}>${x.first_name}</option>`).join('\n');
@@ -40,14 +18,9 @@ function populateList2(users)
 }
 
 
-
 fetch("/members")
 .then((response)=>response.json())
 .then((users)=>{populateList2(users); console.log(users);});
-
-fetch("/equipement")
-.then((response)=>response.json())
-.then((machines)=>{populateList1(machines); console.log(machines);});
 
 
 

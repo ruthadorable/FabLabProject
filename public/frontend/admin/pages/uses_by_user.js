@@ -1,4 +1,3 @@
-
 const token = get_cookie_name("jwt_token");
 if(token){
   console.log("ok")
@@ -18,7 +17,8 @@ function get_cookie_name(name)
        console.log('--something went wrong---');
   }
 }
-
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
 function parseJwt (token) {
 var base64Url = token.split('.')[1];
 var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -85,6 +85,14 @@ const useRows = uses.map((c) => {
 const tableBody = list.querySelector("tbody");
 tableBody.replaceChildren(...useRows);
 };
-fetch(`/uses/${iduser}`)
+fetch(`/uses/${paramId}`)
 .then((response) => response.json())
 .then((uses) => populateTable(uses));
+
+fetch(`/getuserbyid/${paramId}`)
+    .then((response)=>response.json())
+    .then((x)=>{
+        const user=document.getElementById("user");
+        const text=document.createTextNode(x.first_name);
+        user.appendChild(text);
+    })

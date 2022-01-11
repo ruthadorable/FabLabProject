@@ -8,11 +8,14 @@ if(token){
 body.remove();
 alert("Veillez d'abord vous connecter");
 }
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
 
 function populateTable(invoices) {
 
   const invoiceRows = invoices.map((c) => {
     const row = document.createElement("tr");
+
     const numCol = document.createElement("td");
     const numTxt = document.createTextNode(c.num);
     numCol.appendChild(numTxt);
@@ -89,16 +92,7 @@ alert("Vous n'avez pas accès à cette page");
 }else {
 document.getElementById("username").innerText=("   Bonjour "+username+" " );
 
-fetch(`/factures`)
+fetch(`/facturesbyuser/${paramId}`)
   .then((response) => response.json())
   .then((x) => populateTable(x));
-
 }
-
-fetch(`/getuserbyid/${paramId}`)
-    .then((response)=>response.json())
-    .then((x)=>{
-        const user=document.getElementById("user");
-        const text=document.createTextNode(x.first_name);
-        user.appendChild(text);
-    })
