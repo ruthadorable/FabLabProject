@@ -1,11 +1,13 @@
 const express = require("express");
 const bcrypt= require("bcrypt")
-const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage, getUsesById, getUses} = require("../controllers/ficheMembre");
+const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage, getUsesById, getUses, getMembreById} = require("../controllers/ficheMembre");
 const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
+
 const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationsById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
+
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -41,10 +43,10 @@ router.post("/login", async function (req, res){
 
 })
 
-
 router.get("/register", function (req, res, next) {
   res.render("register");
 });
+
 router.post("/register", async function (req,res,next){
   const user = await User.findOne({ where : {email :req.body.email}})
 
@@ -88,6 +90,7 @@ router.post("/equipement/create",createEquipement);
 router.post("/equipement/update/:id",updateEquipement); 
 router.get("/equipement/delete/:id",deleteEquipement);
 router.get("/users",getUsers);
+router.get("/getuserbyid/:id",getMembreById);
 router.post("/user/create",newUser);
 router.get("/user/:id",getUserfromAdmin);
 router.post("/user/update/:id",updateUserfromAdmin);
@@ -102,7 +105,9 @@ router.post("/utilisation/create",newUtilisationByAdmin)
 router.get("/utilisation/:id",getUtilisationsById);
 router.get("/use/delete/:id",deleteUseById);
 router.get("/facturedetails/useid/:id",getFactureDetailsByIdfromAdmin);
+router.get("/facturesbyuser/:id",getFacturesByUser);
 router.get("/uses/machineid/:id",getUseByEquipmentId);
-router.post("/use/create/:id",createUseByUserIdAsParams)
+router.post("/use/create/:id",createUseByUserIdAsParams);
+
 module.exports = router;
 

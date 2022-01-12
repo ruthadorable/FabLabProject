@@ -23,6 +23,7 @@ function populateList1(machines)
   selectequipement.innerHTML=options;
  
 }
+
 function populateList2(users)
 {
   const options= users.map(x=>`<option value=${x.id}>${x.first_name}</option>`).join('\n');
@@ -31,15 +32,16 @@ function populateList2(users)
 }
 
 
-
 fetch("/members")
 .then((response)=>response.json())
 .then((users)=>{populateList2(users); console.log(users);});
+
 
 fetch("/equipement")
 .then((response)=>response.json())
 .then((machines)=>{populateList1(machines); console.log(machines);})
 .then((machines)=>{populateList1(machines); console.log(machines);});
+
 
 
 

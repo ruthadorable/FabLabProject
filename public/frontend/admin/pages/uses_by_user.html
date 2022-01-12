@@ -97,11 +97,6 @@
     <!-- Header container -->
     <div class="container-fluid d-flex align-items-center">
       <div class="row">
-        <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white" id="username"></h1>
-          
-          <a href="ajouter_utilisateur.html" class="btn btn-neutral">Ajouter utilisateur</a>
-        </div>
       </div>
     </div>
     <br/>
@@ -112,21 +107,19 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header border-0">
-              <h3 class="mb-0">Liste des utilisateurs</h3>
+              <h3 class="mb-0">Liste des utilisations de <span id="user"></span></h3>
             </div>
                   <!-- Light table -->
                   <div class="table-responsive">
                     <table id="list" class="table align-items-center table-flush">
                       <thead class="thead-light">
                         <tr>
-                          <th scope="col" class="sort" data-sort="name">Prénom</th>
-                          <th scope="col" class="sort" data-sort="name">Nom</th>
-                          <th scope="col" class="sort" data-sort="name">Email</th>
-                          <th scope="col" class="sort" data-sort="name">Role</th>
-                          <th scope="col" class="sort" data-sort="name">Utilisation </th>
-                          <th scope="col">Modifier</th>
-                          <th scope="col" class="sort" data-sort="completion">Les utilisations</th>
-                          <th scope="col" class="sort" data-sort="completion">les factures</th>
+                          <th role="col">Date</th>
+                          <th role="col">Durée en minutes</th>
+                          <th role="col">Montant</th>
+                          <th role="col">Facturé</th>
+                          <th role="col">Equipement</th>
+                          <th role="col">Tarif</th>
                         </tr>
                       </thead>
                       <tbody >
@@ -139,11 +132,7 @@
       </div> 
     </div>
   </div>
-
-    
-  
-
-  <script src="userstable.js"></script>
+  <script src="uses_by_user.js"></script>
 </body>
 
 </html>

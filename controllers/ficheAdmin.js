@@ -338,10 +338,7 @@ if(now.getDate()==1)
 
 exports.createFacture=async(req,res)=>{
     
-    const {mois,annee,userid}=req.body;
-    const yearformated=String(annee).slice(2,4); 
-    console.log(mois);
-    console.log(new Date(annee,mois-1,1)+" "+new Date(annee,mois-1,31));
+    const {debut,fin,userid}=req.body;
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -353,10 +350,11 @@ exports.createFacture=async(req,res)=>{
     try{
         const usesByIdByMonth=await Use.findAll({where:{
             userId:userid,
-            /*date:{
-                [Op.gte]: new Date(annee,mois-1,1),
-                [Op.lt]: new Date(annee,mois-1,31)
-            }*/
+            date:{
+                [Op.gte]: debut,
+                [Op.lt]: fin
+            },
+            facturé:false
         }});
         
         const uses=usesByIdByMonth.json()
@@ -374,12 +372,12 @@ exports.createFacture=async(req,res)=>{
         });
         const objectToUpdate = {
             facturé: true
-            }
+            };
             await Use.findAll({ where:{
                 userId:iduser,
                 date: {
-                    $gt: beginningOfMonth,
-                    $lt: endOfMonth
+                    $gt: debut,
+                    $lt: fin
                 }
             }}).then((result) => {
                if(result){
@@ -452,6 +450,16 @@ exports.createUseByUserIdAsParams=async(req,res)=>{
         })
         res.redirect("/frontend/admin/pages/usestable.html");
 
+    }catch(err){
+
+    }
+
+}
+exports.getFacturesByUser=async(req,res)=>{
+    const iduser= req.params.id;
+    try{
+        const invoices=Invoice.findAll({where:{userId:iduser}});
+        return res.json(invoices);
     }catch(err){
 
     }
