@@ -48,6 +48,7 @@ function populateTable(classes) {
     const tableBody = classList.querySelector("tbody");
     tableBody.replaceChildren(...classRows);
   }
+
   function get_cookie_name(name) 
   {
     var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -80,7 +81,23 @@ const iduser=decoded.sub;
 const role=decoded.role_user;
 
 
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
+if(token){
+  console.log("ok"),
+  console.log(token),
+  console.log(decoded),
+  console.log(role)
+  if(role!=2)
+  {
+    const body=document.querySelector("body");
+    body.remove();
+    alert("Vous n'avez pas accès à cette page");
+  }
+  document.getElementById("username").innerText=("   Bonjour "+username+" " );
+}else{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Veillez d'abord vous connecter");
+}
 
 
 /*const modifylink=document.getElementById("modifydata");

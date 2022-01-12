@@ -13,7 +13,8 @@ function generate(userId, username,role_id) {
   const payload = {
     sub: userId,
     preferred_username: username,
-    role: role_id
+    role_user: role_id
+
   };
   return jwt.sign(payload, secret, options);
 }

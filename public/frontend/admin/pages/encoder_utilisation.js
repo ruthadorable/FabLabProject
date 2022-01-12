@@ -1,14 +1,5 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
-const token = get_cookie_name("jwt_token");
-if(token){
-  console.log("ok")
-}else{
-  const body=document.querySelector("body");
-body.remove();
-alert("Veillez d'abord vous connecter");
-}
-
 
 function populateList1(machines)
 {
@@ -57,11 +48,30 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
+
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-const role=decoded.role_id;
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
+const role=decoded.role_user;
+
+if(token){
+  console.log("ok"),
+  console.log(token),
+  console.log(decoded),
+  console.log(role)
+  if(role!=1)
+  {
+    const body=document.querySelector("body");
+    body.remove();
+    alert("Vous n'avez pas accès à cette page");
+  }
+  document.getElementById("username").innerText=("   Bonjour "+username+" " );
+}else{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Veillez d'abord vous connecter");
+}
+
 function populateTable(c){
 
     const firstname=document.createTextNode(c.first_name);

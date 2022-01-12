@@ -24,8 +24,10 @@ Equipment.init(
       type: DataTypes.STRING,
       allowNull: true
 
+
     }
         
+
   },
   { sequelize: connection, modelName: "equipment" }
 );

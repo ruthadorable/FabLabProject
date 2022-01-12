@@ -148,5 +148,6 @@ exports.factureDetails=function(req,res){
     }catch(err){
 
     }
+
   }
-  
+

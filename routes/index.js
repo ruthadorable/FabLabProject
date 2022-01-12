@@ -5,11 +5,12 @@ const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams, getFacturesByUser} = require("../controllers/ficheAdmin");
+
+const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationsById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
+
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.clearCookie('id');
   res.clearCookie('jwt_token');
   res.render("login")
 });
@@ -22,7 +23,7 @@ router.post("/login", async function (req, res){
       .send({ message: "L'utilisateur n'a pas été trouvé ou le mot de passe est incorrect !"})
   }else{
     const token = generate(user.id,user.first_name,user.role_id);
-    res.cookie("jwt_token", token,{httpOnly:false});
+    res.cookie("jwt_token", token);
     const decoded = jwt_decode(token);
     console.log(decoded.preferred_username);
     
@@ -80,6 +81,7 @@ router.post("/user/update",updateUser);
 router.get("/uses/:id",getUsesById);
 router.get("/alluses",getUses);
 
+
 //administrator routers
 router.get("/admin/profile",getUserById);
 router.post("/admin/update",updateAdmin);
@@ -100,7 +102,7 @@ router.get("/admin/facture/:id",getFactureByIdfromAdmin);
 router.get("/facture/delete/:id",deleteFacture);
 router.post("/facture/generate",createFacture);
 router.post("/utilisation/create",newUtilisationByAdmin)
-router.get("/utilisation/:id",getUtilisationById);
+router.get("/utilisation/:id",getUtilisationsById);
 router.get("/use/delete/:id",deleteUseById);
 router.get("/facturedetails/useid/:id",getFactureDetailsByIdfromAdmin);
 router.get("/facturesbyuser/:id",getFacturesByUser);
