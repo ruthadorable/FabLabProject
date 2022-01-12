@@ -79,18 +79,17 @@ exports.createEquipement=async(req,res)=>{
 }
 exports.updateEquipement=async(req,res)=>{
     const idmachine = req.params.id;
-    const {nom,tarif,image,description}=req.body;
+    const {nom,tarif,image,reserved,description}=req.body;
     const imagedefault="../../images/ajoutimage.JPG".toString();
     try{
         const equipmentById =await Equipment.findOne({
             where: {id:idmachine }});
-       if(nom!==""&&tarif!==""&&image!=""&&reserved!==""&&description!=="")
+       if(nom!==""&&tarif!==""&&image!=""&&description!=="")
        {
            equipmentById.update({
                name:nom,
                price_minute:tarif,
                image: image,
-               reserved: reserved,
                description:description
            },{where:{id:idmachine}});
         }   
@@ -397,14 +396,9 @@ exports.createFacture=async(req,res)=>{
         res.redirect('/frontend/admin/pages/invoicestable.html');
     }catch(err){}
 }
-exports.getUtilisationById=async(req,res)=>{
-    const iduse=req.params.id;
-    try{
-        const use=await Use.findOne({where:{id:iduse}})
-        return res.json(use);
-    }catch(err){
-    }
-}
+
+
+
 exports.deleteUseById=async(req,res)=>{
     const id=req.params.id;
     try{
@@ -423,6 +417,17 @@ exports.getFactureDetailsByIdfromAdmin=async(req,res)=>{
 
     }
 }
+
+exports.getUtilisationsById=async(req,res)=>{
+    try{
+        const iduse=req.params.id;
+        const useById=Use.findOne({where:{id:iduse}});
+        return res.json(useById);
+    }catch(err){
+        console.log("get use by id error")
+    }
+}
+
 exports.getUseByEquipmentId=async(req,res)=>{
     const idmachine=req.params.id;
     try{

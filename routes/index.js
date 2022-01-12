@@ -5,7 +5,7 @@ const router = express.Router();
 const {User,Equipment} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
-const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
+const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationsById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -76,7 +76,8 @@ router.get("/facture/:id",getFactureById);
 router.post("/membre/utilisation/:id",newUtilisation);
 router.get("/modification/user/:id",getUserById);
 router.post("/user/update",updateUser);
-//router.get("/uses",getUsesById);
+router.get("/uses/:id",getUsesById);
+router.get("/alluses",getUses);
 
 
 //administrator routers
@@ -98,7 +99,7 @@ router.get("/admin/facture/:id",getFactureByIdfromAdmin);
 router.get("/facture/delete/:id",deleteFacture);
 router.post("/facture/generate",createFacture);
 router.post("/utilisation/create",newUtilisationByAdmin)
-router.get("/utilisation/:id",getUtilisationById);
+router.get("/utilisation/:id",getUtilisationsById);
 router.get("/use/delete/:id",deleteUseById);
 router.get("/facturedetails/useid/:id",getFactureDetailsByIdfromAdmin);
 router.get("/uses/machineid/:id",getUseByEquipmentId);
