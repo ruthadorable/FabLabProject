@@ -83,12 +83,13 @@ function populateTable(c){
      machinetarifCol.appendChild( machinetarifTxt);
     })
 
-    fetch(`/utilisation/${paramId}`)
+    fetch(`/utilisation/${c.duree}`)
     .then((response)=>response.json())
     .then((use)=>{
     const dureeCol = document.getElementById("duree");
     const dureeTxt = document.createTextNode(use.durating_M);
     dureeCol.appendChild(dureeTxt);
+    console.log()
     })
 
     const amountCol = document.getElementById("amount");

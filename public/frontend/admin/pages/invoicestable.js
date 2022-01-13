@@ -100,4 +100,3 @@ fetch(`/factures`)
   .then((response) => response.json())
   .then((x) => populateTable(x));
 
-}

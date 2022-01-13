@@ -3,33 +3,20 @@ const Invoice = require("./invoice");
 const Use = require("./use");
 const User = require("./user");
 const Role = require("./role");
-const InvoiceDetail = require("./invoicedetail");
 /*const { hasMany } = require("./equipment");
 const { BelongsTo } = require("sequelize/dist");*/
 
- Equipment.hasMany(Use);
- Use.belongsTo(Equipment);
+Equipment.hasMany(Use);
+Use.belongsTo(Equipment);
 
- User.hasMany(Use);
- Use.belongsTo(User);
+User.hasMany(Use);
+Use.belongsTo(User);
 
-/*Ajouter une relation equipement à Invoice ici */
+Invoice.hasMany(Use)
+Use.belongsTo(Invoice)
 
-
-InvoiceDetail.hasOne(Invoice);
-Invoice.belongsTo(InvoiceDetail); //=>invoicedetailId in invoice
-
-User.hasMany(InvoiceDetail)
-InvoiceDetail.belongsTo(User)
-
-Equipment.hasMany(Invoice);
-Invoice.belongsTo(Equipment); //=>equipmentId dans Invoice
-
-Use.hasOne(Invoice);
-Invoice.belongsTo(Use);//=>UseId dans Invoice
-
- User.hasMany(Invoice);
- Invoice.belongsTo(User); //-> userId in Invoice
+User.hasMany(Invoice)
+Invoice.belongsTo(User)
 
 
 Role.belongsToMany(User ,{
@@ -49,5 +36,4 @@ module.exports = {
     Use,
     User,
     Role,
-    InvoiceDetail
 };

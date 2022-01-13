@@ -5,8 +5,7 @@ const {
   Equipment,
   Invoice,
   Role,
-  Use,
-  InvoiceDetail
+  Use
   } = require("./schema");
 const User = require("./user");
 (async () => {
@@ -66,14 +65,16 @@ const User = require("./user");
         num: 001,
         date: "2021-04-13",
         amount_total: 23.90,
-        userId:1
+        userId:1,
+        payé: false
     });
 
     const in2 = await Invoice.create({
         num: 002,
         date: "2021-04-24",
         amount_total: 14.26,
-        userId:1
+        userId:1,
+        payé: false
     });
 
     const grDecoupLaser = await Equipment.create({
@@ -101,40 +102,14 @@ const User = require("./user");
         durating_M: 125,
         amount_to_be_paid: 14.26,
         date: "2021-04-24",
-        facturé: true
+        
     });
     
     const use2 = await Use.create({
         durating_M: 137,
         amount_to_be_paid: 19.23,
         date: "2021-04-12",
-        facturé: false
-    });
-
-    const ind1=InvoiceDetail.create({
-        equipmentId:grDecoupLaser.id,
-        equipment_name: grDecoupLaser.name,
-        equipment_tarif: grDecoupLaser.price_minute,
-        duration_M: use1.durating_M,
-        amount_total: use1.amount_to_be_paid,
-        facturation: true,
-        useId: use1.id,
-        invoiceId: in1.id,
-        userId:hatim.id,
-        date: in1.date
-    });
-
-    const ind2=InvoiceDetail.create({
-        equipmentId:grFraisNum.id,
-        equipment_name: grFraisNum.name,
-        equipment_tarif: grFraisNum.price_minute,
-        duration_M: use2.durating_M,
-        amount_total: use2.amount_to_be_paid,
-        facturation: true,
-        useId: use2.id,
-        invoiceId: in1.id,
-        userId:hatim.id,
-        date: in2.date
+        
     });
 
     await grFraisNum.setUses(use1);
@@ -143,11 +118,8 @@ const User = require("./user");
     await grDecoupLaser.setUses(use2);
     await soufian.setUses(use2);
     
-    await in1.setUse(use1);
-    await in1.setEquipment(grDecoupLaser);
-
-    await in2.setEquipment(grFraisNum);
-    
+  
+        
     await sequelize.close();
 })();
 
