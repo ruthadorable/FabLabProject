@@ -94,13 +94,6 @@ const useRows = uses.map((c) => {
   amountCol.appendChild (amountTxt);
   row.appendChild( amountCol);
 
-
-  const facturéCol = document.createElement("td");
-  const facturéTxt = document.createTextNode(c.facturé);
-  facturéCol.appendChild (facturéTxt);
-  row.appendChild( facturéCol);
-
-
   const deleteCol = document.createElement("td");
       const button=document.createElement("a");
       const btnTxt=document.createTextNode("Supprimer");

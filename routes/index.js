@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt= require("bcrypt")
 const { newUtilisation,getEquipements,getEquipementById, updateUser, getFactureById,factureDetails ,getFactureDetailsById, equipementPage, getUsesById, getUses, getMembreById} = require("../controllers/ficheMembre");
 const router = express.Router();
-const {User,Equipment} = require("../models/schema");
+const {User,Equipment,Use,Invoice} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
 
@@ -99,7 +99,7 @@ router.get("/factures",getFactures);
 router.get("/members",getMembers);
 router.post("/facture/update/:id",updateFacture);
 router.get("/admin/facture/:id",getFactureByIdfromAdmin);
-router.get("/facture/delete/:id",deleteFacture);
+//router.get("/facture/delete/:id",deleteFacture);
 router.post("/facture/generate",createFacture);
 router.post("/utilisation/create",newUtilisationByAdmin)
 router.get("/utilisation/:id",getUtilisationsById);

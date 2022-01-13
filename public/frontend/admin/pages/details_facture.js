@@ -1,5 +1,6 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
+const dureeCol = document.getElementById("duree");
 
 function get_cookie_name(name) 
 {
@@ -28,7 +29,6 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-
 const role=decoded.role_user;
 
 if(token){
@@ -86,8 +86,8 @@ function populateTable(c){
   fetch(`/utilisation/${paramId}`)
   .then((response)=>response.json())
   .then((use)=>{
-  const dureeCol = document.getElementById("duree");
-  const dureeTxt = document.createTextNode(use.durating_M);
+
+
   dureeCol.appendChild(dureeTxt);
   })
 
@@ -98,4 +98,12 @@ function populateTable(c){
 }
 fetch(`/admin/facture/${paramId}`)
 .then((response)=>response.json())
-.then((x)=>{populateTable(x)})
+.then((x)=>{populateTable(x)}
+)
+
+const fetchReq = fetch(`/admin/facture/${paramId}`).then((res) => res.json()); 
+const data = Promise.all([fetchReq])
+data.then((res) =>{ 
+console.log(res[0])
+})
+

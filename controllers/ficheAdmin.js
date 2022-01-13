@@ -1,10 +1,10 @@
 const Equipment = require("../models/equipment");
-const Use = require("../models/use");
+const Use = require("../models/use")
 const User= require("../models/user");
 const Invoice=require("../models/invoice");
 const  jwt_decode  = require("jwt-decode");
-const InvoiceDetail = require("../models/invoicedetail");
 const { crossOriginResourcePolicy } = require("helmet");
+const { Op, DATE } = require("sequelize");
 
 exports.getUserById=async(req,res,next)=>{
     const token=req.cookies.jwt_token;
@@ -242,28 +242,28 @@ exports.getFactureByIdfromAdmin= async (req,res)=>{
     
     try{
       const factureParId = await Invoice.findOne({
+        include: Use,
         where: {id:id },
       })   
       return res.json(factureParId); 
     }catch(err){}
   }
-exports.deleteFacture=async(req,res)=>{
-    try{
-    const idfacture=req.params.id;
-    //gestion d'erreurs
-    if(true)
-    {
-        Invoice.destroy({
-            where : {id:idfacture}
-        });
-        res.redirect("/frontend/admin/pages/invoicestable.html");
-    }
- }catch(err){}
-}
+// exports.deleteFacture=async(req,res)=>{
+//     try{
+//     const idfacture=req.params.id;
+//     //gestion d'erreurs
+//     if(true)
+//     {
+//         Invoice.destroy({
+//             where : {id:idfacture}
+//         });
+//         res.redirect("/frontend/admin/pages/invoicestable.html");
+//     }
+//  }catch(err){}
+// }
 exports.getUtilisations=async(req,res)=>{
     try{
         const uses=await Use.findAll();
-        console.log(uses.json())
         return res.json(uses);
     }catch(err){
     }
@@ -288,13 +288,15 @@ exports.newUtilisationByAdmin=async(req,res)=>{
 
 }
 exports.getUtilisationsById=async(req,res)=>{
+
     try{
         const iduse=req.params.id;
-        const useById=Use.findOne({where:{id:iduse}});
+        const useById=await Use.findAll({});
+        console.log(useById)
         return res.json(useById);
     }catch(err){
         console.log("get use by id error")
-;    }
+    }
 }
 exports.updateUtilisation=async(req,res)=>{
         const iduse=req.params.id;
@@ -307,7 +309,7 @@ exports.updateUtilisation=async(req,res)=>{
                 
                    use.update({
                        id, id,
-                       durating_id:minutes,
+                       durating_M:minutes,
                        date: date,
                        amount_to_be_paid: total,
                        userId: userid,
@@ -328,72 +330,84 @@ exports.getMembers=async(req,res)=>{
 
     }
 }
-let cptfacture;
-const now=new Date();
-if(now.getDate()==1)
-{
-    cptfacture=0;
-}
-
 
 exports.createFacture=async(req,res)=>{
     
-    const {debut,fin,userid}=req.body;
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    var seqfacture= String(++cptfacture).padStart(3,'0');
-    const numfacture=Number(yyyy+dd+mm+seqfacture);
 
-
-    try{
-        const usesByIdByMonth=await Use.findAll({where:{
-            userId:userid,
-            date:{
-                [Op.gte]: debut,
-                [Op.lt]: fin
+   
+    console.log(req.body)
+    const user = parseInt(req.body.userid)
+    const debutD = req.body.debutDate
+    const finD = req.body.finDate
+    let tot = 0;    
+    const useByUserId = await Use.findAll(
+        {
+            where: {
+                [Op.and]: [
+                    {
+                        userid : user,
+                        invoiceId : null
+                    }
+                ],   
+                date:  
+                {
+                    [Op.between]: [debutD, finD]
+                }  
+              
             },
-            facturé:false
-        }});
-        
-        const uses=usesByIdByMonth.json()
-        console.log(uses);
-        const montant=()=>{let total;
-            uses.map((use)=>{
-            /*const equipement= Equipment.findOne({where:{id:use.equipementId}}) */
-            total+=use.amount_total;
+                       
         })
-        return total;};
-        const newInvoice=await Invoice.create({
-            num: numfacture,
-            date: today,
-            amount_total: montant
-        });
-        const objectToUpdate = {
-            facturé: true
-            };
-            await Use.findAll({ where:{
-                userId:iduser,
-                date: {
-                    $gt: debut,
-                    $lt: fin
+    useByUserId.forEach(element => {
+       // console.log(element.amount_to_be_paid)
+        tot = tot + element.amount_to_be_paid
+      //  console.log(tot)
+    });
+    const factTab = await Invoice.findAll({
+        where : {
+            date:  
+                {
+                    [Op.between]: [debutD, finD]
+
                 }
-            }}).then((result) => {
-               if(result){
-               // Result is array because we have used findAll. 
-                    result.map((x)=>{
-                        x.set(objectToUpdate);
-                        x.save();
-                    })
-                   // result[0].set(objectToUpdate); // seul le premier est modifié
-                   // result[0].save(); // This is a promise
+        }
+    });
+      
+    const annee = new Date(req.body.debutDate).getFullYear()
+    const mois = new Date(req.body.debutDate).getMonth()+1
+    const moisStr = mois.toString().padStart(2,'0')
+    let nFacture = factTab.length+1
+            
+    if (nFacture<=9){
+        nFacture = "00" + nFacture.toString()
+    }else if(nFacture<99 && nFacture>9){
+        nFacture =  "0" + nFacture.toString()
+    }
+
+    const numFact = annee+moisStr+nFacture
+    
+    const invoice = await Invoice.create({
+        num : numFact,
+        date : new Date(),
+        amount_total : tot,
+        payé : false,
+        userId : user
+    })
+
+    useByUserId.forEach(async element =>{
+
+        await Use.update({
+            invoiceId : invoice.id
+        },{
+            where :{
+                id : element.id
             }
-            })
-        newInvoice.setUses(uses.map(x=>x.id));
-        res.redirect('/frontend/admin/pages/invoicestable.html');
-    }catch(err){}
-}
+        })
+
+    })
+    
+    res.redirect("/frontend/admin/pages/invoicestable.html");
+    
+ }
 
 
 

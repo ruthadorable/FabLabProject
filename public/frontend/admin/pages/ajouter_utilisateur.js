@@ -25,7 +25,6 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-
 const role=decoded.role_user;
 
 if(token){

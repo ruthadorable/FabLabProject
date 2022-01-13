@@ -83,16 +83,13 @@ function populateTable(c){
   document.getElementById("image").value=c.image;
   document.getElementById("tarif").value=c.price_minute;
   document.getElementById("description").value=c.description;
-  document.getElementById("reserved").value=c.reserved;
+  
 }
+
 fetch(`/admin/equipement/${paramId}`)
 .then((response) => response.json())
 .then((equipement) => populateTable(equipement));
  
-//   const date = document.querySelector("#date")
-//   var today = new Date();
-//   var date1 =today.getDate()+'-'+(today.getMonth()+1)+'-'+ today.getFullYear();
-//   date.value = date1
 
 //   const idusername = document.querySelector("#idusername")
 //   const equipement = document.querySelector("#equipement")

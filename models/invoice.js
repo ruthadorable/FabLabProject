@@ -20,6 +20,10 @@ Invoice.init(
         type: DataTypes.DOUBLE,
         allowNull: false
     },
+    payé:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    }
    
   },
   { sequelize: connection, modelName: "invoice" }

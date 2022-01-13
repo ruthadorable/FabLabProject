@@ -1,29 +1,14 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
 
-var select = document.getElementById('annee');
-var date = new Date();
-var year = date.getFullYear();
-for (var i = year - 4; i <= year + 3; i++) {
-  var option = document.createElement('option');
-  option.value = option.innerHTML = i;
-  if (i === year) option.selected = true;
-  select.appendChild(option);
-}
-
-
-
-
-
-function populateList1(machines)
-{
+// function populateList1(machines)
+// {
   
-  const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
-  const selectequipement=document.getElementById("equipementid")
-  selectequipement.innerHTML=options;
+//   const options= machines.map(x=>`<option value=${x.id}>${x.name}</option>`).join('\n');
+//   const selectequipement=document.getElementById("equipementid")
+//   selectequipement.innerHTML=options;
  
-}
-
+// }
 function populateList2(users)
 {
   const options= users.map(x=>`<option value=${x.id}>${x.first_name}</option>`).join('\n');
@@ -31,6 +16,16 @@ function populateList2(users)
   selectmembre.innerHTML=options;
 }
 
+
+// function populateTable(c){
+
+//   document.getElementById("numéro").value=c.name;
+//   document.getElementById("date").value=c.image;
+// //document.getElementById("equipementid").value=c.price_minute;
+//   document.getElementById("minutes").value=c.description;
+// //  document.getElementById("utilisateurid").value=c.reserved;
+// document.getElementById("tarif").value=c.description;
+// }
 
 fetch("/members")
 .then((response)=>response.json())
@@ -91,14 +86,4 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 
-}
-
-function populateTable(c){
-
-  document.getElementById("numéro").value=c.name;
-  document.getElementById("date").value=c.image;
-//document.getElementById("equipementid").value=c.price_minute;
-  document.getElementById("minutes").value=c.description;
-//  document.getElementById("utilisateurid").value=c.reserved;
-document.getElementById("tarif").value=c.description;
 }
