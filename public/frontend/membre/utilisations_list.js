@@ -87,10 +87,7 @@ const useRows = uses.map((c) => {
   row.appendChild( amountCol);
 
 
-  const facturéCol = document.createElement("td");
-  const facturéTxt = document.createTextNode(c.facturé);
-  facturéCol.appendChild (facturéTxt);
-  row.appendChild( facturéCol);;
+  
   return row;
 });
 const tableBody = list.querySelector("tbody");

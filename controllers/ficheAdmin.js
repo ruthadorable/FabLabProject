@@ -451,14 +451,14 @@ exports.getUseByEquipmentId=async(req,res)=>{
 }
 exports.createUseByUserIdAsParams=async(req,res)=>{
     const iduser=req.params.id;
-    const {date,duree,equipement,idusername}=req.body;
+    const {date,duree,equipement}=req.body;
     try{
-        // const equipement=await Equipment.findOne({where:{id:equipementid}});
-        const use=Use.create({
+        
+        const use = Use.create({
             durating_M: duree,
             amount_to_be_paid: duree*equipement.price_minute,
             date: date,
-            userId: idusername,
+            userId: iduser,
             facturé: false,
             equipmentId:equipement
         })
