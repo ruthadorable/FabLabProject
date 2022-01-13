@@ -81,7 +81,7 @@ function populateTable(c){
     document.getElementById("image").value=c.image;
     document.getElementById("tarif").value=c.price_minute;
     document.getElementById("description").value=c.description;
-    document.getElementById("reserved").value=c.reserved;
+    
 }
 fetch(`/admin/equipement/${paramId}`)
   .then((response) => response.json())

@@ -6,7 +6,7 @@ const {User,Equipment,Use,Invoice} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
 
-const {newFacture,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationsById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
+const {newFacture,getFacturesByUser,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationsById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
 
 
 /* GET home page. */

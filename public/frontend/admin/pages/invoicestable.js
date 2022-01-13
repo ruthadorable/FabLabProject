@@ -99,15 +99,3 @@ fetch(`/factures`)
   .then((response) => response.json())
   .then((x) => populateTable(x));
 
-<<<<<<< HEAD
-=======
-}
-
-fetch(`/getuserbyid/${paramId}`)
-    .then((response)=>response.json())
-    .then((x)=>{
-        const user=document.getElementById("user");
-        const text=document.createTextNode(x.first_name);
-        user.appendChild(text);
-    })
->>>>>>> 94a5b7d013d73e3709198cb17ffcd6e06e1c5880
