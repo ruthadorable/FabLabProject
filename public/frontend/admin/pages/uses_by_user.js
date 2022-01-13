@@ -1,3 +1,11 @@
+const token = get_cookie_name("jwt_token");
+if(token){
+  console.log("ok")
+}else{
+  const body=document.querySelector("body");
+body.remove();
+alert("Veillez d'abord vous connecter");
+}
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -6,12 +14,11 @@ function get_cookie_name(name)
     return match[2];
   }
   else{
-    console.log('--something went wrong---');
+       console.log('--something went wrong---');
   }
 }
-
-const token = get_cookie_name("jwt_token");
-
+let url = new URL(window.location.href);
+let paramId=url.searchParams.get("id");
 function parseJwt (token) {
 var base64Url = token.split('.')[1];
 var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -21,32 +28,12 @@ var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
 
 return JSON.parse(jsonPayload);
 };
-
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-const role=decoded.role_user;
 
-if(token){
-  console.log("ok"),
-  console.log(token),
-  console.log(decoded),
-  console.log(role)
-  if(role!=2)
-  {
-    const body=document.querySelector("body");
-    body.remove();
-    alert("Vous n'avez pas accès à cette page");
-  }
-  document.getElementById("username").innerText=("   Bonjour "+username+" " );
-}else{
-  const body=document.querySelector("body");
-  body.remove();
-  alert("Veillez d'abord vous connecter");
-}
-
+document.getElementById("username").innerText=("   Bonjour "+username+" " );
 const list = document.getElementById("list");
-
 
 function populateTable(uses) {
 
@@ -72,8 +59,9 @@ const useRows = uses.map((c) => {
   const tCol=document.createTextNode(x.price_minute+"€");
   tarifCol.appendChild(tCol);
   row.appendChild(tarifCol);
-
+  
   }));
+  
   
 
   const dureeCol = document.createElement("td");
@@ -91,11 +79,20 @@ const useRows = uses.map((c) => {
   const facturéTxt = document.createTextNode(c.facturé);
   facturéCol.appendChild (facturéTxt);
   row.appendChild( facturéCol);;
+  
   return row;
 });
 const tableBody = list.querySelector("tbody");
 tableBody.replaceChildren(...useRows);
 };
-fetch(`/uses/${iduser}`)
+fetch(`/uses/${paramId}`)
 .then((response) => response.json())
 .then((uses) => populateTable(uses));
+
+fetch(`/getuserbyid/${paramId}`)
+    .then((response)=>response.json())
+    .then((x)=>{
+        const user=document.getElementById("user");
+        const text=document.createTextNode(x.first_name);
+        user.appendChild(text);
+    })

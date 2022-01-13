@@ -31,10 +31,12 @@ fetch("/members")
 .then((response)=>response.json())
 .then((users)=>{populateList2(users); console.log(users);});
 
+
 fetch("/equipement")
 .then((response)=>response.json())
 .then((machines)=>{populateList1(machines); console.log(machines);})
 .then((machines)=>{populateList1(machines); console.log(machines);});
+
 
 
 

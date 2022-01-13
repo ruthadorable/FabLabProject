@@ -333,6 +333,7 @@ exports.getMembers=async(req,res)=>{
 
 exports.createFacture=async(req,res)=>{
     
+
    
     console.log(req.body)
     const user = parseInt(req.body.userid)
@@ -366,6 +367,7 @@ exports.createFacture=async(req,res)=>{
             date:  
                 {
                     [Op.between]: [debutD, finD]
+
                 }
         }
     });
@@ -462,6 +464,16 @@ exports.createUseByUserIdAsParams=async(req,res)=>{
         })
         res.redirect("/frontend/admin/pages/usestable.html");
 
+    }catch(err){
+
+    }
+
+}
+exports.getFacturesByUser=async(req,res)=>{
+    const iduser= req.params.id;
+    try{
+        const invoices=Invoice.findAll({where:{userId:iduser}});
+        return res.json(invoices);
     }catch(err){
 
     }
