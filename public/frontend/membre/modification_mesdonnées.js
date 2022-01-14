@@ -1,3 +1,4 @@
+let old="";
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -45,8 +46,6 @@ if(token){
   body.remove();
   alert("Veillez d'abord vous connecter");
 }
-var old;
-
 
 const newpassword = document.getElementById("newmotdepasse");
 const confpassword = document.getElementById("confmotdepasse"); 
@@ -60,17 +59,8 @@ function check(elem){
        }
 }
 }
-function checkold(){
 
-  const oldpassword = document.getElementById("oldmotdepasse");
-  
-    if (oldpassword.value != old)
-    {
-      document.getElementById("alertold").innerText="L'ancien mot de passe n'est pas correcte!";
-    }else{
-      document.getElementById("alertold").innerText="";
-    }
-}
+
 
 
 function populateTable(c){
@@ -83,4 +73,18 @@ function populateTable(c){
 fetch(`/modification/user/${iduser}`)
   .then((response) => response.json())
   .then((userdata) => populateTable(userdata));
+
+  function checkold(el){
+    if(el.value.length>0){
+      if (el.value == old)
+      {
+        console.log(el.value+" "+old);
+        document.getElementById("alertold").innerText="";
+        
+      }else{
+        console.log(el.value+" "+old);
+        document.getElementById("alertold").innerText="L'ancien mot de passe n'est pas correcte!";
+      }
+    }
+  }
 

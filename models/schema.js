@@ -12,11 +12,14 @@ Use.belongsTo(Equipment);
 User.hasMany(Use);
 Use.belongsTo(User);
 
-Invoice.hasMany(Use)
-Use.belongsTo(Invoice)
+User.hasMany(Invoice);
+Invoice.belongsTo(User);
 
-User.hasMany(Invoice)
-Invoice.belongsTo(User)
+Invoice.hasMany(Use)
+Use.belongsTo(Invoice);
+
+Equipment.hasMany(Invoice);
+Invoice.belongsTo(Equipment);
 
 
 Role.belongsToMany(User ,{

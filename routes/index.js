@@ -6,7 +6,11 @@ const {User,Equipment,Use,Invoice} = require("../models/schema");
 const { generate } = require("../jwt_generator");
 const  jwt_decode  = require("jwt-decode");
 
-const {newFacture,getFacturesByUser,getFactureDetailsByIdfromAdmin, getUserById, updateAdmin, createEquipement, updateEquipement, deleteEquipement, getAdminEquipementById, getUsers,newUser, updateUserfromAdmin, getUserfromAdmin, deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin, deleteFacture, createFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationsById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
+const {getUserfromAdmin,getFacturesByUser,getUsageByInvoiceId, getUserById,
+   updateAdmin, createEquipement, updateEquipement, deleteEquipement,
+    getAdminEquipementById, getUsers,newUser, updateUserfromAdmin,
+     deleteUser, getFactures, getMembers, updateFacture, getFactureByIdfromAdmin,
+       createFacture,deleteFacture, getUtilisations ,newUtilisationByAdmin, getUtilisationById, deleteUseById, getUseByEquipmentId,createUseByUserIdAsParams} = require("../controllers/ficheAdmin");
 
 
 /* GET home page. */
@@ -83,7 +87,7 @@ router.get("/alluses",getUses);
 
 
 //administrator routers
-router.get("/admin/profile",getUserById);
+router.get("/profile/:id",getUserById);
 router.post("/admin/update",updateAdmin);
 router.get("/admin/equipement/:id",getAdminEquipementById);
 router.post("/equipement/create",createEquipement);
@@ -99,15 +103,15 @@ router.get("/factures",getFactures);
 router.get("/members",getMembers);
 router.post("/facture/update/:id",updateFacture);
 router.get("/admin/facture/:id",getFactureByIdfromAdmin);
-//router.get("/facture/delete/:id",deleteFacture);
+router.get("/facture/delete/:id",deleteFacture);
 router.post("/facture/generate",createFacture);
 router.post("/utilisation/create",newUtilisationByAdmin)
-router.get("/utilisation/:id",getUtilisationsById);
+router.get("/utilisation/:id",getUtilisationById);
 router.get("/use/delete/:id",deleteUseById);
-router.get("/facturedetails/useid/:id",getFactureDetailsByIdfromAdmin);
+router.get("/facturedetails/:id",getFactureById);
 router.get("/facturesbyuser/:id",getFacturesByUser);
 router.get("/uses/machineid/:id",getUseByEquipmentId);
 router.post("/use/create/:id",createUseByUserIdAsParams);
-
+router.get("/usagebyinvoiceid/:id",getUsageByInvoiceId);
 module.exports = router;
 

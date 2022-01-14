@@ -34,7 +34,7 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_id;
-if(role==2||role==3)
+if(role==2||role==1)
 {
 const body=document.querySelector("body");
 body.remove();
@@ -45,6 +45,7 @@ document.getElementById("username").innerText=("   Bonjour "+username+" " );
 
 function deletefacture(){
   fetch(`/facture/delete/${paramId}`)
+
   const content=document.getElementById("content");
   content.remove();
   const messagearea=document.getElementById("message");

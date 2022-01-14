@@ -23,6 +23,11 @@ Use.init(
         type: DataTypes.DATE,
         allowNull: false
     },
+    facturé:{
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false,
+    }, 
     
   },
   { sequelize: connection, modelName: "use" }

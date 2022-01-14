@@ -5,16 +5,15 @@ const Invoice=require("../models/invoice");
 const  jwt_decode  = require("jwt-decode");
 const { crossOriginResourcePolicy } = require("helmet");
 const { Op, DATE } = require("sequelize");
+const { use } = require("passport");
+const { param } = require("../routes");
 
 exports.getUserById=async(req,res,next)=>{
-    const token=req.cookies.jwt_token;
-    const decoded = jwt_decode(token);
-    const id=decoded.sub;
+    const iduser=req.params.id;
     try{
      const userById =await User.findOne({
-        where: {id:id},
-     })
-     console.log(userById);
+        where: {id:iduser}
+     });
      return res.json(userById)
     }catch(err){}
     
@@ -54,12 +53,13 @@ exports.updateAdmin=async(req,res)=>{
 }
 }
 exports.getAdminEquipementById=async (req,res)=>{
-    const id=req.params.id;
+    const idequip=req.params.id;
     try{
       const equipementParId = await Equipment.findOne({
-        where: {id },
+        where: {id:idequip }
       })   
       return res.json(equipementParId); 
+      
     }catch(err){}
   }
 
@@ -167,7 +167,7 @@ exports.updateUserfromAdmin=async(req,res)=>{
 exports.deleteUser=async(req,res)=>{
     const iduser= req.params.id;
     try{
-    Equipment.destroy({
+    User.destroy({
         where:{id:iduser}
     })
     res.redirect("/frontend/admin/pages/userstable.html");
@@ -248,19 +248,17 @@ exports.getFactureByIdfromAdmin= async (req,res)=>{
       return res.json(factureParId); 
     }catch(err){}
   }
-// exports.deleteFacture=async(req,res)=>{
-//     try{
-//     const idfacture=req.params.id;
-//     //gestion d'erreurs
-//     if(true)
-//     {
-//         Invoice.destroy({
-//             where : {id:idfacture}
-//         });
-//         res.redirect("/frontend/admin/pages/invoicestable.html");
-//     }
-//  }catch(err){}
-// }
+exports.deleteFacture=async(req,res)=>{
+    const idfacture=req.params.id; 
+    try{
+     
+         Invoice.destroy({
+             where : {id:idfacture}
+         });
+         res.redirect("/frontend/admin/pages/invoicestable.html");
+     
+  }catch(err){}
+ }
 exports.getUtilisations=async(req,res)=>{
     try{
         const uses=await Use.findAll();
@@ -287,12 +285,11 @@ exports.newUtilisationByAdmin=async(req,res)=>{
     }
 
 }
-exports.getUtilisationsById=async(req,res)=>{
-
+exports.getUtilisationById=async(req,res)=>{
+    const iduse=req.params.id;
     try{
-        const iduse=req.params.id;
-        const useById=await Use.findAll({});
-        console.log(useById)
+        
+        const useById=await Use.findOne({where:{id:iduse}});
         return res.json(useById);
     }catch(err){
         console.log("get use by id error")
@@ -332,10 +329,7 @@ exports.getMembers=async(req,res)=>{
 }
 
 exports.createFacture=async(req,res)=>{
-    
 
-   
-    console.log(req.body)
     const user = parseInt(req.body.userid)
     const debutD = req.body.debutDate
     const finD = req.body.finDate
@@ -357,11 +351,12 @@ exports.createFacture=async(req,res)=>{
             },
                        
         })
-    useByUserId.forEach(element => {
-       // console.log(element.amount_to_be_paid)
-        tot = tot + element.amount_to_be_paid
-      //  console.log(tot)
-    });
+        useByUserId.forEach(element => {
+            // console.log(element.amount_to_be_paid)
+            tot = tot + element.amount_to_be_paid
+            //  console.log(tot)
+        });
+    console.table(useByUserId)
     const factTab = await Invoice.findAll({
         where : {
             date:  
@@ -371,6 +366,7 @@ exports.createFacture=async(req,res)=>{
                 }
         }
     });
+    //console.log(factTab)
       
     const annee = new Date(req.body.debutDate).getFullYear()
     const mois = new Date(req.body.debutDate).getMonth()+1
@@ -384,31 +380,35 @@ exports.createFacture=async(req,res)=>{
     }
 
     const numFact = annee+moisStr+nFacture
-    
-    const invoice = await Invoice.create({
-        num : numFact,
-        date : new Date(),
-        amount_total : tot,
-        payé : false,
-        userId : user
-    })
-
-    useByUserId.forEach(async element =>{
-
-        await Use.update({
-            invoiceId : invoice.id
-        },{
-            where :{
-                id : element.id
-            }
+    //console.log(factTab.length)
+    if (useByUserId.length > 0){
+        
+        const invoice = await Invoice.create({
+            num : numFact,
+            date : new Date(),
+            amount_total : tot,
+            payé : false,
+            userId : user
         })
+        useByUserId.forEach(async element =>{
+    
+            await Use.update({
+                invoiceId : invoice.id,
+                facturé: true
+            },{
+                where :{
+                    id : element.id
+                }
+            })
+    
+        })
+        
+    }
 
-    })
     
     res.redirect("/frontend/admin/pages/invoicestable.html");
     
  }
-
 
 
 exports.deleteUseById=async(req,res)=>{
@@ -416,15 +416,6 @@ exports.deleteUseById=async(req,res)=>{
     try{
         Use.destroy({where:{id:id}})
 
-    }catch(err){
-
-    }
-}
-exports.getFactureDetailsByIdfromAdmin=async(req,res)=>{
-    const id=req.params.id;
-    try{
-        const invoice=await Invoice.findOne({where:{useId:id}})
-        return res.json(invoice);
     }catch(err){
 
     }
@@ -472,10 +463,27 @@ exports.createUseByUserIdAsParams=async(req,res)=>{
 exports.getFacturesByUser=async(req,res)=>{
     const iduser= req.params.id;
     try{
-        const invoices=Invoice.findAll({where:{userId:iduser}});
+        const invoices= await Invoice.findAll({where:{userId:iduser}});
         return res.json(invoices);
     }catch(err){
 
     }
 
+}
+exports.getFactureById=async(req,res)=>{
+    const idfacture=req.params.id;
+    try{
+        const invoice= await Invoice.findOne({where:{id:idfacture}});
+        return res.json(invoice);
+    }catch(err){}
+}
+exports.getUsageByInvoiceId=async(req,res)=>{
+    const idinvoice=req.params.id;
+    try{
+        const use=await Use.findOne({where:{invoiceId:idinvoice}})
+        return res.json(use);
+
+    }catch(err){
+
+    }
 }

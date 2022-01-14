@@ -52,12 +52,10 @@ function populateTable(invoices) {
       });
     
 
-    
-
     return row;
   });
   const tableBody = list.querySelector("tbody");
-  tableBody.replaceChildren(...invoiceRows);
+  tableBody.replaceChildren( ...invoiceRows);
 }
 function get_cookie_name(name) 
     {

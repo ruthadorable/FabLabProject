@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:public/frontend/admin/pages/profile.js
->>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399
+
 function get_cookie_name(name) 
 {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -36,11 +33,7 @@ if(token){
   console.log(token),
   console.log(decoded),
   console.log(role)
-<<<<<<< HEAD
   if(role!=3)
-=======
-  if(role!=1)
->>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399
   {
     const body=document.querySelector("body");
     body.remove();
@@ -58,9 +51,7 @@ if(token){
       const firstname=document.createTextNode(c.first_name);
       const lastname=document.createTextNode(c.last_name);
       const email=document.createTextNode(c.email);
-<<<<<<< HEAD
-=======
-========
+
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -82,41 +73,31 @@ function get_cookie_name(name)
     }
   
 }
-const token = get_cookie_name("jwt_token");
-const decoded= parseJwt(token);
-  const username=decoded.preferred_username;
-  const iduser=decoded.sub;
-  const decoded=parseJwt(token);
-  const role=decoded.role_user;
+
   const userarea=document.getElementById("username")
   const message=document.createTextNode("Bonjour "+username);
   userarea.appendChild(message);
+
 function populateTable(c){
->>>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399:public/frontend/comptable/pages/profile.js
->>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399
-      document.getElementById("prenom").value=c.first_name;
-      document.getElementById("nom").value=c.last_name;
-      document.getElementById("email").value=c.email;
-      document.getElementById("motdepasse").value=c.password;
-      document.getElementById("confmotdepasse").value=c.password;
-<<<<<<< HEAD
+
+      const firstname=document.getElementById("prenom");
+      firstname.value=c.first_name;
+      const lastname=document.getElementById("nom");
+      lastname.value=c.last_name;
+      const email=document.getElementById("email");
+      email.value=c.email;
+      const password=document.getElementById("motdepasse");
+      password.value=c.password;
+      const confirmpwd=document.getElementById("confmotdepasse");
+      confirmpwd.value=c.password;
+
   }
   
   
-  fetch("/admin/profile")
-    .then((response) => response.json())
-    .then((userdata) => populateTable(userdata));
+  fetch(`/modification/user/${iduser}`)
+  .then((response) => response.json())
+  .then((userdata) => populateTable(userdata));
   
-=======
+
 }
-fetch("/admin/profile")
-    .then((response) => response.json())
-    .then((userdata) => populateTable(userdata));
-<<<<<<<< HEAD:public/frontend/admin/pages/profile.js
-  
-========
 
-
-    
->>>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399:public/frontend/comptable/pages/profile.js
->>>>>>> 65a5a8b991f357bef5c1b7c74e921613cafb4399

@@ -73,7 +73,7 @@ function populateTable(invoices) {
 
     const detailsCol= document.createElement("td");
     const detailsBtn=document.createElement("a");
-    detailsBtn.href=`/frontend/admin/pages/details_facture.html?id=${c.id}`;
+    detailsBtn.href=`/frontend/membre/details_facture.html?id=${c.id}`;
     const detailsTxt = document.createTextNode("Voir détails");
     detailsBtn.appendChild(detailsTxt);
     detailsCol.appendChild(detailsBtn);
@@ -87,3 +87,7 @@ function populateTable(invoices) {
   tableBody.replaceChildren(...invoiceRows);
 
 }
+
+fetch(`/facturesbyuser/${iduser}`)
+.then((response)=>response.json())
+.then((invoices)=>{populateTable(invoices);console.log("factures:"+invoices);});

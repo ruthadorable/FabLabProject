@@ -53,11 +53,10 @@ if(token){
       document.getElementById("prenom").value=c.first_name;
       document.getElementById("nom").value=c.last_name;
       document.getElementById("email").value=c.email;
-      document.getElementById("motdepasse").value=c.password;
-      document.getElementById("confmotdepasse").value=c.password;
+      
   }
 
 
-  fetch("/admin/profile")
-    .then((response) => response.json())
-    .then((userdata) => populateTable(userdata));
+  fetch(`/modification/user/${iduser}`)
+  .then((response) => response.json())
+  .then((userdata) => populateTable(userdata));

@@ -1,5 +1,6 @@
 let url = new URL(window.location.href);
 let paramId=url.searchParams.get("id");
+const dureeCol = document.getElementById("duree");
 
 function get_cookie_name(name) 
 {
@@ -15,17 +16,15 @@ function get_cookie_name(name)
 
 const token = get_cookie_name("jwt_token");
 
-
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-
+  
   return JSON.parse(jsonPayload);
 };
-
 
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
@@ -37,7 +36,7 @@ if(token){
   console.log(token),
   console.log(decoded),
   console.log(role)
-  if(role!=1)
+  if(role!=2)
   {
     const body=document.querySelector("body");
     body.remove();
@@ -50,36 +49,34 @@ if(token){
   alert("Veillez d'abord vous connecter");
 }
 
-const list=document.getElementById("list");
+
+const list = document.getElementById("list");
 
 
 function populateTable(c){
     
-    const idCol = document.getElementById("id");
-    const idTxt = document.createTextNode(c.id);
-    idCol.appendChild(idTxt);
-    const usernameCol = document.getElementById("membre");
-    
-    
-    const dateCol= document.getElementById("date");
-    const dateTxt = document.createTextNode(String(c.date).slice(0,10));
-    dateCol.appendChild(dateTxt);
+  const idCol = document.getElementById("id");
+  const idTxt = document.createTextNode(c.id);
+  idCol.appendChild(idTxt);
+  const usernameCol = document.getElementById("membre");
+  fetch(`/user/${c.userId}`)
+  .then((response)=>response.json())
+  .then((user)=>{
+  
+  const usernameTxt = document.createTextNode(user.first_name+" "+user.last_name);
+  usernameCol.appendChild(usernameTxt);
+  });
+  
+  const dateCol= document.getElementById("date");
+  const dateTxt = document.createTextNode(c.date.toString().slice(0,10));
+  dateCol.appendChild(dateTxt);
 
-    const amountCol = document.getElementById("amount");
-    const amountTxt = document.createTextNode(c.amount_total+"€");
-    amountCol.appendChild(amountTxt);
 
-    fetch(`/user/${c.userId}`)
-    .then((response)=>response.json())
-    .then((user)=>{
-      console.log("User data"+user);
-    
-    const usernameTxt = document.createTextNode(user.first_name+" "+user.last_name);
-    usernameCol.appendChild(usernameTxt);
-    });
-    
+  const amountCol = document.getElementById("amount");
+  const amountTxt = document.createTextNode(c.amount_total+"€");
+  amountCol.appendChild(amountTxt);
+  
 }
-
 function populateColumns(use){
 
   fetch(`/equipement/${use.equipmentId}`)
@@ -109,3 +106,10 @@ fetch(`/admin/facture/${paramId}`)
 fetch(`/usagebyinvoiceid/${paramId}`)
 .then((response)=>response.json())
 .then((use)=>populateColumns(use));
+
+const fetchReq = fetch(`/admin/facture/${paramId}`).then((res) => res.json()); 
+const data = Promise.all([fetchReq])
+data.then((res) =>{ 
+console.log(res[0])
+})
+

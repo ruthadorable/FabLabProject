@@ -41,26 +41,38 @@
     </div>
 </nav>
 <main class="container">
-    <h1>Liste des factures</h1>
+    <h1>Détails de la facture</h1>
     <p id="date"></p>
-    <table id="list" class="table">
-      <thead>
+    <table id="list" class="table align-items-center table-flush">
+      <thead class="thead-light">
         <tr>
-          <th role="col">Num facture</th>
-          <th role="col">Date</th>
-          <th role="col">Total</th>
-          <th role="col">Détails</th>
+          <th scope="col" class="sort" data-sort="name">ID</th>
+          <th scope="col" class="sort" data-sort="status">Utilisateur</th>
+          <th scope="col" class="sort" data-sort="status">Date</th>
+          <th scope="col" class="sort" data-sort="budget">Equipement Name</th>
+          <th scope="col" class="sort" data-sort="status">Equipement Tarif</th>
+          <th scope="col" class="sort" data-sort="status">Durée d'utilisation</th>
+          <th scope="col" class="sort" data-sort="status">Prix total</th>
         </tr>
       </thead>
-      <tbody>
-
+      <tbody >
+        <tr>
+          <td id="id" scope="col" class="sort" data-sort="status"></td>
+          <td id="membre" scope="col" class="sort" data-sort="status"></td>
+          <td id="date" scope="col" class="sort" data-sort="status"></td>
+          <td id="equipmentname" scope="col" class="sort" data-sort="budget"></td>
+          <td id="equipmenttarif" scope="col" class="sort" data-sort="status"></td>
+          <td id="duree" scope="col" class="sort" data-sort="status"></td>
+          <td id="amount" scope="col" class="sort" data-sort="status"></td>
+        </tr>
+        
       </tbody>
     </table>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-  <script src="factures_list.js"></script>
+  <script src="details_facture.js"></script>
 </body>
 
 </html>

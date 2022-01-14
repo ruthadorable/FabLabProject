@@ -71,9 +71,17 @@ function populateTable(c){
   const dateTxt = document.createTextNode(c.date.toString().slice(0,10));
   dateCol.appendChild(dateTxt);
 
-  fetch(`/admin/equipement/${c.equipmentId}`)
+
+  const amountCol = document.getElementById("amount");
+  const amountTxt = document.createTextNode(c.amount_total+"€");
+  amountCol.appendChild(amountTxt);
+  
+}
+function populateColumns(use){
+
+  fetch(`/equipement/${use.equipmentId}`)
   .then((response)=>response.json())
-  .then((machine)=>{
+  .then((machine)=>{ console.log("machine"+machine);
   const machinenameCol = document.getElementById("equipmentname");
   const machinenameTxt = document.createTextNode( machine.name);
    machinenameCol.appendChild( machinenameTxt);
@@ -83,23 +91,21 @@ function populateTable(c){
    machinetarifCol.appendChild( machinetarifTxt);
   })
 
-  fetch(`/utilisation/${paramId}`)
-  .then((response)=>response.json())
-  .then((use)=>{
-
-
-  dureeCol.appendChild(dureeTxt);
-  })
-
-  const amountCol = document.getElementById("amount");
-  const amountTxt = document.createTextNode(c.amount_total+"€");
-  amountCol.appendChild(amountTxt);
   
+  const dureeCol = document.getElementById("duree");
+  const dureeTxt = document.createTextNode(use.durating_M);
+  dureeCol.appendChild(dureeTxt);
+
+
 }
 fetch(`/admin/facture/${paramId}`)
 .then((response)=>response.json())
 .then((x)=>{populateTable(x)}
 )
+
+fetch(`/usagebyinvoiceid/${paramId}`)
+.then((response)=>response.json())
+.then((use)=>populateColumns(use));
 
 const fetchReq = fetch(`/admin/facture/${paramId}`).then((res) => res.json()); 
 const data = Promise.all([fetchReq])

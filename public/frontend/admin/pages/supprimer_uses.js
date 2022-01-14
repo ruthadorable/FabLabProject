@@ -55,15 +55,16 @@ let paramId=url.searchParams.get("id");
 fetch(`/utilisation/${paramId}`)
 .then((response)=>response.json())
 .then((x)=>{
-if(x.facturé){
-  const content=document.getElementById("content");
-  content.innerText="Impossible de supprimer car il faut que sa facture soit supprimé avant !! \n Voir lien => ";
-  const lien=document.createElement("a");
-  const btnTxt=document.createTextNode("Details facture");
-  lien.href=`invoice_details.html?id=${paramId}`;
-  lien.appendChild(btnTxt);
-  content.appendChild(lien);
-}
+
+  if(x.facturé){
+    const content=document.getElementById("content");
+    content.innerText="Impossible de supprimer une utilisation qui a déjà été facturé. \n Il faut que sa facture soit supprimé avant !! \n Voir lien => ";
+    const lien=document.createElement("a");
+    const btnTxt=document.createTextNode("Details facture");
+    lien.href=`invoice_details.html?id=${x.invoiceId}`;
+    lien.appendChild(btnTxt);
+    content.appendChild(lien);
+  }
 })
 
 function deleteuse(){
