@@ -34,14 +34,23 @@ const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
 const role=decoded.role_id;
-if(role==2||role==1)
-{
-const body=document.querySelector("body");
-body.remove();
-alert("Vous n'avez pas accès à cette page");
+if(token){
+  console.log("ok"),
+  console.log(token),
+  console.log(decoded),
+  console.log(role)
+  if(role!=2)
+  {
+    const body=document.querySelector("body");
+    body.remove();
+    alert("Vous n'avez pas accès à cette page");
+  }
+  document.getElementById("username").innerText=("   Bonjour "+username+" " );
+}else{
+  const body=document.querySelector("body");
+  body.remove();
+  alert("Veillez d'abord vous connecter");
 }
-document.getElementById("username").innerText=("   Bonjour "+username+" " );
-
 
 function deletefacture(){
   fetch(`/facture/delete/${paramId}`)
