@@ -96,7 +96,7 @@ router.get("/equipement/delete/:id",deleteEquipement);
 router.get("/users",getUsers);
 router.get("/getuserbyid/:id",getMembreById);
 router.post("/user/create",newUser);
-router.get("/user/:id",getUserfromAdmin);
+router.get("/user/:id",getUserById);
 router.post("/user/update/:id",updateUserfromAdmin);
 router.get("/user/delete/:id",deleteUser);
 router.get("/factures",getFactures);

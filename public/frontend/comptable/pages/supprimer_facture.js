@@ -33,13 +33,13 @@ function parseJwt (token) {
 const decoded=parseJwt(token);
 const username=decoded.preferred_username;
 const iduser=decoded.sub;
-const role=decoded.role_id;
+const role=decoded.role_user;
 if(token){
   console.log("ok"),
   console.log(token),
   console.log(decoded),
   console.log(role)
-  if(role!=2)
+  if(role!=3)
   {
     const body=document.querySelector("body");
     body.remove();

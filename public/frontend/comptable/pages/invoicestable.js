@@ -25,15 +25,23 @@ function populateTable(classes) {
     const amountTxt = document.createTextNode(total+"€");
     amountCol.appendChild(amountTxt);
     row.appendChild(amountCol);
+
+    const paidCol= document.createElement("td");
+    const bool= c.payé;
+    const paidTxt = document.createTextNode(bool);
+    paidCol.appendChild(paidTxt);
+    row.appendChild(paidCol);
     
     const userCol = document.createElement("td");
     fetch(`/user/${c.userId}`)
     .then((response)=>response.json())
-
-    .then((user)=>{ membre=user.first_name+" "+user.last_name; console.log(membre);});
+    .then((user)=>{ membre=user.first_name+" "+user.last_name; console.log(membre);
     const userTxt=document.createTextNode(membre);
     userCol.appendChild(userTxt);
     row.appendChild(userCol);
+    
+  
+  });
     
 
     const detailsCol= document.createElement("td");
